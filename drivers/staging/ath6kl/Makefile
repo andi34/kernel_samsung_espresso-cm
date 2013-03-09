@@ -2,7 +2,7 @@
 # Copyright (c) 2004-2010 Atheros Communications Inc.
 # All rights reserved.
 #
-# 
+#
 #
 # Permission to use, copy, modify, and/or distribute this software for any
 # purpose with or without fee is hereby granted, provided that the above
@@ -111,7 +111,7 @@ ath6kl-y += wmi/wmi.o
 ath6kl-y += reorder/rcv_aggr.o
 ath6kl-y += wlan/src/wlan_node.o
 ath6kl-y += wlan/src/wlan_recv_beacon.o
-ath6kl-y += wlan/src/wlan_utils.o			 
+ath6kl-y += wlan/src/wlan_utils.o
 
 # ATH_HIF_TYPE := sdio
 ccflags-y += -I$(obj)/hif/sdio/linux_sdio/include

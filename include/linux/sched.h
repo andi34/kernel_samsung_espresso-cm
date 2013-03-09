@@ -33,7 +33,7 @@
 /*
  * Scheduling policies
  */
-#define SCHED_NORMAL		0
+#define SCHED_NORMAL	0
 #define SCHED_FIFO		1
 #define SCHED_RR		2
 #define SCHED_BATCH		3
@@ -141,7 +141,6 @@ extern unsigned long nr_uninterruptible(void);
 extern unsigned long nr_iowait(void);
 extern unsigned long nr_iowait_cpu(int cpu);
 extern unsigned long this_cpu_load(void);
-
 
 extern void calc_global_load(unsigned long ticks);
 
@@ -397,7 +396,6 @@ extern void arch_unmap_area_topdown(struct mm_struct *, unsigned long);
 #else
 static inline void arch_pick_mmap_layout(struct mm_struct *mm) {}
 #endif
-
 
 extern void set_dumpable(struct mm_struct *mm, int value);
 extern int get_dumpable(struct mm_struct *mm);
@@ -727,7 +725,6 @@ extern struct user_struct *find_user(uid_t);
 extern struct user_struct root_user;
 #define INIT_USER (&root_user)
 
-
 struct backing_dev_info;
 struct reclaim_state;
 
@@ -1046,9 +1043,7 @@ partition_sched_domains(int ndoms_new, cpumask_var_t doms_new[],
 }
 #endif	/* !CONFIG_SMP */
 
-
 struct io_context;			/* See blkdev.h */
-
 
 #ifdef ARCH_HAS_PREFETCH_SWITCH_STACK
 extern void prefetch_stack(struct task_struct *t);
@@ -1318,9 +1313,9 @@ struct task_struct {
 	unsigned long stack_canary;
 #endif
 
-	/* 
+	/*
 	 * pointers to (original) parent process, youngest child, younger sibling,
-	 * older sibling, respectively.  (p->father can be replaced with 
+	 * older sibling, respectively.  (p->father can be replaced with
 	 * p->real_parent->pid)
 	 */
 	struct task_struct *real_parent; /* real parent process */
@@ -1670,7 +1665,6 @@ static inline pid_t task_pid_vnr(struct task_struct *tsk)
 	return __task_pid_nr_ns(tsk, PIDTYPE_PID, NULL);
 }
 
-
 static inline pid_t task_tgid_nr(struct task_struct *tsk)
 {
 	return tsk->tgid;
@@ -1683,7 +1677,6 @@ static inline pid_t task_tgid_vnr(struct task_struct *tsk)
 	return pid_vnr(task_tgid(tsk));
 }
 
-
 static inline pid_t task_pgrp_nr_ns(struct task_struct *tsk,
 					struct pid_namespace *ns)
 {
@@ -1694,7 +1687,6 @@ static inline pid_t task_pgrp_vnr(struct task_struct *tsk)
 {
 	return __task_pid_nr_ns(tsk, PIDTYPE_PGID, NULL);
 }
-
 
 static inline pid_t task_session_nr_ns(struct task_struct *tsk,
 					struct pid_namespace *ns)
@@ -1900,7 +1892,6 @@ extern unsigned long long notrace sched_clock(void);
 extern u64 cpu_clock(int cpu);
 extern u64 local_clock(void);
 extern u64 sched_clock_cpu(int cpu);
-
 
 extern void sched_clock_init(void);
 
@@ -2143,7 +2134,7 @@ static inline int dequeue_signal_lock(struct task_struct *tsk, sigset_t *mask, s
 	spin_unlock_irqrestore(&tsk->sighand->siglock, flags);
 
 	return ret;
-}	
+}
 
 extern void block_all_signals(int (*notifier)(void *priv), void *priv,
 			      sigset_t *mask);

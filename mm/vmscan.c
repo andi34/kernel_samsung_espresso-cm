@@ -2204,6 +2204,7 @@ static bool shrink_zones(int priority, struct zonelist *zonelist,
 				if (compaction_ready(zone, sc)) {
 					aborted_reclaim = true;
 					continue;
+				}
 			}
 			/*
 			 * This steals pages from memory cgroups over softlimit

@@ -499,7 +499,6 @@ unlock:
 	return copied ?: err;
 }
 
-
 static unsigned int skcipher_poll(struct file *file, struct socket *sock,
 				  poll_table *wait)
 {

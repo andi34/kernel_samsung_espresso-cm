@@ -605,7 +605,7 @@ void add_disk(struct gendisk *disk)
 
 	disk_alloc_events(disk);
 
-	/* Register BDI before referencing it from bdev */ 
+	/* Register BDI before referencing it from bdev */
 	bdi = &disk->queue->backing_dev_info;
 	bdi_register_dev(bdi, disk_devt(disk));
 

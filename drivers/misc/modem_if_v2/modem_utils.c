@@ -29,7 +29,6 @@
 #define CMD_SUSPEND	((unsigned short)(0x00CA))
 #define CMD_RESUME	((unsigned short)(0x00CB))
 
-
 int mif_dump_log(struct modem_shared *msd, struct io_device *iod)
 {
 	struct sk_buff *skb;

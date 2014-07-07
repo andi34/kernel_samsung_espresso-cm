@@ -82,7 +82,6 @@
 
 #define CP_LOOPBACK_CHANNEL	30
 
-
 /* Does modem ctl structure will use state ? or status defined below ?*/
 /* Be careful!! below sequence shouldn't be changed*/
 enum modem_state {

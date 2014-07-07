@@ -341,7 +341,6 @@ static int scan_read_raw_oob(struct mtd_info *mtd, uint8_t *buf, loff_t offs,
 	ops.ooboffs = 0;
 	ops.ooblen = mtd->oobsize;
 
-
 	while (len > 0) {
 		if (len <= mtd->writesize) {
 			ops.oobbuf = buf + len;

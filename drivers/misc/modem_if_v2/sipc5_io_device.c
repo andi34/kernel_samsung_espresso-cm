@@ -10,7 +10,6 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- *
  */
 
 #include <linux/init.h>
@@ -30,10 +29,9 @@
 #include "modem_prj.h"
 #include "modem_utils.h"
 
-
-#define SIPC5_CFG_MASK	0b11111000
-#define SIPC5_SIZE_OF_CFG	1
-#define SIPC5_CFG_PADDING_MASK	0b00000100
+#define SIPC5_CFG_MASK			0b11111000
+#define SIPC5_SIZE_OF_CFG		1
+#define SIPC5_CFG_PADDING_MASK		0b00000100
 #define SIPC5_CFG_EXT_FIELD_MASK	0b00000010
 #define SIPC5_CFG_CTL_FIELD_MASK	0b00000001
 
@@ -45,7 +43,6 @@ struct sipc5_hdr {
 	u16 len;
 	u8 ext_field;
 } __packed;
-
 
 static ssize_t show_waketime(struct device *dev,
 		struct device_attribute *attr, char *buf)

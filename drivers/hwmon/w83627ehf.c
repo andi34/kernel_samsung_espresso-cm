@@ -31,7 +31,6 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 
-
     Supports the following chips:
 
     Chip        #vin    #fan    #pwm    #temp  chip IDs       man ID
@@ -1387,7 +1386,6 @@ store_pwm_enable(struct device *dev, struct device_attribute *attr,
 	return count;
 }
 
-
 #define show_tol_temp(reg) \
 static ssize_t show_##reg(struct device *dev, struct device_attribute *attr, \
 				char *buf) \
@@ -1632,7 +1630,6 @@ static struct sensor_device_attribute sda_sf3_arrays[] = {
 	SENSOR_ATTR(pwm3_stop_output, S_IWUSR | S_IRUGO, show_fan_stop_output,
 		    store_fan_stop_output, 2),
 };
-
 
 /*
  * pwm1 and pwm3 don't support max and step settings on all chips.

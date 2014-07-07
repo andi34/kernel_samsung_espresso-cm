@@ -64,8 +64,6 @@ static ssize_t ahci_led_store(struct ata_port *ap, const char *buf,
 static ssize_t ahci_transmit_led_message(struct ata_port *ap, u32 state,
 					ssize_t size);
 
-
-
 static int ahci_scr_read(struct ata_link *link, unsigned int sc_reg, u32 *val);
 static int ahci_scr_write(struct ata_link *link, unsigned int sc_reg, u32 val);
 static unsigned int ahci_qc_issue(struct ata_queued_cmd *qc);
@@ -1665,7 +1663,6 @@ static void ahci_port_intr(struct ata_port *ap)
 		else
 			qc_active = readl(port_mmio + PORT_CMD_ISSUE);
 	}
-
 
 	rc = ata_qc_complete_multiple(ap, qc_active);
 

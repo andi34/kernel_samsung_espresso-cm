@@ -31,7 +31,6 @@
 #include "Si47xx_ioctl.h"
 #include <linux/i2c/si47xx_common.h>
 
-
 /*******************************************************/
 
 /*static functions*/
@@ -749,7 +748,6 @@ MISC_DREG:
 	misc_deregister(&Si47xx_misc_device);
 	return ret;
 
-
 }
 
 void __exit Si47xx_i2c_drv_exit(void)
@@ -766,4 +764,3 @@ module_exit(Si47xx_i2c_drv_exit);
 MODULE_AUTHOR("ashton seo <ashton.seo@samsung.com>");
 MODULE_DESCRIPTION("Si47xx FM tuner driver");
 MODULE_LICENSE("GPL");
-

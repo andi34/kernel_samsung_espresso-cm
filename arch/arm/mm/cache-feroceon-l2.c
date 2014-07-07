@@ -226,7 +226,6 @@ static void feroceon_l2_flush_range(unsigned long start, unsigned long end)
 	dsb();
 }
 
-
 /*
  * Routines to disable and re-enable the D-cache and I-cache at run
  * time.  These are necessary because the L2 cache can only be enabled
@@ -342,7 +341,6 @@ void __init feroceon_l2_init(int __l2_wt_override)
 	outer_cache.inv_range = feroceon_l2_inv_range;
 	outer_cache.clean_range = feroceon_l2_clean_range;
 	outer_cache.flush_range = feroceon_l2_flush_range;
-	outer_cache.inv_all = l2_inv_all;
 
 	enable_l2();
 

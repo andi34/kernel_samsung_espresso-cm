@@ -180,7 +180,6 @@ int mpu6050_i2c_read_reg(struct i2c_client *i2c_client,
 		return 0;
 }
 
-
 int mpu6050_i2c_read_fifo(struct i2c_client *i2c_client,
 				unsigned short length, unsigned char *data)
 {
@@ -1207,8 +1206,6 @@ static ssize_t mpu6050_input_gyro_self_test_show(struct device *dev,
 		(int)abs(scaled_gyro_rms[2])%1000);
 }
 
-
-
 static DEVICE_ATTR(acc_enable, S_IRUGO | S_IWUSR | S_IWGRP,
 		mpu6050_input_accel_enable_show,
 			mpu6050_input_accel_enable_store);
@@ -1223,8 +1220,6 @@ static DEVICE_ATTR(gyro_delay, S_IRUGO | S_IWUSR | S_IWGRP,
 			mpu6050_input_gyro_delay_store);
 static DEVICE_ATTR(self_test, S_IRUGO | S_IWUSR | S_IWGRP,
 		mpu6050_input_gyro_self_test_show, NULL);
-
-
 
 static struct attribute *mpu6050_attributes[] = {
 	&dev_attr_acc_enable.attr,

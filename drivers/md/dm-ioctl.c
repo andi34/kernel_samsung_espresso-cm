@@ -43,7 +43,6 @@ struct vers_iter {
     uint32_t flags;
 };
 
-
 #define NUM_BUCKETS 64
 #define MASK_BUCKETS (NUM_BUCKETS - 1)
 static struct list_head _name_buckets[NUM_BUCKETS];
@@ -1704,9 +1703,8 @@ int __init dm_interface_init(void)
 		return r;
 	}
 
-	DMINFO("%d.%d.%d%s initialised: %s", DM_VERSION_MAJOR,
-	       DM_VERSION_MINOR, DM_VERSION_PATCHLEVEL, DM_VERSION_EXTRA,
-	       DM_DRIVER_EMAIL);
+	DMINFO("%d.%d.%d%s initialised", DM_VERSION_MAJOR,
+	       DM_VERSION_MINOR, DM_VERSION_PATCHLEVEL, DM_VERSION_EXTRA);
 	return 0;
 }
 

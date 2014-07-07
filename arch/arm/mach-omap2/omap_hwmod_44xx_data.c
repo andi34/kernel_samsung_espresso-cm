@@ -2457,7 +2457,6 @@ static struct omap_hwmod omap44xx_emif2_hwmod = {
 	.omap_chip	= OMAP_CHIP_INIT(CHIP_IS_OMAP44XX),
 };
 
-
 /*
  * 'fdif' class
  * face detection hw accelerator module

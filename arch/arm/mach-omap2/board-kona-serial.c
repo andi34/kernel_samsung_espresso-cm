@@ -32,7 +32,6 @@
 
 #include "control.h"
 
-
 static struct i2c_board_info __initdata kona_i2c_board_info[] = {
 	{
 		I2C_BOARD_INFO("ducati", 0x20),
@@ -96,7 +95,6 @@ static void __init kona_i2c_init(void)
 	r |= (1 << OMAP4_I2C3_SDA_PULLUPRESX_SHIFT);
 	r |= (1 << OMAP4_I2C3_SCL_PULLUPRESX_SHIFT);
 	omap4_ctrl_pad_writel(r, OMAP4_CTRL_MODULE_PAD_CORE_CONTROL_I2C_0);
-
 
 }
 

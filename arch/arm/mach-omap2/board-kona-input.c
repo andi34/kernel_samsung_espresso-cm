@@ -617,7 +617,6 @@ void wacom_power_on(bool on)
 		gpio_set_value(wacom_gpios[GPIO_PEN_LDO_EN].gpio, on);
 }
 
-
 static struct wacom_platform_data wacom_pdata = {
 	.x_invert = false,
 	.y_invert = false,

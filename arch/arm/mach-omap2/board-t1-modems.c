@@ -181,7 +181,6 @@ static void __init umts_modem_cfg_gpio(void)
 	mif_debug("umts_modem_cfg_gpio done\n");
 }
 
-
 /* if use more than one modem device, then set id num */
 static struct platform_device umts_modem = {
 	.name = "mif_sipc4",

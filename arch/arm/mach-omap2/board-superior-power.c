@@ -12,7 +12,6 @@
  * GNU General Public License for more details.
  */
 
-
 #include <linux/init.h>
 #include <linux/err.h>
 #include <linux/gpio.h>
@@ -30,7 +29,6 @@
 #include <linux/workqueue.h>
 #include <linux/delay.h>
 #include <linux/module.h>
-
 
 #include <linux/switch.h>
 #include <linux/mfd/max77693.h>
@@ -80,7 +78,6 @@
 #define SEC_MAX77693MFD_I2C_ID		5
 
 #define SEC_BATTERY_PMIC_NAME		""
-
 
 #define ADC_OPEN			0x1f
 #define ADC_CEA936ATYPE1_CHG		0x17

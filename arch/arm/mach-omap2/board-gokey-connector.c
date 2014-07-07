@@ -13,7 +13,6 @@
  *
  */
 
-
 #include <linux/device.h>
 #include <linux/err.h>
 #include <linux/gpio.h>
@@ -78,7 +77,6 @@
 #if !defined(CONFIG_USB_SWITCH_FSA9480_DISABLE_OTG)
 static int otg_en;
 #endif
-
 
 /* type => CABLE_TYPE_NONE(0), _USB(1), or _AC(2) */
 static int g_charging_type = CABLE_TYPE_NONE;
@@ -877,7 +875,6 @@ void __init omap4_gokey_connector_init(void)
 	uart_l3_cstr_flag = true;
 	device_isupdated = false;
 	usb_attached = false;
-
 
 	gokey_uart_sw_gpio_init();
 	gokey_connector_gpio_init();

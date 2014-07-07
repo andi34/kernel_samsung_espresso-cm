@@ -306,7 +306,6 @@ static void __sec_gaf_dump_one_task_info(struct task_struct *tsk, bool isMain)
 			tsk->se.statistics.block_start,
 			tsk->se.statistics.block_max);
 
-
 	if (tsk->state == TASK_RUNNING ||
 	    tsk->state == TASK_UNINTERRUPTIBLE || tsk->mm == NULL)
 		show_stack(tsk, NULL);

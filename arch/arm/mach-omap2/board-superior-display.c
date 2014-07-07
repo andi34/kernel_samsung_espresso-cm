@@ -448,7 +448,6 @@ static struct omap_dss_device superior_oled_device = {
 #endif
 };
 
-
 static struct omap_dss_device superior_hdmi_device = {
 	.name = "hdmi",
 	.driver_name = "hdmi_panel",

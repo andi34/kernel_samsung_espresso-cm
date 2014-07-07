@@ -495,7 +495,6 @@ static struct stc311x_platform_data stc3115_data = {
 	.OCVOffset[1] = 46,		/* OCV curve adjustment */
 	.OCVOffset[0] = -3,		/* OCV curve adjustment */
 
-
 	.OCVOffset2[15] = -45,	/* OCV curve adjustment */
 	.OCVOffset2[14] = -35,	/* OCV curve adjustment */
 	.OCVOffset2[13] = -21,	/* OCV curve adjustment */

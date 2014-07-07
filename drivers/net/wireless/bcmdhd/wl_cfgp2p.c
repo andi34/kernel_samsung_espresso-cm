@@ -2,13 +2,13 @@
  * Linux cfgp2p driver
  *
  * Copyright (C) 1999-2012, Broadcom Corporation
- * 
+ *
  *      Unless you and Broadcom execute a separate written software license
  * agreement governing use of this software, this software is licensed to you
  * under the terms of the GNU General Public License version 2 (the "GPL"),
  * available at http://www.broadcom.com/licenses/GPLv2.php, with the
  * following added to such license:
- * 
+ *
  *      As a special exception, the copyright holders of this software give you
  * permission to link this software with independent modules, and to copy and
  * distribute the resulting executable under terms of your choice, provided that
@@ -16,7 +16,7 @@
  * the license of that module.  An independent module is a module which is not
  * derived from this software.  The special exception does not apply to any
  * modifications of the software.
- * 
+ *
  *      Notwithstanding the above, under no circumstances may you combine this
  * software in any way with any other Broadcom software provided under a license
  * other than the GPL, without Broadcom's express prior written consent.
@@ -288,7 +288,6 @@ void wl_cfgp2p_print_actframe(bool tx, void *frame, u32 frame_len, u32 channel)
 					" channel=%d\n", (tx)? "TX" : "RX", channel));
 		}
 
-
 	}
 }
 
@@ -505,7 +504,6 @@ wl_cfgp2p_ifchange(struct wl_priv *wl, struct ether_addr *mac, u8 if_type,
 	}
 	return err;
 }
-
 
 /* Get the index of a created P2P BSS.
  * Parameters:
@@ -835,7 +833,6 @@ wl_cfgp2p_escan(struct wl_priv *wl, struct net_device *dev, u16 active,
 		return -1;
 	}
 
-
 	/* Fill in the P2P scan structure at the start of the iovar param block */
 	p2p_params = (wl_p2p_scan_t*) memblk;
 	p2p_params->type = 'E';
@@ -1029,7 +1026,6 @@ end:
 	}
 	return err;
 }
-
 
 /* Delete and Set a management vndr ie to firmware
  * Parameters:

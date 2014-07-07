@@ -2,13 +2,13 @@
  * Linux cfgp2p driver
  *
  * Copyright (C) 1999-2012, Broadcom Corporation
- * 
+ *
  *      Unless you and Broadcom execute a separate written software license
  * agreement governing use of this software, this software is licensed to you
  * under the terms of the GNU General Public License version 2 (the "GPL"),
  * available at http://www.broadcom.com/licenses/GPLv2.php, with the
  * following added to such license:
- * 
+ *
  *      As a special exception, the copyright holders of this software give you
  * permission to link this software with independent modules, and to copy and
  * distribute the resulting executable under terms of your choice, provided that
@@ -16,7 +16,7 @@
  * the license of that module.  An independent module is a module which is not
  * derived from this software.  The special exception does not apply to any
  * modifications of the software.
- * 
+ *
  *      Notwithstanding the above, under no circumstances may you combine this
  * software in any way with any other Broadcom software provided under a license
  * other than the GPL, without Broadcom's express prior written consent.
@@ -115,7 +115,6 @@ enum wl_cfgp2p_status {
 	WLP2P_STATUS_DISC_IN_PROGRESS
 };
 
-
 #define wl_to_p2p_bss_ndev(wl, type)		((wl)->p2p->bss_idx[type].dev)
 #define wl_to_p2p_bss_bssidx(wl, type)		((wl)->p2p->bss_idx[type].bssidx)
 #define wl_to_p2p_bss_saved_ie(wl, type)	((wl)->p2p->bss_idx[type].saved_ie)
@@ -141,7 +140,6 @@ enum wl_cfgp2p_status {
 #else
 #define CFGP2P_ERROR_TEXT		"CFGP2P-ERROR) "
 #endif
-
 
 #define CFGP2P_ERR(args)									\
 	do {										\
@@ -249,7 +247,6 @@ wl_cfgp2p_find_idx(struct wl_priv *wl, struct net_device *ndev);
 extern struct net_device *
 wl_cfgp2p_find_ndev(struct wl_priv *wl, s32 bssidx);
 
-
 extern s32
 wl_cfgp2p_listen_complete(struct wl_priv *wl, struct net_device *ndev,
             const wl_event_msg_t *e, void *data);
@@ -277,7 +274,6 @@ wl_cfgp2p_bss_isup(struct net_device *ndev, int bsscfg_idx);
 
 extern s32
 wl_cfgp2p_bss(struct wl_priv *wl, struct net_device *ndev, s32 bsscfg_idx, s32 up);
-
 
 extern s32
 wl_cfgp2p_supported(struct wl_priv *wl, struct net_device *ndev);

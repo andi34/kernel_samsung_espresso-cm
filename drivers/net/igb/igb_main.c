@@ -194,7 +194,6 @@ static struct pci_error_handlers igb_err_handler = {
 	.resume = igb_io_resume,
 };
 
-
 static struct pci_driver igb_driver = {
 	.name     = igb_driver_name,
 	.id_table = igb_pci_tbl,
@@ -542,7 +541,6 @@ rx_ring_summary:
 exit:
 	return;
 }
-
 
 /**
  * igb_read_clock - read raw cycle counter (to be used by time counter)
@@ -1188,7 +1186,6 @@ static int igb_init_interrupt_scheme(struct igb_adapter *adapter)
 		dev_err(&pdev->dev, "Invalid q_vector to ring mapping\n");
 		goto err_map_queues;
 	}
-
 
 	return 0;
 err_map_queues:
@@ -2224,7 +2221,6 @@ static void __devinit igb_probe_vfs(struct igb_adapter * adapter)
 	}
 #endif /* CONFIG_PCI_IOV */
 }
-
 
 /**
  * igb_init_hw_timer - Initialize hardware timer used with IEEE 1588 timestamp

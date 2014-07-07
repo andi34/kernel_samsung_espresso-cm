@@ -92,7 +92,6 @@ enum {
 	STEP_SEND_TO_CONN_CLOSED,
 };
 
-
 struct if_hsi_channel {
 	struct hsi_device *dev;
 	unsigned int channel_id;
@@ -166,7 +165,6 @@ struct mipi_link_device {
 #define to_mipi_link_device(linkdev) \
 			container_of(linkdev, struct mipi_link_device, ld)
 
-
 enum {
 	HSI_INIT_MODE_NORMAL,
 	HSI_INIT_MODE_FLASHLESS_BOOT,
@@ -179,7 +177,6 @@ static int if_hsi_write(struct if_hsi_channel *channel, u32 *data,
 static int if_hsi_protocol_send(struct mipi_link_device *mipi_ld, int ch,
 			u32 *data, unsigned int len);
 static int if_hsi_close_channel(struct if_hsi_channel *channel);
-
 
 #define MIPI_LOG_TAG "mipi_link: "
 

@@ -88,7 +88,6 @@ GCDBG_FILTERDEF(gcbv, GCZONE_NONE,
 		"blit",
 		"cache")
 
-
 /*******************************************************************************
 ** Miscellaneous defines and macros.
 */
@@ -155,7 +154,6 @@ GCDBG_FILTERDEF(gcbv, GCZONE_NONE,
 #else
 #define GCDUMPSCHEDULE()
 #endif
-
 
 /*******************************************************************************
 ** Internal structures.
@@ -382,7 +380,6 @@ struct gccontext {
 
 static struct gccontext gccontext;
 
-
 /*******************************************************************************
  * Debugging.
  */
@@ -432,7 +429,6 @@ static void dumpbatch(struct gcbatch *batch)
 #else
 #	define GCDUMPBATCH(...)
 #endif
-
 
 /*******************************************************************************
  * Error handling.
@@ -517,7 +513,6 @@ static struct bvsurferrorid g_src1surferr = { "src1", BVERR_SRC1DESC };
 static struct bvsurferrorid g_src2surferr = { "src2", BVERR_SRC2DESC };
 static struct bvsurferrorid g_masksurferr = { "mask", BVERR_MASKDESC };
 
-
 /*******************************************************************************
  * Callback info management.
  */
@@ -583,7 +578,6 @@ void gccallback(void *callbackparam)
 
 	GCEXIT(GCZONE_BLIT);
 }
-
 
 /*******************************************************************************
  * Memory management.
@@ -891,7 +885,6 @@ static void unmap_implicit(struct gcbatch *batch)
 	GCEXIT(GCZONE_MAPPING);
 }
 
-
 /*******************************************************************************
  * Batch memory manager.
  */
@@ -1173,7 +1166,6 @@ exit:
 		  (bverror == BVERR_NONE) ? "result" : "error", bverror);
 	return bverror;
 }
-
 
 /*******************************************************************************
  * Pixel format parser.
@@ -1620,7 +1612,6 @@ static unsigned int getinternalcolor(void *ptr, struct bvformatxlate *format)
 
 	return dstpixel;
 }
-
 
 /*******************************************************************************
  * Alpha blending parser.
@@ -2300,7 +2291,6 @@ exit:
 	return bverror;
 }
 
-
 /*******************************************************************************
  * Rotation and mirror.
  */
@@ -2357,7 +2347,6 @@ static inline int get_angle(int orientation)
 	/* Not supported angle. */
 	return ROT_ANGLE_INVALID;
 }
-
 
 /*******************************************************************************
  * Surface compare and validation.
@@ -2914,7 +2903,6 @@ static enum bverror parse_source(struct bvbltparams *bltparams,
 exit:
 	return bverror;
 }
-
 
 /*******************************************************************************
  * Primitive renderers.
@@ -3818,7 +3806,6 @@ static enum bverror do_filter(struct bvbltparams *bltparams,
 	return bverror;
 }
 
-
 /*******************************************************************************
  * Library constructor and destructor.
  */
@@ -3876,7 +3863,6 @@ void bv_exit(void)
 		gcfree(batch);
 	}
 }
-
 
 /*******************************************************************************
  * Library API.

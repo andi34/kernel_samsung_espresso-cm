@@ -572,7 +572,6 @@ static int fsa9480_reg_init(struct fsa9480_usbsw *usbsw)
 	return 0;
 }
 
-
 static int fsa9480_reset(struct fsa9480_usbsw *usbsw)
 {
 	struct i2c_client *client = usbsw->client;
@@ -772,7 +771,6 @@ unhandled:
 			 "nothing known attached, keeping ownership of port\n");
 		goto handled;
 	}
-
 
 err:
 	usbsw->pdata->enable(false);

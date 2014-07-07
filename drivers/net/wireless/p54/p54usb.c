@@ -1,4 +1,3 @@
-
 /*
  * Linux device driver for USB based Prism54
  *

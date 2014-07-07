@@ -397,7 +397,6 @@ void ath_beacon_tasklet(unsigned long data)
 	 * on the tsf to safeguard against missing an swba.
 	 */
 
-
 	if (ah->opmode == NL80211_IFTYPE_AP) {
 		u16 intval;
 		u32 tsftu;
@@ -417,7 +416,6 @@ void ath_beacon_tasklet(unsigned long data)
 		slot = 0;
 		vif = sc->beacon.bslot[slot];
 	}
-
 
 	bfaddr = 0;
 	if (vif) {
@@ -795,7 +793,6 @@ static bool ath_has_valid_bslot(struct ath_softc *sc)
 	}
 	return found;
 }
-
 
 void ath_set_beacon(struct ath_softc *sc)
 {

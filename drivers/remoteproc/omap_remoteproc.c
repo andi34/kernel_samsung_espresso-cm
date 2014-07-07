@@ -142,7 +142,6 @@ omap_rproc_map(struct device *dev, struct iommu *obj, u32 da, u32 pa, u32 size)
 	return 0;
 }
 
-
 static int omap_rproc_iommu_isr(struct iommu *iommu, u32 da, u32 errs, void *p)
 {
 	struct rproc *rproc = p;

@@ -2,13 +2,13 @@
  * Broadcom Dongle Host Driver (DHD), common DHD core.
  *
  * Copyright (C) 1999-2012, Broadcom Corporation
- * 
+ *
  *      Unless you and Broadcom execute a separate written software license
  * agreement governing use of this software, this software is licensed to you
  * under the terms of the GNU General Public License version 2 (the "GPL"),
  * available at http://www.broadcom.com/licenses/GPLv2.php, with the
  * following added to such license:
- * 
+ *
  *      As a special exception, the copyright holders of this software give you
  * permission to link this software with independent modules, and to copy and
  * distribute the resulting executable under terms of your choice, provided that
@@ -16,7 +16,7 @@
  * the license of that module.  An independent module is a module which is not
  * derived from this software.  The special exception does not apply to any
  * modifications of the software.
- * 
+ *
  *      Notwithstanding the above, under no circumstances may you combine this
  * software in any way with any other Broadcom software provided under a license
  * other than the GPL, without Broadcom's express prior written consent.
@@ -65,12 +65,10 @@
 #include <dhd_wlfc.h>
 #endif
 
-
 #ifdef WLMEDIA_HTSF
 extern void htsf_update(struct dhd_info *dhd, void *data);
 #endif
 int dhd_msg_level = DHD_ERROR_VAL;
-
 
 #include <wl_iw.h>
 
@@ -98,7 +96,6 @@ extern int dhd_get_concurrent_capabilites(dhd_pub_t *dhd);
 #endif
 bool ap_cfg_running = FALSE;
 bool ap_fw_loaded = FALSE;
-
 
 #ifdef DHD_DEBUG
 const char dhd_version[] = "Dongle Host Driver, version " EPI_VERSION_STR "\nCompiled on "
@@ -268,7 +265,6 @@ dhd_wl_ioctl_cmd(dhd_pub_t *dhd_pub, int cmd, void *arg, int len, uint8 set, int
 	return dhd_wl_ioctl(dhd_pub, ifindex, &ioc, arg, len);
 }
 
-
 int
 dhd_wl_ioctl(dhd_pub_t *dhd_pub, int ifindex, wl_ioctl_t *ioc, void *buf, int len)
 {
@@ -299,7 +295,7 @@ dhd_wl_ioctl(dhd_pub_t *dhd_pub, int ifindex, wl_ioctl_t *ioc, void *buf, int le
 			DHD_ERROR(("%s: WLC_IOCTL: cmd: %d, ret = %d\n",
 				__FUNCTION__, ioc->cmd, ret));
 	}
-#endif 
+#endif
 
 	return ret;
 }
@@ -415,7 +411,6 @@ dhd_doiovar(dhd_pub_t *dhd_pub, const bcm_iovar_t *vi, uint32 actionid, const ch
 #endif /* PROP_TXSTATUS */
 		break;
 
-
 	case IOV_GVAL(IOV_IOCTLTIMEOUT): {
 		int_val = (int32)dhd_os_get_ioctl_resp_timeout();
 		bcopy(&int_val, arg, sizeof(int_val));
@@ -497,7 +492,6 @@ dhd_doiovar(dhd_pub_t *dhd_pub, const bcm_iovar_t *vi, uint32 actionid, const ch
 		int_val = BUS_TYPE_SDIO;
 		bcopy(&int_val, arg, val_size);
 		break;
-
 
 #ifdef WLMEDIA_HTSF
 	case IOV_GVAL(IOV_WLPKTDLYSTAT_SZ):
@@ -962,7 +956,6 @@ wl_show_host_event(wl_event_msg_t *event, void *event_data)
 		break;
 	}
 
-
 	case WLC_E_RSSI:
 		DHD_EVENT(("MACEVENT: %s %d\n", event_name, ntoh32(*((int *)event_data))));
 		break;
@@ -1054,7 +1047,6 @@ wl_host_event(dhd_pub_t *dhd_pub, int *ifidx, void *pktdata,
 				eWLFC_MAC_ENTRY_ACTION_ADD : eWLFC_MAC_ENTRY_ACTION_DEL),
 				ifevent->ifidx, ifevent->is_AP, ea);
 
-
 		/* dhd already has created an interface by default, for 0 */
 		if (ifevent->ifidx == 0)
 			break;
@@ -1101,7 +1093,6 @@ wl_host_event(dhd_pub_t *dhd_pub, int *ifidx, void *pktdata,
 			dhd_event(dhd_pub->info, (char *)pvt_data, evlen, *ifidx);
 		break;
 
-
 #ifdef WLMEDIA_HTSF
 	case WLC_E_HTSFSYNC:
 		htsf_update(dhd_pub->info, event_data);
@@ -1117,7 +1108,7 @@ wl_host_event(dhd_pub_t *dhd_pub, int *ifidx, void *pktdata,
 		memcpy((void *)(&pvt_data->event.event_type), &temp,
 		       sizeof(pvt_data->event.event_type));
 	}
-#endif 
+#endif
 		/* These are what external supplicant/authenticator wants */
 		/* fall through */
 	case WLC_E_LINK:
@@ -1531,7 +1522,6 @@ dhd_arp_offload_add_ip(dhd_pub_t *dhd, uint32 ipaddr, int idx)
 	char iovbuf[32];
 	int retcode;
 
-
 	if (dhd == NULL) return;
 	if (dhd->arp_version == 1)
 		idx = 0;
@@ -1827,7 +1817,6 @@ bool dhd_is_associated(dhd_pub_t *dhd, void *bss_buf, int *retval)
 		return FALSE;
 	}
 }
-
 
 /* Function to estimate possible DTIM_SKIP value */
 int

@@ -3,13 +3,13 @@
  *  implement bcmsdh API for SDIOH driver
  *
  * Copyright (C) 1999-2012, Broadcom Corporation
- * 
+ *
  *      Unless you and Broadcom execute a separate written software license
  * agreement governing use of this software, this software is licensed to you
  * under the terms of the GNU General Public License version 2 (the "GPL"),
  * available at http://www.broadcom.com/licenses/GPLv2.php, with the
  * following added to such license:
- * 
+ *
  *      As a special exception, the copyright holders of this software give you
  * permission to link this software with independent modules, and to copy and
  * distribute the resulting executable under terms of your choice, provided that
@@ -17,7 +17,7 @@
  * the license of that module.  An independent module is a module which is not
  * derived from this software.  The special exception does not apply to any
  * modifications of the software.
- * 
+ *
  *      Notwithstanding the above, under no circumstances may you combine this
  * software in any way with any other Broadcom software provided under a license
  * other than the GPL, without Broadcom's express prior written consent.
@@ -223,7 +223,6 @@ bcmsdh_intr_pending(void *sdh)
 }
 #endif
 
-
 int
 bcmsdh_devremove_reg(void *sdh, bcmsdh_cb_fn_t fn, void *argh)
 {
@@ -349,7 +348,6 @@ bcmsdh_cfg_write_word(void *sdh, uint fnc_num, uint32 addr, uint32 data, int *er
 	             addr, data));
 }
 
-
 int
 bcmsdh_cis_read(void *sdh, uint func, uint8 *cis, uint length)
 {
@@ -388,7 +386,6 @@ bcmsdh_cis_read(void *sdh, uint func, uint8 *cis, uint length)
 
 	return (SDIOH_API_SUCCESS(status) ? 0 : BCME_ERROR);
 }
-
 
 int
 bcmsdhsdio_set_sbaddr_window(void *sdh, uint32 address, bool force_set)
@@ -634,7 +631,6 @@ bcmsdh_waitlockfree(void *sdh)
 
 	return sdioh_waitlockfree(bcmsdh->sdioh);
 }
-
 
 #ifdef BCMSPI     /* 4329 gSPI won't have CIS reads. */
 int

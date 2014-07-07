@@ -1365,7 +1365,6 @@ static void sec_bat_alarm(struct alarm *alarm)
 	}
 }
 
-
 static unsigned int sec_bat_get_polling_time(
 	struct sec_battery_info *battery)
 {

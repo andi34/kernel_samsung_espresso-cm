@@ -597,7 +597,6 @@ else
 	endif
 endif
 
-
 ifdef NO_STRLCPY
 	BASIC_CFLAGS += -DNO_STRLCPY
 else
@@ -643,7 +642,6 @@ ALL_CFLAGS += $(ARCH_CFLAGS)
 ALL_LDFLAGS += $(BASIC_LDFLAGS)
 
 export INSTALL SHELL_PATH
-
 
 ### Build rules
 

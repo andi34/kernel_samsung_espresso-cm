@@ -35,7 +35,6 @@ use strict;
 #              Small fixes (like spaces vs. \s in regex)
 # -- Tim Jansen <tim@tjansen.de>
 
-
 #
 # This will read a 'c' file and scan for embedded comments in the
 # style of gnome comments (+minor extensions - see below).
@@ -2258,7 +2257,6 @@ sub process_file($) {
 	}
     }
 }
-
 
 $kernelversion = get_kernel_version();
 

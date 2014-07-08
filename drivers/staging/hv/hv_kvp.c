@@ -30,8 +30,6 @@
 #include "hyperv.h"
 #include "hv_kvp.h"
 
-
-
 /*
  * Global state maintained for transaction that is being processed.
  * Note that only one transaction can be active at any point in time.
@@ -244,10 +242,8 @@ void hv_kvp_onchannelcallback(void *context)
 	struct icmsg_hdr *icmsghdrp;
 	struct icmsg_negotiate *negop = NULL;
 
-
 	if (kvp_transaction.active)
 		return;
-
 
 	vmbus_recvpacket(channel, recv_buffer, PAGE_SIZE, &recvlen, &requestid);
 

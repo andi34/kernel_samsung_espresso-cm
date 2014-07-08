@@ -163,7 +163,6 @@ static void delayed_put_task_struct(struct rcu_head *rhp)
 	put_task_struct(tsk);
 }
 
-
 void release_task(struct task_struct * p)
 {
 	struct task_struct *leader;
@@ -1058,7 +1057,6 @@ NORET_TYPE void do_exit(long code)
 	 *   - SMI occurs before setting TASK_RUNINNG.
 	 *     (or hypervisor of virtual machine switches to other guest)
 	 *  As a result, we may become TASK_RUNNING after becoming TASK_DEAD
-	 *
 	 * To avoid it, we have to wait for releasing tsk->pi_lock which
 	 * is held by try_to_wake_up()
 	 */

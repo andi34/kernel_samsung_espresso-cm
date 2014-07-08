@@ -715,7 +715,6 @@ const char * const vmstat_text[] = {
 	"nr_shmem",
 	"nr_dirtied",
 	"nr_written",
-
 #ifdef CONFIG_NUMA
 	"numa_hit",
 	"numa_miss",
@@ -799,7 +798,6 @@ const char * const vmstat_text[] = {
 #endif /* CONFIG_VM_EVENTS_COUNTERS */
 };
 #endif /* CONFIG_PROC_FS || CONFIG_SYSFS */
-
 
 #ifdef CONFIG_PROC_FS
 static void frag_show_print(struct seq_file *m, pg_data_t *pgdat,

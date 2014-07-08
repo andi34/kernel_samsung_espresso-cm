@@ -93,7 +93,6 @@ struct khugepaged_scan {
 	.mm_head = LIST_HEAD_INIT(khugepaged_scan.mm_head),
 };
 
-
 static int set_recommended_min_free_kbytes(void)
 {
 	struct zone *zone;

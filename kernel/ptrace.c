@@ -24,7 +24,6 @@
 #include <linux/regset.h>
 #include <linux/hw_breakpoint.h>
 
-
 /*
  * ptrace a task: make the debugger its new parent and
  * move it to the ptrace list.
@@ -554,7 +553,6 @@ static int ptrace_setsiginfo(struct task_struct *child, const siginfo_t *info)
 	}
 	return error;
 }
-
 
 #ifdef PTRACE_SINGLESTEP
 #define is_singlestep(request)		((request) == PTRACE_SINGLESTEP)

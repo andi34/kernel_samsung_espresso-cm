@@ -33,7 +33,6 @@ enum trace_type {
 	__TRACE_LAST_TYPE,
 };
 
-
 #undef __field
 #define __field(type, item)		type	item;
 
@@ -222,7 +221,6 @@ struct tracer_flags {
 /* Makes more easy to define a tracer opt */
 #define TRACER_OPT(s, b)	.name = #s, .bit = b
 
-
 /**
  * struct tracer - a specific tracer and its callbacks to interact with debugfs
  * @name: the name chosen to select it on the available_tracers file
@@ -272,15 +270,13 @@ struct tracer {
 	/* If you handled the flag setting, return 0 */
 	int			(*set_flag)(u32 old_flags, u32 bit, int set);
 	/* Return 0 if OK with change, else return non-zero */
-	int			(*flag_changed)(struct tracer *tracer,
-						u32 mask, int set);
+	int			(*flag_changed)(struct tracer *tracer, u32 mask, int set);
 	struct tracer		*next;
 	struct tracer_flags	*flags;
 	int			print_max;
 	int			use_max_tr;
-	bool			enabled;
+	bool		enabled;
 };
-
 
 #define TRACE_PIPE_ALL_CPU	-1
 
@@ -494,7 +490,6 @@ extern int __trace_graph_entry(struct trace_array *tr,
 extern void __trace_graph_return(struct trace_array *tr,
 				 struct ftrace_graph_ret *trace,
 				 unsigned long flags, int pc);
-
 
 #ifdef CONFIG_DYNAMIC_FTRACE
 /* TODO: make this variable */

@@ -195,7 +195,6 @@ static int posix_get_monotonic_raw(clockid_t which_clock, struct timespec *tp)
 	return 0;
 }
 
-
 static int posix_get_realtime_coarse(clockid_t which_clock, struct timespec *tp)
 {
 	*tp = current_kernel_time();
@@ -220,7 +219,6 @@ static int posix_get_boottime(const clockid_t which_clock, struct timespec *tp)
 	get_monotonic_boottime(tp);
 	return 0;
 }
-
 
 /*
  * Initialize everything, well, just everything in Posix clocks/timers ;)
@@ -792,7 +790,7 @@ common_timer_set(struct k_itimer *timr, int flags,
 	if (hrtimer_try_to_cancel(timer) < 0)
 		return TIMER_RETRY;
 
-	timr->it_requeue_pending = (timr->it_requeue_pending + 2) & 
+	timr->it_requeue_pending = (timr->it_requeue_pending + 2) &
 		~REQUEUE_PENDING;
 	timr->it_overrun_last = 0;
 

@@ -1,4 +1,3 @@
-
 #ifdef CONFIG_SCHEDSTATS
 /*
  * bump this up when changing the output format or the meaning of an existing
@@ -80,7 +79,6 @@ static int schedstat_open(struct inode *inode, struct file *file)
 	res = single_open(file, show_schedstat, NULL);
 	if (res)
 		return res;
-
 
 	m = file->private_data;
 	res = seq_reserve(m, size);

@@ -553,7 +553,6 @@ int dss_resume_all_devices(void)
 	return bus_for_each_dev(bus, NULL, NULL, dss_resume_device);
 }
 
-
 static int dss_disable_device(struct device *dev, void *data)
 {
 	struct omap_dss_device *dssdev = to_dss_device(dev);
@@ -573,7 +572,6 @@ void dss_disable_all_devices(void)
 	struct bus_type *bus = dss_get_bus();
 	bus_for_each_dev(bus, NULL, NULL, dss_disable_device);
 }
-
 
 void omap_dss_get_device(struct omap_dss_device *dssdev)
 {
@@ -646,4 +644,3 @@ void omap_dss_stop_device(struct omap_dss_device *dssdev)
 	module_put(dssdev->dev.driver->owner);
 }
 EXPORT_SYMBOL(omap_dss_stop_device);
-

@@ -5506,28 +5506,7 @@ index 70f931a..503ef4b 100644
 -	return 0;
 +	sgx_omaplfb_set(0, p_sgx_config);
  }
-diff --git a/arch/arm/plat-omap/clock.c b/arch/arm/plat-omap/clock.c
-index d319b23..c54c1af 100644
---- a/arch/arm/plat-omap/clock.c
-+++ b/arch/arm/plat-omap/clock.c
-@@ -591,7 +591,7 @@ const struct clkops clkops_null = {
- };
- 
- /*
-- * Dummy functions used for virtual dummy clocks
-+ * Dummy clock
-  */
- long clk_dummy_round_rate(struct clk *clk, unsigned long rate)
- {
-@@ -605,8 +605,6 @@ int clk_dummy_set_rate(struct clk *clk, unsigned long rate)
- };
- 
- /*
-- * Dummy clock
-- *
-  * Used for clock aliases that are needed on some OMAPs, but not others
-  */
- struct clk dummy_ck = {
+
 diff --git a/arch/arm/plat-omap/dma.c b/arch/arm/plat-omap/dma.c
 index 90ae3ec..1ce12ff 100644
 --- a/arch/arm/plat-omap/dma.c

@@ -645,7 +645,6 @@ static ssize_t mtpg_write(struct file *fp, const char __user *buf,
 	int r = count, xfer;
 	int ret;
 
-
 	DEBUG_MTPW("[%s] \t%d ep bulk_out name = %s\n",
 			__func__, __LINE__ , dev->bulk_out->name);
 
@@ -759,7 +758,6 @@ static ssize_t interrupt_write(struct file *fd,
 	return ret;
 }
 
-
 static void read_send_work(struct work_struct *work)
 {
 	struct mtpg_dev	*dev = container_of(work, struct mtpg_dev,
@@ -790,7 +788,6 @@ static void read_send_work(struct work_struct *work)
 	 */
 	if ((count & (dev->bulk_in->maxpacket - 1)) == 0)
 		ZLP_flag = 1;
-
 
 	while (count > 0 || ZLP_flag) {
 		/*Breaking the loop after sending Zero Length Packet*/
@@ -860,7 +857,6 @@ static void read_send_work(struct work_struct *work)
 	dev->read_send_result = r;
 	smp_wmb();
 }
-
 
 static long  mtpg_ioctl(struct file *fd, unsigned int code, unsigned long arg)
 {
@@ -1041,7 +1037,6 @@ static long  mtpg_ioctl(struct file *fd, unsigned int code, unsigned long arg)
 							__func__, __LINE__);
 			goto exit;
 		}
-
 
 		dev->read_send_file = file;
 		dev->read_send_length = info.Length;
@@ -1393,7 +1388,6 @@ static void mtpg_function_disable(struct usb_function *f)
 	wake_up(&dev->read_wq);
 }
 
-
 /*PIMA15740-2000 spec: Class specific setup request for MTP*/
 static void
 mtp_complete_cancel_io(struct usb_ep *ep, struct usb_request *req)
@@ -1427,7 +1421,7 @@ mtp_complete_cancel_io(struct usb_ep *ep, struct usb_request *req)
 
 }
 
-static int mtp3sung_ctrlrequest(struct usb_composite_dev *cdev,
+static int mtpSsung_ctrlrequest(struct usb_composite_dev *cdev,
 				const struct usb_ctrlrequest *ctrl)
 {
 	struct mtpg_dev	*dev = the_mtpg;
@@ -1538,7 +1532,7 @@ static int mtp3sung_ctrlrequest(struct usb_composite_dev *cdev,
 	return value;
 }
 
-static int mtp3sung_bind_config(struct usb_configuration *c, bool ptp_config)
+static int mtpSsung_bind_config(struct usb_configuration *c, bool ptp_config)
 {
 	struct mtpg_dev	*mtpg = the_mtpg;
 	int		status = 0;
@@ -1577,7 +1571,7 @@ static int mtp3sung_bind_config(struct usb_configuration *c, bool ptp_config)
 	return usb_add_function(c, &mtpg->function);
 }
 
-static int mtp3sung_setup(void)
+static int mtpSsung_setup(void)
 {
 	struct mtpg_dev	*mtpg;
 	int		rc;
@@ -1631,7 +1625,7 @@ err_misc_register:
 	return rc;
 }
 
-static void mtp3sung_cleanup(void)
+static void mtpSsung_cleanup(void)
 {
 	struct mtpg_dev	*mtpg = the_mtpg;
 	printk(KERN_DEBUG "[%s:::%d]\n", __func__, __LINE__);

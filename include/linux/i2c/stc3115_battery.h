@@ -13,8 +13,6 @@
 
 #define GG_VERSION "2.00a"
 
-
-
 struct fuelgauge_callbacks {
 	int (*get_value)(struct fuelgauge_callbacks *ptr,
 		enum fuel_property fg_prop);

@@ -188,7 +188,6 @@ static inline int twl_class_is_ ##class(void)	\
 TWL_CLASS_IS(4030, TWL4030_CLASS_ID)
 TWL_CLASS_IS(6030, TWL6030_CLASS_ID)
 
-
 #define TWL6030_CLASS		BIT(3)	/* TWL6030 class */
 #define TWL6032_SUBCLASS	BIT(4)  /* Phoenix Lite is a varient*/
 #define TWL6034_SUBCLASS	BIT(5)  /* Varient of Phoenix Lite */
@@ -1052,7 +1051,6 @@ static inline int twl4030charger_usb_en(int enable) { return 0; }
 /* External control pins */
 #define TWL6030_REG_SYSEN	62
 #define TWL6030_REG_REGEN1	63
-
 
 #define TWL6034_REG_SMPSN7	64
 #define TWL6034_REG_SMPSN8	65

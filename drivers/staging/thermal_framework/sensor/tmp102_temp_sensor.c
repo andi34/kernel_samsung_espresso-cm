@@ -229,7 +229,6 @@ static int find_samsung_siop_level(struct sec_siop_info *info, int increase)
 			level = i;
 	}
 
-
 	return level;
 }
 static void notify_change_of_temperature(struct tmp102_temp_sensor *tmp102)
@@ -280,7 +279,6 @@ static void notify_change_of_temperature(struct tmp102_temp_sensor *tmp102)
 	return;
 }
 
-
 static int __devinit samsung_siop_init(struct tmp102_temp_sensor *tmp102)
 {
 	int ret = 0;
@@ -304,12 +302,10 @@ static int __devinit samsung_siop_init(struct tmp102_temp_sensor *tmp102)
 
 	platform_set_drvdata(tmp102->siop_pdev, siop_info);
 
-
 	ret = sysfs_create_group(&tmp102->siop_pdev->dev.kobj,
 						&sec_therm_group);
 	if (ret)
 		goto fail_sysfs;
-
 
 	dev_info(&tmp102->siop_pdev->dev, "Samsung SIOP init\n");
 
@@ -354,7 +350,6 @@ static int tmp102_get_temp(struct thermal_dev *tdev)
 
 	if (current_temp < 0)
 		current_temp = 0;
-
 
 	if (current_temp/1000 != tmp102->therm_fw->current_temp/1000)
 		dev_info(&pdev->dev, "temperature = %d\n", current_temp);
@@ -416,7 +411,6 @@ static DEVICE_ATTR(debug_user, S_IWUSR | S_IRUGO, tmp102_show_temp_user_space,
 			  tmp102_set_temp_user_space);
 static DEVICE_ATTR(temp1_input, S_IRUGO, tmp102_temp_sensor_read_temp,
 			  NULL);
-
 
 static struct attribute *tmp102_temp_sensor_attributes[] = {
 	&dev_attr_temp1_input.attr,
@@ -513,13 +507,11 @@ static int __devinit tmp102_temp_sensor_probe(
 		goto therm_fw_alloc_err;
 	}
 
-
 	ret = samsung_siop_init(tmp102);
 
 	dev_info(&client->dev, "initialized\n");
 	if (ret)
 		goto sysfs_create_err;
-
 
 	return ret;
 

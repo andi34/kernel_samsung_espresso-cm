@@ -52,7 +52,6 @@
 #define TSPDRV_DISABLE_AMP		_IO(TSPDRV_MAGIC_NUMBER & 0xFF, 4)
 #define TSPDRV_GET_NUM_ACTUATORS _IO(TSPDRV_MAGIC_NUMBER & 0xFF, 5)
 
-
 #define VIBE_MAX_DEVICE_NAME_LENGTH		64
 /* DO NOT CHANGE - SPI buffer header size */
 #define SPI_HEADER_SIZE					3
@@ -574,7 +573,6 @@ out:
 	mutex_unlock(&secvib->lock);
 	return -EINVAL;
 
-
 }
 
 /* ioctl - I/O control */
@@ -689,7 +687,6 @@ static int secvib_probe(struct platform_device *pdev)
 	struct secvib_platform_data *pdata = pdev->dev.platform_data;
 	struct secvib_data *secvib;
 	int ret, i;
-
 
 	if (!pdata)
 		return -EBUSY;

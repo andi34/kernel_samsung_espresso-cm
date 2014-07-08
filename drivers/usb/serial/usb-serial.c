@@ -692,7 +692,7 @@ static int serial_carrier_raised(struct tty_port *port)
 	if (drv->carrier_raised)
 		return drv->carrier_raised(p);
 	/* No carrier control - don't block */
-	return 1;	
+	return 1;
 }
 
 static void serial_dtr_rts(struct tty_port *port, int on)
@@ -1223,7 +1223,6 @@ static const struct tty_operations serial_ops = {
 	.proc_fops =		&serial_proc_fops,
 };
 
-
 struct tty_driver *usb_serial_tty_driver;
 
 static int __init usb_serial_init(void)
@@ -1304,7 +1303,6 @@ exit_bus:
 	return result;
 }
 
-
 static void __exit usb_serial_exit(void)
 {
 	usb_serial_console_exit();
@@ -1316,7 +1314,6 @@ static void __exit usb_serial_exit(void)
 	put_tty_driver(usb_serial_tty_driver);
 	bus_unregister(&usb_serial_bus_type);
 }
-
 
 module_init(usb_serial_init);
 module_exit(usb_serial_exit);
@@ -1381,7 +1378,6 @@ int usb_serial_register(struct usb_serial_driver *driver)
 	return retval;
 }
 EXPORT_SYMBOL_GPL(usb_serial_register);
-
 
 void usb_serial_deregister(struct usb_serial_driver *device)
 {

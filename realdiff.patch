@@ -16872,28 +16872,6 @@ index a992525..f872ef9 100644
  		/* Set-uid? */
  		if (mode & S_ISUID) {
  			bprm->per_clear |= PER_CLEAR_ON_SETID;
-diff --git a/fs/ext3/super.c b/fs/ext3/super.c
-index 16c4be4..5f12bd6 100644
---- a/fs/ext3/super.c
-+++ b/fs/ext3/super.c
-@@ -371,7 +371,7 @@ static struct block_device *ext3_blkdev_get(dev_t dev, struct super_block *sb)
- 	return bdev;
- 
- fail:
--	ext3_msg(sb, KERN_ERR, "error: failed to open journal device %s: %ld",
-+	ext3_msg(sb, "error: failed to open journal device %s: %ld",
- 		__bdevname(dev, b), PTR_ERR(bdev));
- 
- 	return NULL;
-@@ -891,7 +891,7 @@ static ext3_fsblk_t get_sb_block(void **data, struct super_block *sb)
- 	/*todo: use simple_strtoll with >32bit ext3 */
- 	sb_block = simple_strtoul(options, &options, 0);
- 	if (*options && *options != ',') {
--		ext3_msg(sb, KERN_ERR, "error: invalid sb specification: %s",
-+		ext3_msg(sb, "error: invalid sb specification: %s",
- 		       (char *) *data);
- 		return 1;
- 	}
 diff --git a/fs/ext4/dir.c b/fs/ext4/dir.c
 index f00b0a0..3bda91c 100644
 --- a/fs/ext4/dir.c

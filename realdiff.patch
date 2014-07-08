@@ -2184,7 +2184,7 @@ index e04de0c..4d3d5b3 100644
  			CABLE_TYPE_USB;
  
 -	pr_info("%s : Charger type is [%s], adc = %d\n",
--		__func__,
+-		__func__,build
 -		cable_type == CABLE_TYPE_AC ? "TA" : "USB",
 -		adc);
 +	pr_info("%s : Charger type is [%s], adc = %d\n", __func__,

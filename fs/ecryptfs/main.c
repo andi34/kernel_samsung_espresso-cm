@@ -39,11 +39,9 @@
 #include <linux/magic.h>
 #include "ecryptfs_kernel.h"
 
-
 #ifdef CONFIG_WTL_ENCRYPTION_FILTER
 #include <linux/ctype.h>
 #endif
-
 
 /**
  * Module parameter that defines the ecryptfs_verbosity level.
@@ -263,7 +261,6 @@ static int parse_enc_file_filter_parms(
 	}
 	return 0;
 }
-
 
 static int parse_enc_ext_filter_parms(
 	struct ecryptfs_mount_crypt_stat *mcs, char *str)
@@ -953,7 +950,6 @@ static void __exit ecryptfs_exit(void)
 	unregister_filesystem(&ecryptfs_fs_type);
 	ecryptfs_free_kmem_caches();
 }
-
 
 MODULE_AUTHOR("Michael A. Halcrow <mhalcrow@us.ibm.com>");
 MODULE_DESCRIPTION("eCryptfs");

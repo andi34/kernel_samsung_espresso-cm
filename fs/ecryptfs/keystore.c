@@ -293,7 +293,6 @@ out:
 	return rc;
 }
 
-
 static int
 write_tag_66_packet(char *signature, u8 cipher_code,
 		    struct ecryptfs_crypt_stat *crypt_stat, char **packet,
@@ -2527,4 +2526,3 @@ ecryptfs_add_global_auth_tok(struct ecryptfs_mount_crypt_stat *mount_crypt_stat,
 out:
 	return rc;
 }
-

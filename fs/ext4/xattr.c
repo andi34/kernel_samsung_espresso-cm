@@ -1360,8 +1360,6 @@ cleanup:
 	return error;
 }
 
-
-
 /*
  * ext4_xattr_delete_inode()
  *

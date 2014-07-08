@@ -40,7 +40,6 @@
 #define ECRYPTFS_WAS_ENCRYPTED_OTHER_DEVICE 0x0100
 #endif
 
-
 /**
  * ecryptfs_read_update_atime
  *

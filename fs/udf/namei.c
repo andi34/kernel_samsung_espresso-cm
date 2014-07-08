@@ -1231,7 +1231,6 @@ out_unlock:
 	return ERR_PTR(-EACCES);
 }
 
-
 static struct dentry *udf_nfs_get_inode(struct super_block *sb, u32 block,
 					u16 partref, __u32 generation)
 {

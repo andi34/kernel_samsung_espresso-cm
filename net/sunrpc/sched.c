@@ -855,7 +855,6 @@ struct rpc_task *rpc_new_task(const struct rpc_task_setup *setup_data)
  * Note that we free up the rpc_task _after_ rpc_release_calldata()
  * in order to work around a workqueue dependency issue.
  *
- * Tejun Heo states:
  * "Workqueue currently considers two work items to be the same if they're
  * on the same address and won't execute them concurrently - ie. it
  * makes a work item which is queued again while being executed wait
@@ -866,7 +865,6 @@ struct rpc_task *rpc_new_task(const struct rpc_task_setup *setup_data)
  * recycles the freed work item, it can create a false dependency loop.
  * There really is no reliable way to detect this short of verifying
  * every memory free."
- *
  */
 static void rpc_free_task(struct rpc_task *task)
 {

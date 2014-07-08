@@ -103,4 +103,3 @@ enum {
 };
 
 #endif /* _LINUX_ION_H */
-

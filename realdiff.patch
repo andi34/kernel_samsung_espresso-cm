@@ -32200,15 +32200,6 @@ index b30fcd0..e8d07a6 100644
  	return 0;
  }
 -
-diff --git a/sound/usb/helper.c b/sound/usb/helper.c
-index f280c19..be0c853 100644
---- a/sound/usb/helper.c
-+++ b/sound/usb/helper.c
-@@ -115,4 +115,3 @@ unsigned char snd_usb_parse_datainterval(struct snd_usb_audio *chip,
- 	}
- 	return 0;
- }
--
 diff --git a/sound/usb/midi.c b/sound/usb/midi.c
 index c635a2d..256063f 100644
 --- a/sound/usb/midi.c

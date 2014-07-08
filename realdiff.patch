@@ -623,21 +623,6 @@ index b12ae07..df00064 100644
 -
  #endif /* __KERNEL__ */
  #endif
-diff --git a/arch/arm/include/asm/hwcap.h b/arch/arm/include/asm/hwcap.h
-index 1e3f30f..c1062c3 100644
---- a/arch/arm/include/asm/hwcap.h
-+++ b/arch/arm/include/asm/hwcap.h
-@@ -18,9 +18,8 @@
- #define HWCAP_THUMBEE	2048
- #define HWCAP_NEON	4096
- #define HWCAP_VFPv3	8192
--#define HWCAP_VFPv3D16	(1 << 14)	/* also set for VFPv4-D16 */
-+#define HWCAP_VFPv3D16	16384
- #define HWCAP_TLS	32768
--#define HWCAP_VFPD32	(1 << 19)	/* set if VFP has 32 regs (not 16) */
- 
- #if defined(__KERNEL__) && !defined(__ASSEMBLY__)
- /*
 diff --git a/arch/arm/include/asm/mach/map.h b/arch/arm/include/asm/mach/map.h
 index a6efcdd..b36f365 100644
 --- a/arch/arm/include/asm/mach/map.h
@@ -960,36 +945,6 @@ index 0504364..92d8e7d 100644
  	tlb->pages[tlb->nr++] = page;
  	VM_BUG_ON(tlb->nr > tlb->max);
  	return tlb->max - tlb->nr;
-diff --git a/arch/arm/include/asm/vfpmacros.h b/arch/arm/include/asm/vfpmacros.h
-index c49c8f7..3d5fc41 100644
---- a/arch/arm/include/asm/vfpmacros.h
-+++ b/arch/arm/include/asm/vfpmacros.h
-@@ -27,9 +27,9 @@
- #if __LINUX_ARM_ARCH__ <= 6
- 	ldr	\tmp, =elf_hwcap		    @ may not have MVFR regs
- 	ldr	\tmp, [\tmp, #0]
--	tst	\tmp, #HWCAP_VFPD32
--	ldcnel	p11, cr0, [\base],#32*4		    @ FLDMIAD \base!, {d16-d31}
--	addeq	\base, \base, #32*4		    @ step over unused register space
-+	tst	\tmp, #HWCAP_VFPv3D16
-+	ldceq	p11, cr0, [\base],#32*4		    @ FLDMIAD \base!, {d16-d31}
-+	addne	\base, \base, #32*4		    @ step over unused register space
- #else
- 	VFPFMRX	\tmp, MVFR0			    @ Media and VFP Feature Register 0
- 	and	\tmp, \tmp, #MVFR0_A_SIMD_MASK	    @ A_SIMD field
-@@ -51,9 +51,9 @@
- #if __LINUX_ARM_ARCH__ <= 6
- 	ldr	\tmp, =elf_hwcap		    @ may not have MVFR regs
- 	ldr	\tmp, [\tmp, #0]
--	tst	\tmp, #HWCAP_VFPD32
--	stcnel	p11, cr0, [\base],#32*4		    @ FSTMIAD \base!, {d16-d31}
--	addeq	\base, \base, #32*4		    @ step over unused register space
-+	tst	\tmp, #HWCAP_VFPv3D16
-+	stceq	p11, cr0, [\base],#32*4		    @ FSTMIAD \base!, {d16-d31}
-+	addne	\base, \base, #32*4		    @ step over unused register space
- #else
- 	VFPFMRX	\tmp, MVFR0			    @ Media and VFP Feature Register 0
- 	and	\tmp, \tmp, #MVFR0_A_SIMD_MASK	    @ A_SIMD field
 diff --git a/arch/arm/kernel/armksyms.c b/arch/arm/kernel/armksyms.c
 index acca35a..ac96ebf 100644
 --- a/arch/arm/kernel/armksyms.c
@@ -6048,37 +6003,6 @@ index 214b002..b817db1 100644
   * EHCI0
   ****************************************************************************/
 
-diff --git a/arch/arm/vfp/vfpmodule.c b/arch/arm/vfp/vfpmodule.c
-index 1ec2b08..723f163 100644
---- a/arch/arm/vfp/vfpmodule.c
-+++ b/arch/arm/vfp/vfpmodule.c
-@@ -377,7 +377,7 @@ void VFP_bounce(u32 trigger, u32 fpexc, struct pt_regs *regs)
- 	 * If there isn't a second FP instruction, exit now. Note that
- 	 * the FPEXC.FP2V bit is valid only if FPEXC.EX is 1.
- 	 */
--	if ((fpexc & (FPEXC_EX | FPEXC_FP2V)) != (FPEXC_EX | FPEXC_FP2V))
-+	if (fpexc ^ (FPEXC_EX | FPEXC_FP2V))
- 		goto exit;
- 
- 	/*
-@@ -602,14 +602,11 @@ static int __init vfp_init(void)
- 			elf_hwcap |= HWCAP_VFPv3;
- 
- 			/*
--			 * Check for VFPv3 D16 and VFPv4 D16.  CPUs in
--			 * this configuration only have 16 x 64bit
--			 * registers.
-+			 * Check for VFPv3 D16. CPUs in this configuration
-+			 * only have 16 x 64bit registers.
- 			 */
- 			if (((fmrx(MVFR0) & MVFR0_A_SIMD_MASK)) == 1)
--				elf_hwcap |= HWCAP_VFPv3D16; /* also v4-D16 */
--			else
--				elf_hwcap |= HWCAP_VFPD32;
-+				elf_hwcap |= HWCAP_VFPv3D16;
- 		}
- #endif
- #ifdef CONFIG_NEON
 diff --git a/arch/um/include/asm/pgtable.h b/arch/um/include/asm/pgtable.h
 index 7896c5a..bd05162 100644
 --- a/arch/um/include/asm/pgtable.h

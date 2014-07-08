@@ -81,7 +81,6 @@ struct gp2a_data {
 	bool offset_cal_high;
 };
 
-
 /* initial value for sensor register */
 #define COL 8
 static u8 gp2a_reg[COL][2] = {
@@ -171,7 +170,6 @@ static int gp2a_i2c_write(struct gp2a_data *gp2a,
 	pr_err(" i2c transfer error(%d)\n", err);
 	return err;
 }
-
 
 int lightsensor_get_adc(struct gp2a_data *data)
 {
@@ -1048,7 +1046,6 @@ light_enable_store(struct device *dev, struct device_attribute *attr,
 
 	data->light_enabled = value;
 
-
 	mutex_unlock(&data->light_mutex);
 done:
 	return count;
@@ -1091,7 +1088,6 @@ static struct attribute *lightsensor_attributes[] = {
 	NULL
 };
 
-
 static struct attribute_group proximity_attribute_group = {
 	.attrs = proximity_attributes
 };
@@ -1121,7 +1117,6 @@ static struct device_attribute *additional_proximity_attrs[] = {
 	NULL,
 };
 
-
 static irqreturn_t gp2a_irq_handler(int irq, void *dev_id)
 {
 	struct gp2a_data *gp2a = dev_id;
@@ -1132,7 +1127,6 @@ static irqreturn_t gp2a_irq_handler(int irq, void *dev_id)
 	pr_debug("[PROXIMITY] IRQ_HANDLED.\n");
 	return IRQ_HANDLED;
 }
-
 
 static int gp2a_setup_irq(struct gp2a_data *gp2a)
 {
@@ -1182,8 +1176,6 @@ err_gpio_direction_input:
 done:
 	return rc;
 }
-
-
 
 static void gp2a_work_func_prox(struct work_struct *work)
 {
@@ -1313,7 +1305,6 @@ static void gp2a_work_func_light(struct work_struct *work)
 		schedule_delayed_work(&data->light_work,
 			msecs_to_jiffies(data->light_delay));
 }
-
 
 static int gp2a_i2c_probe(struct i2c_client *client,
 			 const struct i2c_device_id *id)

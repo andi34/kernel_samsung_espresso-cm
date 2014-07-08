@@ -16639,18 +16639,6 @@ index 86c73ae..c7e4711 100644
  static int hdmi_rx_write_reg(struct sii9234_data *sii9234, unsigned int offset,
  		u8 value)
  {
-diff --git a/fs/9p/xattr_user.c b/fs/9p/xattr_user.c
-index d0b701b..391aaa0 100644
---- a/fs/9p/xattr_user.c
-+++ b/fs/9p/xattr_user.c
-@@ -12,7 +12,6 @@
-  *
-  */
- 
--
- #include <linux/module.h>
- #include <linux/string.h>
- #include <linux/fs.h>
 diff --git a/fs/Kconfig b/fs/Kconfig
 index 62aeb09..2419cbe 100644
 --- a/fs/Kconfig
@@ -16884,43 +16872,6 @@ index a992525..f872ef9 100644
  		/* Set-uid? */
  		if (mode & S_ISUID) {
  			bprm->per_clear |= PER_CLEAR_ON_SETID;
-diff --git a/fs/ext3/dir.c b/fs/ext3/dir.c
-index 34f0a07..7dfd01f 100644
---- a/fs/ext3/dir.c
-+++ b/fs/ext3/dir.c
-@@ -50,7 +50,6 @@ const struct file_operations ext3_dir_operations = {
- 	.release	= ext3_release_dir,
- };
- 
--
- static unsigned char get_dtype(struct super_block *sb, int filetype)
- {
- 	if (!EXT3_HAS_INCOMPAT_FEATURE(sb, EXT3_FEATURE_INCOMPAT_FILETYPE) ||
-@@ -60,7 +59,6 @@ static unsigned char get_dtype(struct super_block *sb, int filetype)
- 	return (ext3_filetype_table[filetype]);
- }
- 
--
- int ext3_check_dir_entry (const char * function, struct inode * dir,
- 			  struct ext3_dir_entry_2 * de,
- 			  struct buffer_head * bh,
-@@ -307,7 +305,6 @@ static void free_rb_tree_fname(struct rb_root *root)
- 	}
- }
- 
--
- static struct dir_private_info *ext3_htree_create_dir_info(loff_t pos)
- {
- 	struct dir_private_info *p;
-@@ -384,8 +381,6 @@ int ext3_htree_store_dirent(struct file *dir_file, __u32 hash,
- 	return 0;
- }
- 
--
--
- /*
-  * This is a helper function for ext3_dx_readdir.  It calls filldir
-  * for all entres on the fname linked list.  (Normally there is only
 diff --git a/fs/ext3/super.c b/fs/ext3/super.c
 index 16c4be4..5f12bd6 100644
 --- a/fs/ext3/super.c

@@ -74,7 +74,6 @@ static int ipv4_local_port_range(ctl_table *table, int write,
 	return ret;
 }
 
-
 void inet_get_ping_group_range_table(struct ctl_table *table, gid_t *low, gid_t *high)
 {
 	gid_t *data = table->data;

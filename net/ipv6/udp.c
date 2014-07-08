@@ -98,12 +98,11 @@ static unsigned int udp6_portaddr_hash(struct net *net,
 	return hash ^ port;
 }
 
-
 int udp_v6_get_port(struct sock *sk, unsigned short snum)
 {
 	unsigned int hash2_nulladdr =
 		udp6_portaddr_hash(sock_net(sk), &in6addr_any, snum);
-	unsigned int hash2_partial = 
+	unsigned int hash2_partial =
 		udp6_portaddr_hash(sock_net(sk), &inet6_sk(sk)->rcv_saddr, 0);
 
 	/* precompute partial secondary hash */
@@ -192,7 +191,6 @@ static inline int compute_score2(struct sock *sk, struct net *net,
 	}
 	return score;
 }
-
 
 /* called with read_rcu_lock() */
 static struct sock *udp6_lib_lookup2(struct net *net,
@@ -326,7 +324,6 @@ struct sock *udp6_lib_lookup(struct net *net, const struct in6_addr *saddr, __be
 	return __udp6_lib_lookup(net, saddr, sport, daddr, dport, dif, &udp_table);
 }
 EXPORT_SYMBOL_GPL(udp6_lib_lookup);
-
 
 /*
  * 	This should be easy, if there is something there we
@@ -1505,7 +1502,6 @@ static struct inet_protosw udpv6_protosw = {
 	.no_check =  UDP_CSUM_DEFAULT,
 	.flags =     INET_PROTOSW_PERMANENT,
 };
-
 
 int __init udpv6_init(void)
 {

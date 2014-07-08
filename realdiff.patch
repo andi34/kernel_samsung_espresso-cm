@@ -5334,27 +5334,6 @@ index f59f274..e15bf1d 100644
  	devicemaps_init(mdesc);
  	kmap_init();
  
-diff --git a/arch/arm/plat-omap/Kconfig b/arch/arm/plat-omap/Kconfig
-index bde66f5..e49838b 100644
---- a/arch/arm/plat-omap/Kconfig
-+++ b/arch/arm/plat-omap/Kconfig
-@@ -254,12 +254,11 @@ config OMAP_TEMP_SENSOR
- 	depends on ARCH_OMAP4
- 	default n
- 	help
--		Say Y here if you want support for the temp sensor on OMAP4460.
--		This provides the temperature of the MPU
--		subsystem. Only one instance of on die temperature
--		sensor is present.
-+	   Say Y here if you want support for the temp sensor on OMAP4460.
-+	   This provides the temperature of the MPU
-+	   subsystem. Only one instance of on die temperature
-+	   sensor is present.
- 
--# this carveout should probably become generic and not omap specific
- config OMAP_REMOTEPROC_MEMPOOL_SIZE
- 	hex "Physical carveout memory pool size (Byte)"
- 	depends on OMAP_REMOTE_PROC_IPU
 diff --git a/arch/arm/plat-omap/android-display.c b/arch/arm/plat-omap/android-display.c
 index 70f931a..503ef4b 100644
 --- a/arch/arm/plat-omap/android-display.c

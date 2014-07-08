@@ -1501,7 +1501,6 @@ iscsi_tgt_dscvr(struct iscsi_transport *transport,
 		return -ENODEV;
 	}
 
-
 	dst_addr = (struct sockaddr *)((char*)ev + sizeof(*ev));
 	err = transport->tgt_dscvr(shost, ev->u.tgt_dscvr.type,
 				   ev->u.tgt_dscvr.enable, dst_addr);

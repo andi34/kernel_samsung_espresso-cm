@@ -13971,16 +13971,6 @@ index c5fc946..a1c167d
  }
  
  static void fill_platform_info(struct dsscomp_dev *cdev)
-@@ -663,7 +642,9 @@ void dsscomp_kdump(void)
- 	};
- 	int i;
- 
-+#ifdef CONFIG_DSSCOMP_DEBUG_LOG
- 	dsscomp_dbg_events(&s);
-+#endif
- 	dsscomp_dbg_comps(&s);
- 	dsscomp_dbg_gralloc(&s);
- 
 diff --git a/drivers/video/omap2/dsscomp/gralloc.c b/drivers/video/omap2/dsscomp/gralloc.c
 index 726e53c..1838f7f 100644
 --- a/drivers/video/omap2/dsscomp/gralloc.c

@@ -1,0 +1,103 @@
+From 127b67e59f1b5960f3dc302b7157a636422525a1 Mon Sep 17 00:00:00 2001
+From: Wu Fengguang <fengguang.wu@intel.com>
+Date: Fri, 18 Nov 2011 20:14:04 -0800
+Subject: [PATCH] make default readahead size a kernel parameter From: Nikanth
+ Karthikesan <knikanth@suse.de>
+
+Add new kernel parameter "readahead", which would be used instead of the
+value of VM_MAX_READAHEAD. If the parameter is not specified, the default
+of 128kb would be used.
+
+CC: Ankit Jain <radical@gmail.com>
+CC: Dave Chinner <david@fromorbit.com>
+CC: Christian Ehrhardt <ehrhardt@linux.vnet.ibm.com>
+Signed-off-by: Nikanth Karthikesan <knikanth@suse.de>
+Signed-off-by: Wu Fengguang <fengguang.wu@intel.com>
+---
+diff --git a/block/blk-core.c b/block/blk-core.c
+index b7cd1a4..dc20ef6 100644
+--- a/block/blk-core.c
++++ b/block/blk-core.c
+@@ -413,8 +413,7 @@ struct request_queue *blk_alloc_queue_node(gfp_t gfp_mask, int node_id)
+ 	if (!q)
+ 		return NULL;
+ 
+-	q->backing_dev_info.ra_pages =
+-			(VM_MAX_READAHEAD * 1024) / PAGE_CACHE_SIZE;
++	q->backing_dev_info.ra_pages = max_readahead_pages;
+ 	q->backing_dev_info.state = 0;
+ 	q->backing_dev_info.capabilities = BDI_CAP_MAP_COPY;
+ 	q->backing_dev_info.name = "block";
+diff --git a/fs/fuse/inode.c b/fs/fuse/inode.c
+index 389edcf..d9bf0b3 100644
+--- a/fs/fuse/inode.c
++++ b/fs/fuse/inode.c
+@@ -894,8 +894,7 @@ static int fuse_bdi_init(struct fuse_conn *fc, struct super_block *sb)
+ 	int err;
+ 
+ 	fc->bdi.name = "fuse";
+-	fc->bdi.ra_pages = (VM_MAX_READAHEAD * 1024) / PAGE_CACHE_SIZE;
+-	fc->bdi.ra_pages *= 4;
++	fc->bdi.ra_pages = max_readahead_pages;
+ 	/* fuse does it's own writeback accounting */
+ 	fc->bdi.capabilities = BDI_CAP_NO_ACCT_WB;
+ 
+diff --git a/include/linux/mm.h b/include/linux/mm.h
+index a729f93..703de55 100644
+--- a/include/linux/mm.h
++++ b/include/linux/mm.h
+@@ -1469,8 +1469,10 @@ int write_one_page(struct page *page, int wait);
+ void task_dirty_inc(struct task_struct *tsk);
+ 
+ /* readahead.c */
+-#define VM_MAX_READAHEAD	128	/* kbytes */
+-#define VM_MIN_READAHEAD	16	/* kbytes (includes current page) */
++#define VM_MAX_READAHEAD  2048  /* kbytes */
++#define VM_MIN_READAHEAD    64  /* kbytes (includes current page) */
++
++extern unsigned long max_readahead_pages;
+ 
+ int force_page_cache_readahead(struct address_space *mapping, struct file *filp,
+ 			pgoff_t offset, unsigned long nr_to_read);
+diff --git a/mm/readahead.c b/mm/readahead.c
+index 867f9dd..1dde918 100644
+--- a/mm/readahead.c
++++ b/mm/readahead.c
+@@ -18,6 +18,33 @@
+ #include <linux/pagevec.h>
+ #include <linux/pagemap.h>
+ 
++unsigned long max_readahead_pages = VM_MAX_READAHEAD * 1024 / PAGE_CACHE_SIZE;
++
++static int __init readahead(char *str)
++{
++	unsigned long bytes;
++	if (!str)
++		return -EINVAL;
++	bytes = memparse(str, &str);
++	if (*str != '\0')
++		return -EINVAL;
++
++	if (bytes) {
++		if (bytes < PAGE_CACHE_SIZE)
++			return -EINVAL;
++
++		if (bytes > 256 << 20)    /* limit to 256MB */
++			bytes = 256 << 20;
++	}
++
++	max_readahead_pages = bytes / PAGE_CACHE_SIZE;
++	default_backing_dev_info.ra_pages = max_readahead_pages;
++
++	return 0;
++}
++
++early_param("readahead", readahead);
++
+ /*
+  * Initialise a struct file's readahead state.  Assumes that the caller has
+  * memset *ra to zero.
+-- 
+1.9.3
+
+

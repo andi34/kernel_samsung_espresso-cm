@@ -6511,28 +6511,6 @@ index 3199b76..e30fbec 100644
  
  endmenu
  
-diff --git a/block/blk-core.c b/block/blk-core.c
-index b7cd1a4..dc20ef6 100644
---- a/block/blk-core.c
-+++ b/block/blk-core.c
-@@ -413,8 +413,7 @@ struct request_queue *blk_alloc_queue_node(gfp_t gfp_mask, int node_id)
- 	if (!q)
- 		return NULL;
- 
--	q->backing_dev_info.ra_pages =
--			(VM_MAX_READAHEAD * 1024) / PAGE_CACHE_SIZE;
-+	q->backing_dev_info.ra_pages = max_readahead_pages;
- 	q->backing_dev_info.state = 0;
- 	q->backing_dev_info.capabilities = BDI_CAP_MAP_COPY;
- 	q->backing_dev_info.name = "block";
-@@ -2204,7 +2203,6 @@ static void blk_finish_request(struct request *req, int error)
- 	if (req->cmd_flags & REQ_DONTPREP)
- 		blk_unprep_request(req);
- 
--
- 	blk_account_io_done(req);
- 
- 	if (req->end_io)
 diff --git a/block/blk-sysfs.c b/block/blk-sysfs.c
 index cb0f1a0..6b22106 100644
 --- a/block/blk-sysfs.c
@@ -18312,20 +18290,6 @@ index 09089e1..228c82c 100644
  /*
   * For ioctls, there is no generic way to determine how much memory
   * needs to be read and/or written.  Furthermore, ioctls are allowed
-diff --git a/fs/fuse/inode.c b/fs/fuse/inode.c
-index 389edcf..d9bf0b3 100644
---- a/fs/fuse/inode.c
-+++ b/fs/fuse/inode.c
-@@ -894,8 +894,7 @@ static int fuse_bdi_init(struct fuse_conn *fc, struct super_block *sb)
- 	int err;
- 
- 	fc->bdi.name = "fuse";
--	fc->bdi.ra_pages = (VM_MAX_READAHEAD * 1024) / PAGE_CACHE_SIZE;
--	fc->bdi.ra_pages *= 4;
-+	fc->bdi.ra_pages = max_readahead_pages;
- 	/* fuse does it's own writeback accounting */
- 	fc->bdi.capabilities = BDI_CAP_NO_ACCT_WB;
- 
 diff --git a/fs/locks.c b/fs/locks.c
 index 35388d5..f3d65ef 100644
 --- a/fs/locks.c
@@ -22186,56 +22150,6 @@ index 8982004..7b064ab 100644
  
  static inline int migrate_prep(void) { return -ENOSYS; }
  static inline int migrate_prep_local(void) { return -ENOSYS; }
-diff --git a/include/linux/mm.h b/include/linux/mm.h
-index a729f93..703de55 100644
---- a/include/linux/mm.h
-+++ b/include/linux/mm.h
-@@ -197,7 +197,7 @@ struct vm_fault {
- /*
-  * These are the virtual MM functions - opening of an area, closing and
-  * unmapping it (needed to keep files on disk up-to-date etc), pointer
-- * to the functions called when a no-page or a wp-page exception occurs. 
-+ * to the functions called when a no-page or a wp-page exception occurs.
-  */
- struct vm_operations_struct {
- 	void (*open)(struct vm_area_struct * area);
-@@ -574,7 +574,6 @@ static inline pte_t maybe_mkwrite(pte_t pte, struct vm_area_struct *vma)
-  * sets it, so none of the operations on it need to be atomic.
-  */
- 
--
- /*
-  * page->flags layout:
-  *
-@@ -1469,8 +1468,10 @@ int write_one_page(struct page *page, int wait);
- void task_dirty_inc(struct task_struct *tsk);
- 
- /* readahead.c */
--#define VM_MAX_READAHEAD	128	/* kbytes */
--#define VM_MIN_READAHEAD	16	/* kbytes (includes current page) */
-+#define VM_MAX_READAHEAD  2048  /* kbytes */
-+#define VM_MIN_READAHEAD    64  /* kbytes (includes current page) */
-+
-+extern unsigned long max_readahead_pages;
- 
- int force_page_cache_readahead(struct address_space *mapping, struct file *filp,
- 			pgoff_t offset, unsigned long nr_to_read);
-@@ -1545,7 +1546,6 @@ int vm_insert_mixed(struct vm_area_struct *vma, unsigned long addr,
- 			unsigned long pfn);
- int vm_iomap_memory(struct vm_area_struct *vma, phys_addr_t start, unsigned long len);
- 
--
- struct page *follow_page(struct vm_area_struct *, unsigned long address,
- 			unsigned int foll_flags);
- #define FOLL_WRITE	0x01	/* check pte is writable */
-@@ -1642,7 +1642,6 @@ int vmemmap_populate_basepages(struct page *start_page,
- int vmemmap_populate(struct page *start_page, unsigned long pages, int node);
- void vmemmap_populate_print_last(void);
- 
--
- enum mf_flags {
- 	MF_COUNT_INCREASED = 1 << 0,
- };
 diff --git a/include/linux/posix_acl.h b/include/linux/posix_acl.h
 index 54211c1..2ee5c52 100644
 --- a/include/linux/posix_acl.h
@@ -25339,44 +25253,6 @@ index 07de2e0..c9f0477 100644
  	}
  	if (pfn < end_pfn)
  		return 0;
-diff --git a/mm/readahead.c b/mm/readahead.c
-index 867f9dd..1dde918 100644
---- a/mm/readahead.c
-+++ b/mm/readahead.c
-@@ -18,6 +18,33 @@
- #include <linux/pagevec.h>
- #include <linux/pagemap.h>
- 
-+unsigned long max_readahead_pages = VM_MAX_READAHEAD * 1024 / PAGE_CACHE_SIZE;
-+
-+static int __init readahead(char *str)
-+{
-+	unsigned long bytes;
-+	if (!str)
-+		return -EINVAL;
-+	bytes = memparse(str, &str);
-+	if (*str != '\0')
-+		return -EINVAL;
-+
-+	if (bytes) {
-+		if (bytes < PAGE_CACHE_SIZE)
-+			return -EINVAL;
-+
-+		if (bytes > 256 << 20)    /* limit to 256MB */
-+			bytes = 256 << 20;
-+	}
-+
-+	max_readahead_pages = bytes / PAGE_CACHE_SIZE;
-+	default_backing_dev_info.ra_pages = max_readahead_pages;
-+
-+	return 0;
-+}
-+
-+early_param("readahead", readahead);
-+
- /*
-  * Initialise a struct file's readahead state.  Assumes that the caller has
-  * memset *ra to zero.
 diff --git a/mm/shmem.c b/mm/shmem.c
 index e17c52e..f014e35 100644
 --- a/mm/shmem.c

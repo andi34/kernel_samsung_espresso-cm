@@ -1,0 +1,45 @@
+From b86247b3d78dcada4003f790650e48133131719b Mon Sep 17 00:00:00 2001
+From: DerTeufel <dominik-kassel@gmx.de>
+Date: Sun, 8 Dec 2013 19:51:25 +0100
+Subject: [PATCH] writeback: fix occasional slow sync(1) In case when system
+ contains no dirty pages, wakeup_flusher_threads() will submit WB_SYNC_NONE
+ writeback for 0 pages so wb_writeback() exits immediately without doing
+ anything, even though there are dirty inodes in the system.  Thus sync(1)
+ will write all the dirty inodes from a WB_SYNC_ALL writeback pass which is
+ slow.
+
+Fix the problem by using get_nr_dirty_pages() in wakeup_flusher_threads()
+instead of calculating number of dirty pages manually.  That function also
+takes number of dirty inodes into account.
+
+Change-Id: Ic90f80a31bb866b7628143b8b013871f83d05c13
+Signed-off-by: Jan Kara <jack@suse.cz>
+Reported-by: Paul Taysom <taysom@chromium.org>
+Cc: Wu Fengguang <fengguang.wu@intel.com>
+Signed-off-by: Andrew Morton <akpm@linux-foundation.org>
+Signed-off-by: Linus Torvalds <torvalds@linux-foundation.org>
+---
+ fs/fs-writeback.c | 6 ++----
+ 1 file changed, 2 insertions(+), 4 deletions(-)
+
+diff --git a/fs/fs-writeback.c b/fs/fs-writeback.c
+index 49c8c98..a826c7c 100644
+--- a/fs/fs-writeback.c
++++ b/fs/fs-writeback.c
+@@ -963,10 +963,8 @@ void wakeup_flusher_threads(long nr_pages)
+ {
+ 	struct backing_dev_info *bdi;
+ 
+-	if (!nr_pages) {
+-		nr_pages = global_page_state(NR_FILE_DIRTY) +
+-				global_page_state(NR_UNSTABLE_NFS);
+-	}
++  	if (!nr_pages)
++    	    nr_pages = get_nr_dirty_pages();
+ 
+ 	rcu_read_lock();
+ 	list_for_each_entry_rcu(bdi, &bdi_list, bdi_list) {
+-- 
+1.9.3
+
+

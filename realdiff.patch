@@ -25357,15 +25357,6 @@ diff --git a/mm/slub.c b/mm/slub.c
 index 10ab233..cdb0855 100644
 --- a/mm/slub.c
 +++ b/mm/slub.c
-@@ -2169,7 +2169,7 @@ EXPORT_SYMBOL(kmem_cache_free);
-  * take the list_lock.
-  */
- static int slub_min_order;
--static int slub_max_order = PAGE_ALLOC_COSTLY_ORDER;
-+static int slub_max_order;
- static int slub_min_objects;
- 
- /*
 @@ -2470,7 +2480,6 @@ static int calculate_sizes(struct kmem_cache *s, int forced_order)
  	else
  		s->flags &= ~__OBJECT_POISON;

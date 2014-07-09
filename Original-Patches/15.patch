@@ -1,0 +1,27 @@
+From 4b0a7e364c54a67dd0b58589814237edaa9ee20d Mon Sep 17 00:00:00 2001
+From: Locasto <amperific@gmail.com>
+Date: Sun, 30 Jun 2013 13:16:59 +0800
+Subject: [PATCH] slub.c: Remove Page allocation
+
+This increase the performance because there won't be any COSTLY_ORDER
+
+Improves performance by 3%.
+
+Signed-off-by: Locasto <amperific@gmail.com>
+---
+diff --git a/mm/slub.c b/mm/slub.c
+index d2ec2a9..1f0fda4 100644
+--- a/mm/slub.c
++++ b/mm/slub.c
+@@ -2179,7 +2179,7 @@ EXPORT_SYMBOL(kmem_cache_free);
+  * take the list_lock.
+  */
+ static int slub_min_order;
+-static int slub_max_order = PAGE_ALLOC_COSTLY_ORDER;
++static int slub_max_order;
+ static int slub_min_objects;
+ 
+ /*
+-- 
+1.9.3
+

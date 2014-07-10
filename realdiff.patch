@@ -198,108 +198,6 @@ index 2922e1f..58c208b 100644
  include $(srctree)/arch/$(SRCARCH)/Makefile
  
  ifneq ($(CONFIG_FRAME_WARN),0)
-@@ -593,8 +609,8 @@ endif
- endif
- 
- ifdef CONFIG_DEBUG_INFO
--KBUILD_CFLAGS	+= -g
--KBUILD_AFLAGS	+= -gdwarf-2
-+KBUILD_CFLAGS  += -g
-+KBUILD_AFLAGS  += -gdwarf-2
- endif
- 
- ifdef CONFIG_DEBUG_INFO_REDUCED
-@@ -706,7 +722,6 @@ mod_strip_cmd = true
- endif # INSTALL_MOD_STRIP
- export mod_strip_cmd
- 
--
- ifeq ($(KBUILD_EXTMOD),)
- core-y		+= kernel/ mm/ fs/ ipc/ security/ crypto/ block/
- 
-@@ -806,7 +821,6 @@ define rule_vmlinux__
- 	$(verify_kallsyms)
- endef
- 
--
- ifdef CONFIG_KALLSYMS
- # Generate section listing all symbols and add it into vmlinux $(kallsyms.o)
- # It's a three stage process:
-@@ -851,7 +865,7 @@ endef
- # First command is ':' to allow us to use + in front of this rule
- cmd_ksym_ld = $(cmd_vmlinux__)
- define rule_ksym_ld
--	: 
-+	:
- 	+$(call cmd,vmlinux_version)
- 	$(call cmd,vmlinux__)
- 	$(Q)echo 'cmd_$@ := $(cmd_vmlinux__)' > $(@D)/.$(@F).cmd
-@@ -930,7 +944,7 @@ modpost-init := $(filter-out init/built-in.o, $(vmlinux-init))
- vmlinux.o: $(modpost-init) $(vmlinux-main) FORCE
- 	$(call if_changed_rule,vmlinux-modpost)
- 
--# The actual objects are generated when descending, 
-+# The actual objects are generated when descending,
- # make sure no implicit rule kicks in
- $(sort $(vmlinux-init) $(vmlinux-main)) $(vmlinux-lds): $(vmlinux-dirs) ;
- 
-@@ -949,7 +963,6 @@ include/config/kernel.release: include/config/auto.conf FORCE
- 	$(Q)rm -f $@
- 	$(Q)echo "$(KERNELVERSION)$$($(CONFIG_SHELL) $(srctree)/scripts/setlocalversion $(srctree))" > $@
- 
--
- # Things we need to do before we recursively start building the kernel
- # or the modules are listed in "prepare".
- # A multi level approach is used. prepareN is processed before prepareN-1.
-@@ -1099,7 +1112,6 @@ modules.builtin: $(vmlinux-dirs:%=%/modules.builtin)
- %/modules.builtin: include/config/auto.conf
- 	$(Q)$(MAKE) $(modbuiltin)=$*
- 
--
- # Target to prepare building external modules
- PHONY += modules_prepare
- modules_prepare: prepare scripts
-@@ -1202,7 +1214,6 @@ distclean: mrproper
- 		-o -name '*%' -o -name '.*.cmd' -o -name 'core' \) \
- 		-type f -print | xargs rm -f
- 
--
- # Packaging of the kernel to various formats
- # ---------------------------------------------------------------------------
- # rpm target kept for backward compatibility
-@@ -1215,7 +1226,6 @@ package-dir	:= $(srctree)/scripts/package
- rpm: include/config/kernel.release FORCE
- 	$(Q)$(MAKE) $(build)=$(package-dir) $@
- 
--
- # Brief documentation of the typical targets used
- # ---------------------------------------------------------------------------
- 
-@@ -1300,7 +1310,6 @@ help:
- 	@echo  'Execute "make" or "make all" to build all targets marked with [*] '
- 	@echo  'For further info see the ./README file'
- 
--
- help-board-dirs := $(addprefix help-,$(board-dirs))
- 
- help-boards: $(help-board-dirs)
-@@ -1314,7 +1323,6 @@ $(help-board-dirs): help-%:
- 		printf "  %-24s - Build for %s\\n" $*/$(b) $(subst _defconfig,,$(b));) \
- 		echo '')
- 
--
- # Documentation targets
- # ---------------------------------------------------------------------------
- %docs: scripts_basic FORCE
-@@ -1515,7 +1523,7 @@ endif
- 	$(build)=$(build-dir) $(@:.ko=.o)
- 	$(Q)$(MAKE) -f $(srctree)/scripts/Makefile.modpost
- 
--# FIXME Should go into a make.lib or something 
-+# FIXME Should go into a make.lib or something
- # ===========================================================================
- 
- quiet_cmd_rmdirs = $(if $(wildcard $(rm-dirs)),CLEAN   $(wildcard $(rm-dirs)))
 diff --git a/arch/Kconfig b/arch/Kconfig
 index 228d761..26b0e23 100644
 --- a/arch/Kconfig
@@ -520,24 +418,6 @@ index caddb9d..191a7ee 100644
  		orr	r0, r0, #0x5000		@ I-cache enable, RR cache replacement
  		orr	r0, r0, #0x003c		@ write buffer
  #ifdef CONFIG_MMU
-@@ -688,7 +687,7 @@ proc_types:
- 		W(b)	__armv3_mpu_cache_on
- 		W(b)	__armv3_mpu_cache_off
- 		W(b)	__armv3_mpu_cache_flush
--		
-+
- 		.word	0x41009400		@ ARM94x
- 		.word	0xff00ff00
- 		W(b)	__armv4_mpu_cache_on
-@@ -915,7 +914,7 @@ __armv4_mpu_cache_flush:
- 		mcrne	p15, 0, ip, c7, c5, 0	@ invalidate I cache
- 		mcr	p15, 0, ip, c7, c10, 4	@ drain WB
- 		mov	pc, lr
--		
-+
- __fa526_cache_flush:
- 		mov	r1, #0
- 		mcr	p15, 0, r1, c7, c14, 0	@ clean and invalidate D cache
 diff --git a/arch/arm/include/asm/dma-mapping.h b/arch/arm/include/asm/dma-mapping.h
 index b12ae07..df00064 100644
 --- a/arch/arm/include/asm/dma-mapping.h
@@ -574,29 +454,6 @@ index b12ae07..df00064 100644
  /**
   * dma_alloc_coherent - allocate consistent memory for DMA
   * @dev: valid struct device pointer, or NULL for ISA and EISA-like devices
-@@ -233,7 +215,6 @@ extern void dma_free_coherent(struct device *, size_t, void *, dma_addr_t);
- int dma_mmap_coherent(struct device *, struct vm_area_struct *,
- 		void *, dma_addr_t, size_t);
- 
--
- /**
-  * dma_alloc_writecombine - allocate writecombining memory for DMA
-  * @dev: valid struct device pointer, or NULL for ISA and EISA-like devices
-@@ -360,7 +341,6 @@ static inline int dmabounce_sync_for_device(struct device *d, dma_addr_t addr,
- 	return 1;
- }
- 
--
- static inline dma_addr_t __dma_map_single(struct device *dev, void *cpu_addr,
- 		size_t size, enum dma_data_direction dir)
- {
-@@ -557,6 +537,5 @@ extern void dma_sync_sg_for_cpu(struct device *, struct scatterlist *, int,
- extern void dma_sync_sg_for_device(struct device *, struct scatterlist *, int,
- 		enum dma_data_direction);
- 
--
- #endif /* __KERNEL__ */
- #endif
 diff --git a/arch/arm/include/asm/mach/map.h b/arch/arm/include/asm/mach/map.h
 index a6efcdd..b36f365 100644
 --- a/arch/arm/include/asm/mach/map.h
@@ -861,14 +718,6 @@ index b02c88b..3fbdf04 100644
  	if (mdesc->soft_reboot)
  		reboot_setup("s");
  
-@@ -938,7 +933,6 @@ void __init setup_arch(char **cmdline_p)
- 		mdesc->init_early();
- }
- 
--
- static int __init topology_init(void)
- {
- 	int cpu;
 diff --git a/arch/arm/kernel/smp.c b/arch/arm/kernel/smp.c
 index be15dac..1a6e62a 100644
 --- a/arch/arm/kernel/smp.c
@@ -1015,15 +864,6 @@ index 629382b..8a83a3a 100644
  
  # OPP table initialization
  ifeq ($(CONFIG_PM_OPP),y)
-@@ -333,7 +332,7 @@ endif
- obj-$(CONFIG_ION_OMAP)			+= omap4_ion.o
- obj-$(CONFIG_ARCH_OMAP4)		+= omap_dmm.o
- obj-$(CONFIG_OMAP_FIQ_DEBUGGER)		+= omap_fiq_debugger.o
--obj-$(CONFIG_OMAP_RAM_CONSOLE)         += omap_ram_console.o
-+obj-$(CONFIG_OMAP_RAM_CONSOLE)          += omap_ram_console.o
- obj-$(CONFIG_ARCH_OMAP4)		+= omap_gcxxx.o
- 
- include arch/arm/mach-omap2/Makefile.sec
 diff --git a/arch/arm/mach-omap2/Makefile.chn b/arch/arm/mach-omap2/Makefile.chn
 old mode 100755
 new mode 100644
@@ -1403,22 +1243,6 @@ index f23792d..8ea1ed2 100644
  #endif
  	},
  	{
-@@ -70,7 +65,6 @@ static struct omap2_hsmmc_info espresso_mmc_info[] = {
- 	{}	/* Terminator */
- };
- 
--
- static ssize_t sd_detection_cmd_show(struct device *dev,
- 		struct device_attribute *attr, char *buf)
- {
-@@ -94,7 +88,6 @@ static ssize_t sd_detection_cmd_show(struct device *dev,
- }
- static DEVICE_ATTR(status, 0444, sd_detection_cmd_show, NULL);
- 
--
- static int espresso_hsmmc_late_init(struct device *dev)
- {
- 	int ret = 0;
 diff --git a/arch/arm/mach-omap2/board-espresso.c b/arch/arm/mach-omap2/board-espresso.c
 index bc802db..9f9ed3f 100644
 --- a/arch/arm/mach-omap2/board-espresso.c
@@ -3116,14 +2940,6 @@ index 7f47128..e396407 100644
  	policy->cpuinfo.transition_latency = 300 * 1000;
  
  #ifdef CONFIG_DVFS_LIMIT
-@@ -794,7 +731,6 @@ static int __cpuinit omap_cpu_init(struct cpufreq_policy *policy)
- 	}
- #endif
- 
--
- 	if (!max_thermal)
- 		max_thermal = max_freq;
- 
 diff --git a/arch/arm/mach-omap2/omap4-common.c b/arch/arm/mach-omap2/omap4-common.c
 index dc55dfb..f102fff 100644
 --- a/arch/arm/mach-omap2/omap4-common.c
@@ -3456,19 +3272,6 @@ index 396d0da..b498744 100644
  
  /* timer1 */
  static struct omap_hwmod omap44xx_timer1_hwmod;
-@@ -6131,7 +6128,6 @@ static struct omap_hwmod_ocp_if *omap44xx_usbhs_ehci_masters[] = {
- 	&omap44xx_usb_host_hs__l3_main_2,
- };
- 
--
- static struct omap_hwmod omap44xx_usbhs_ehci_hwmod = {
- 	.name		= "usbhs_ehci",
- 	.class		= &omap44xx_usbhs_ehci_hwmod_class,
-@@ -6394,4 +6390,3 @@ int __init omap44xx_hwmod_init(void)
- {
- 	return omap_hwmod_register(omap44xx_hwmods);
- }
--
 diff --git a/arch/arm/mach-omap2/omap_phy_tune.c b/arch/arm/mach-omap2/omap_phy_tune.c
 index 74f75bd..9de74db 100644
 --- a/arch/arm/mach-omap2/omap_phy_tune.c
@@ -5945,30 +5748,6 @@ index 2fdfe31..a93715b 100644
  
  static inline void __set_fixmap(unsigned /* enum fixed_addresses */ idx,
  				phys_addr_t phys, pgprot_t flags)
-@@ -880,7 +877,6 @@ static inline notrace unsigned long arch_local_irq_save(void)
- 	return f;
- }
- 
--
- /* Make sure as little as possible of this mess escapes. */
- #undef PARAVIRT_CALL
- #undef __PVOP_CALL
-@@ -912,7 +908,6 @@ extern void default_banner(void);
- 	 .short clobbers;			\
- 	.popsection
- 
--
- #define COND_PUSH(set, mask, reg)			\
- 	.if ((~(set)) & mask); push %reg; .endif
- #define COND_POP(set, mask, reg)			\
-@@ -993,7 +988,6 @@ extern void default_banner(void);
- 		  CLBR_NONE,						\
- 		  jmp PARA_INDIRECT(pv_cpu_ops+PV_CPU_irq_enable_sysexit))
- 
--
- #else	/* !CONFIG_X86_32 */
- 
- /*
 diff --git a/arch/x86/include/asm/paravirt_types.h b/arch/x86/include/asm/paravirt_types.h
 index 4b67ec9..166bc80 100644
 --- a/arch/x86/include/asm/paravirt_types.h
@@ -6081,30 +5860,6 @@ index 6be9909..729dffb 100644
  }
  
  static inline int pmd_none(pmd_t pmd)
-@@ -600,7 +590,6 @@ static inline int pgd_none(pgd_t pgd)
-  */
- #define pgd_offset_k(address) pgd_offset(&init_mm, (address))
- 
--
- #define KERNEL_PGD_BOUNDARY	pgd_index(PAGE_OFFSET)
- #define KERNEL_PGD_PTRS		(PTRS_PER_PGD - KERNEL_PGD_BOUNDARY)
- 
-@@ -730,7 +719,6 @@ extern int pmdp_test_and_clear_young(struct vm_area_struct *vma,
- extern int pmdp_clear_flush_young(struct vm_area_struct *vma,
- 				  unsigned long address, pmd_t *pmdp);
- 
--
- #define __HAVE_ARCH_PMDP_SPLITTING_FLUSH
- extern void pmdp_splitting_flush(struct vm_area_struct *vma,
- 				 unsigned long addr, pmd_t *pmdp);
-@@ -773,7 +761,6 @@ static inline void clone_pgd_range(pgd_t *dst, pgd_t *src, int count)
-        memcpy(dst, src, count * sizeof(pgd_t));
- }
- 
--
- #include <asm-generic/pgtable.h>
- #endif	/* __ASSEMBLY__ */
- 
 diff --git a/arch/x86/include/asm/processor.h b/arch/x86/include/asm/processor.h
 index e5f7248..7aceb23 100644
 --- a/arch/x86/include/asm/processor.h
@@ -6994,113 +6749,6 @@ index 5e14a6b..2fe0c6e 100644
 +	},
  	{}
  };
- 
-@@ -529,7 +559,6 @@ acpi_video_device_EDID(struct acpi_video_device *device,
- 	union acpi_object arg0 = { ACPI_TYPE_INTEGER };
- 	struct acpi_object_list args = { 1, &arg0 };
- 
--
- 	*edid = NULL;
- 
- 	if (!device)
-@@ -563,7 +592,7 @@ acpi_video_device_EDID(struct acpi_video_device *device,
- /*
-  *  Arg:
-  *  	video		: video bus device pointer
-- *	bios_flag	: 
-+ *	bios_flag	:
-  *		0.	The system BIOS should NOT automatically switch(toggle)
-  *			the active display output.
-  *		1.	The system BIOS should automatically switch (toggle) the
-@@ -575,7 +604,7 @@ acpi_video_device_EDID(struct acpi_video_device *device,
-  *	lcd_flag	:
-  *		0.	The system BIOS should automatically control the brightness level
-  *			of the LCD when the power changes from AC to DC
-- *		1. 	The system BIOS should NOT automatically control the brightness 
-+ *		1. 	The system BIOS should NOT automatically control the brightness
-  *			level of the LCD when the power changes from AC to DC.
-  * Return Value:
-  * 		-1	wrong arg.
-@@ -588,7 +617,6 @@ acpi_video_bus_DOS(struct acpi_video_bus *video, int bios_flag, int lcd_flag)
- 	union acpi_object arg0 = { ACPI_TYPE_INTEGER };
- 	struct acpi_object_list args = { 1, &arg0 };
- 
--
- 	if (bios_flag < 0 || bios_flag > 3 || lcd_flag < 0 || lcd_flag > 1) {
- 		status = -1;
- 		goto Failed;
-@@ -612,7 +640,7 @@ acpi_video_cmp_level(const void *a, const void *b)
- }
- 
- /*
-- *  Arg:	
-+ *  Arg:
-  *  	device	: video output device (LCD, CRT, ..)
-  *
-  *  Return Value:
-@@ -884,7 +912,7 @@ static void acpi_video_device_find_cap(struct acpi_video_device *device)
- }
- 
- /*
-- *  Arg:	
-+ *  Arg:
-  *  	device	: video output device (VGA)
-  *
-  *  Return Value:
-@@ -1100,12 +1128,12 @@ acpi_video_bus_get_one_device(struct acpi_device *device,
- 
- /*
-  *  Arg:
-- *  	video	: video bus device 
-+ *  	video	: video bus device
-  *
-  *  Return:
-  *  	none
-- *  
-- *  Enumerate the video device list of the video bus, 
-+ *
-+ *  Enumerate the video device list of the video bus,
-  *  bind the ids with the corresponding video devices
-  *  under the video bus.
-  */
-@@ -1124,13 +1152,13 @@ static void acpi_video_device_rebind(struct acpi_video_bus *video)
- 
- /*
-  *  Arg:
-- *  	video	: video bus device 
-- *  	device	: video output device under the video 
-+ *  	video	: video bus device
-+ *  	device	: video output device under the video
-  *  		bus
-  *
-  *  Return:
-  *  	none
-- *  
-+ *
-  *  Bind the ids with the corresponding video devices
-  *  under the video bus.
-  */
-@@ -1153,11 +1181,11 @@ acpi_video_device_bind(struct acpi_video_bus *video,
- 
- /*
-  *  Arg:
-- *  	video	: video bus device 
-+ *  	video	: video bus device
-  *
-  *  Return:
-  *  	< 0	: error
-- *  
-+ *
-  *  Call _DOD to enumerate all devices attached to display adapter
-  *
-  */
-@@ -1741,7 +1769,6 @@ static int acpi_video_bus_remove(struct acpi_device *device, int type)
- {
- 	struct acpi_video_bus *video = NULL;
- 
--
- 	if (!device || !acpi_driver_data(device))
- 		return -EINVAL;
  
 diff --git a/drivers/ata/Kconfig b/drivers/ata/Kconfig
 index 34575fb..75afa75 100644
@@ -8647,11 +8295,6 @@ index 1236d53..a01b0d1 100644
  		channel->packet_size = 0;
  
  		ch = channel->channel_id;
-@@ -1838,4 +1777,3 @@ struct link_device *mipi_create_link_device(struct platform_device *pdev)
- 
- 	return ld;
- }
--
 diff --git a/drivers/misc/modem_if_v2/sipc4_io_device.c b/drivers/misc/modem_if_v2/sipc4_io_device.c
 index f4c08cf..f220112 100644
 --- a/drivers/misc/modem_if_v2/sipc4_io_device.c
@@ -8705,11 +8348,6 @@ index 38ffe63..a865f3c 100644
  	return count;
  }
  
-@@ -1102,4 +1097,3 @@ int sipc5_init_io_device(struct io_device *iod)
- 				iod->name, iod->io_typ, ret);
- 	return ret;
- }
--
 diff --git a/drivers/misc/omap4_duty_cycle.c b/drivers/misc/omap4_duty_cycle.c
 index 42b4e88..085dbb8 100644
 --- a/drivers/misc/omap4_duty_cycle.c
@@ -8845,20 +8483,6 @@ index b26c5cc..ae2a451 100644
  				mmc_hostname(host));
  		} else if (ro > 0) {
  			mmc_card_set_readonly(card);
-@@ -1018,7 +1010,7 @@ static void mmc_sd_detect(struct mmc_host *host)
- 
- 	BUG_ON(!host);
- 	BUG_ON(!host->card);
--       
-+
- 	mmc_claim_host(host);
- 
- 	/*
-@@ -1265,4 +1257,3 @@ err:
- 
- 	return err;
- }
--
 diff --git a/drivers/mmc/host/omap_hsmmc.c b/drivers/mmc/host/omap_hsmmc.c
 index e9a6f2a..30b23e2 100644
 --- a/drivers/mmc/host/omap_hsmmc.c
@@ -9151,72 +8775,6 @@ index c54989b..e9b5b5a 100644
  #endif
  
  enum dhd_bus_wake_state {
-@@ -147,7 +147,6 @@ typedef enum  {
- 	DHD_IF_DELETING
- } dhd_if_state_t;
- 
--
- #if defined(CONFIG_DHD_USE_STATIC_BUF)
- 
- uint8* dhd_os_prealloc(void *osh, int section, uint size);
-@@ -263,7 +262,7 @@ typedef struct dhd_pub {
- #if (LINUX_VERSION_CODE >= KERNEL_VERSION(2, 6, 25)) && 1
- 	struct mutex 	wl_start_stop_lock; /* lock/unlock for Android start/stop */
- 	struct mutex 	wl_softap_lock;		 /* lock/unlock for any SoftAP/STA settings */
--#endif 
-+#endif
- 
- #ifdef WLBTAMP
- 	uint16	maxdatablks;
-@@ -289,7 +288,6 @@ typedef struct dhd_pub {
- #endif
- } dhd_pub_t;
- 
--
- 	#if (LINUX_VERSION_CODE >= KERNEL_VERSION(2, 6, 27)) && defined(CONFIG_PM_SLEEP)
- 
- 	#define DHD_PM_RESUME_WAIT_INIT(a) DECLARE_WAIT_QUEUE_HEAD(a);
-@@ -423,7 +421,7 @@ void dhd_net_if_unlock(struct net_device *dev);
- 
- #if (LINUX_VERSION_CODE >= KERNEL_VERSION(2, 6, 25)) && 1
- extern struct mutex _dhd_sdio_mutex_lock_;
--#endif 
-+#endif
- 
- typedef struct dhd_if_event {
- 	uint8 ifidx;
-@@ -594,7 +592,6 @@ extern void dhd_vif_del(struct dhd_info *dhd, int ifidx);
- extern void dhd_event(struct dhd_info *dhd, char *evpkt, int evlen, int ifidx);
- extern void dhd_vif_sendup(struct dhd_info *dhd, int ifidx, uchar *cp, int len);
- 
--
- /* Send packet to dongle via data channel */
- extern int dhd_sendpkt(dhd_pub_t *dhdp, int ifidx, void *pkt);
- 
-@@ -710,7 +707,6 @@ extern uint dhd_force_tx_queueing;
- #define CUSTOM_ROAM_DELTA_SETTING 	DEFAULT_ROAM_DELTA_VALUE
- #endif
- 
--
- /* hooks for custom dhd_dpc_prio setting option via Makefile */
- #define DEFAULT_DHP_DPC_PRIO  1
- #ifndef CUSTOM_DPC_PRIO_SETTING
-@@ -731,7 +727,6 @@ extern uint dhd_pktgen_len;
- #define MAX_PKTGEN_LEN 1800
- #endif
- 
--
- /* optionally set by a module_param_string() */
- #define MOD_PARAM_PATHLEN	2048
- extern char fw_path[MOD_PARAM_PATHLEN];
-@@ -760,7 +755,6 @@ int dhd_deepsleep(struct net_device *dev, int flag);
- #define DHD_BAD_IF	-0xf
- #define WL_AUTO_ROAM_TRIGGER -75
- 
--
- #ifdef PROP_TXSTATUS
- /* Please be mindful that total pkttag space is 32 octets only */
- typedef struct dhd_pkttag {
 diff --git a/drivers/net/wireless/bcmdhd/dhd_sec_feature.h b/drivers/net/wireless/bcmdhd/dhd_sec_feature.h
 index 6a387ab..4260bb8 100644
 --- a/drivers/net/wireless/bcmdhd/dhd_sec_feature.h
@@ -10006,22 +9564,6 @@ index a870a8f..b817221
  
  	mutex_lock(&wl->usr_sync);
  	dhd = (dhd_pub_t *)(wl->pub);
-@@ -10151,7 +10053,6 @@ s32 wl_cfg80211_get_p2p_dev_addr(struct net_device *net, struct ether_addr *p2pd
- 			wl->p2p->dev_addr.octet, ETHER_ADDR_LEN);
- 	}
- 
--
- 	return 0;
- }
- s32 wl_cfg80211_set_p2p_noa(struct net_device *net, char* buf, int len)
-@@ -10366,7 +10267,6 @@ wl_cfg80211_find_interworking_ie(u8 *parse, u32 len)
- 	return NULL;
- }
- 
--
- static s32
- wl_cfg80211_add_iw_ie(struct wl_priv *wl, struct net_device *ndev, s32 bssidx, s32 pktflag,
-             uint8 ie_id, uint8 *data, uint8 data_len)
 diff --git a/drivers/net/wireless/bcmdhd/wl_cfg80211.h b/drivers/net/wireless/bcmdhd/wl_cfg80211.h
 index 7138d21..ca090fd 100644
 --- a/drivers/net/wireless/bcmdhd/wl_cfg80211.h
@@ -10035,73 +9577,6 @@ index 7138d21..ca090fd 100644
  
  #ifdef CUSTOMER_HW4
  #define CFG80211_ERROR_TEXT		"CFG80211-INFO2) "
-@@ -142,7 +142,6 @@ do {									\
- #endif				/* (WL_DBG_LEVEL > 0) */
- #define WL_PNO(x)
- 
--
- #define WL_SCAN_RETRY_MAX	3
- #define WL_NUM_PMKIDS_MAX	MAXPMKID
- #define WL_SCAN_BUF_MAX 	(1024 * 8)
-@@ -162,10 +161,10 @@ do {									\
- #define WL_MIN_DWELL_TIME	100
- #define WL_LONG_DWELL_TIME 	1000
- #define IFACE_MAX_CNT 		2
--#define WL_SCAN_CONNECT_DWELL_TIME_MS 		300
--#define WL_SCAN_JOIN_PROBE_INTERVAL_MS 		60
--#define WL_SCAN_JOIN_ACTIVE_DWELL_TIME_MS 	320
--#define WL_SCAN_JOIN_PASSIVE_DWELL_TIME_MS 	400
-+#define WL_SCAN_CONNECT_DWELL_TIME_MS       300
-+#define WL_SCAN_JOIN_PROBE_INTERVAL_MS       60
-+#define WL_SCAN_JOIN_ACTIVE_DWELL_TIME_MS   320
-+#define WL_SCAN_JOIN_PASSIVE_DWELL_TIME_MS  400
- #define WL_AF_TX_MAX_RETRY 	5
- 
- #define WL_AF_SEARCH_TIME_MAX           450
-@@ -403,7 +402,6 @@ struct wl_pmk_list {
- 	pmkid_t foo[MAXPMKID - 1];
- };
- 
--
- #define ESCAN_BUF_SIZE (64 * 1024)
- 
- struct escan_info {
-@@ -488,10 +486,9 @@ struct parsed_ies {
- 	u32 wpa2_ie_len;
- };
- 
--
- #ifdef WL11U
- /* Max length of Interworking element */
--#define IW_IES_MAX_BUF_LEN 		9
-+#define IW_IES_MAX_BUF_LEN		9
- #endif
- 
- /* private data of cfg80211 interface */
-@@ -600,7 +597,6 @@ struct wl_priv {
- #endif /* WL_HOST_BAND_MGMT */
- };
- 
--
- static inline struct wl_bss_info *next_bss(struct wl_scan_results *list, struct wl_bss_info *bss)
- {
- 	return bss = bss ?
-@@ -752,7 +748,6 @@ wl_get_mode_by_netdev(struct wl_priv *wl, struct net_device *ndev)
- 	return -1;
- }
- 
--
- static inline void
- wl_set_mode_by_netdev(struct wl_priv *wl, struct net_device *ndev,
- 	s32 mode)
-@@ -819,7 +814,6 @@ wl_get_netinfo_by_netdev(struct wl_priv *wl, struct net_device *ndev)
- #define for_each_ndev(wl, iter, next) \
- 	list_for_each_entry_safe(iter, next, &wl->net_list, list)
- 
--
- /* In case of WPS from wpa_supplicant, pairwise siute and group suite is 0.
-  * In addtion to that, wpa_version is WPA_VERSION_1
-  */
 diff --git a/drivers/power/bat_manager.c b/drivers/power/bat_manager.c
 index 6c56c01..1f343bc 100644
 --- a/drivers/power/bat_manager.c
@@ -10503,22 +9978,6 @@ index cf8c36a..89e7280 100644
  static void smb136_set_charging_state(struct smb_charger_callbacks *ptr,
  		int cable_status)
  {
-@@ -388,7 +321,6 @@ static const struct i2c_device_id smb136_id[] = {
- 	{ }
- };
- 
--
- static struct i2c_driver smb136_i2c_driver = {
- 	.driver = {
- 		.owner	= THIS_MODULE,
-@@ -400,7 +332,6 @@ static struct i2c_driver smb136_i2c_driver = {
- 	.command = NULL,
- };
- 
--
- MODULE_DEVICE_TABLE(i2c, smb136_id);
- 
- static int __init smb136_init(void)
 diff --git a/drivers/power/smb347_charger.c b/drivers/power/smb347_charger.c
 index f5512b4..1b5614e 100644
 --- a/drivers/power/smb347_charger.c
@@ -10552,22 +10011,6 @@ index f5512b4..1b5614e 100644
  static void smb347_charger_init(struct smb347_chg_data *chg)
  {
  	/* Allow volatile writes to CONFIG registers */
-@@ -362,7 +340,6 @@ static const struct i2c_device_id smb347_id[] = {
- 	{ "smb347-charger", 0 },
- };
- 
--
- static struct i2c_driver smb347_i2c_driver = {
- 	.driver = {
- 		.owner	= THIS_MODULE,
-@@ -373,7 +350,6 @@ static struct i2c_driver smb347_i2c_driver = {
- 	.id_table	= smb347_id,
- };
- 
--
- MODULE_DEVICE_TABLE(i2c, smb347_id);
- 
- static int __init smb347_init(void)
 diff --git a/drivers/regulator/twl-regulator.c b/drivers/regulator/twl-regulator.c
 index 0896181..848f04c 100644
 --- a/drivers/regulator/twl-regulator.c
@@ -10654,22 +10097,6 @@ index b3ca81b..7e8b0b4 100644
  	/* init cached IRQ enable bits */
  	ret = twl_rtc_read_u8(&rtc_irq_bits, REG_RTC_INTERRUPTS_REG);
  	if (ret < 0)
-@@ -628,7 +630,6 @@ static int __devinit twl_rtc_probe(struct platform_device *pdev)
- 		control |= BIT_RTC_CTRL_REG_AUTO_COMP_M;
- 		ret |= twl_rtc_write_u8(control, REG_RTC_CTRL_REG);
- 
--
- 		ret |= twl_rtc_read_u8(&msb_value, REG_RTC_COMP_MSB_REG);
- 		ret |= twl_rtc_read_u8(&lsb_value, REG_RTC_COMP_LSB_REG);
- 		dev_info(&pdev->dev, "COMP_MSB=0x%x  COMP_LSB=0x%x\n",
-@@ -681,7 +682,6 @@ static int __devexit twl_rtc_remove(struct platform_device *pdev)
- 			REG_INT_MSK_STS_A);
- 	}
- 
--
- 	free_irq(irq, rtc);
- 
- 	rtc_device_unregister(rtc);
 diff --git a/drivers/sensors/accelerometer/yas_acc_kernel_driver.c b/drivers/sensors/accelerometer/yas_acc_kernel_driver.c
 index 4ea984d..69b0142 100644
 --- a/drivers/sensors/accelerometer/yas_acc_kernel_driver.c
@@ -10720,14 +10147,6 @@ index 4ea984d..69b0142 100644
  	return err;
  }
  
-@@ -1300,7 +1289,6 @@ static void yas_acc_work_func(struct work_struct *work)
- 	schedule_delayed_work(&data->work, delay);
- }
- 
--
- static ssize_t acc_data_read(struct device *dev,
- 		struct device_attribute *attr, char *buf)
- {
 diff --git a/drivers/staging/Kconfig b/drivers/staging/Kconfig
 index 2cdf49a..9dcf09e 100644
 --- a/drivers/staging/Kconfig
@@ -11659,14 +11078,6 @@ index b97a64e..9617788 100644
  	"proc",
  	"thread",
  	"node",
-@@ -3446,7 +3138,6 @@ static void print_binder_proc_stats(struct seq_file *m,
- 	print_binder_stats(m, "  ", &proc->stats);
- }
- 
--
- static int binder_state_show(struct seq_file *m, void *unused)
- {
- 	struct binder_proc *proc;
 diff --git a/drivers/staging/android/logger.c b/drivers/staging/android/logger.c
 index 53d0190..3963187 100644
 --- a/drivers/staging/android/logger.c
@@ -12219,33 +11630,6 @@ index 33d71c6..beef0ff 100644
  #endif
  	INIT_LIST_HEAD(&dev->enabled_functions);
  	INIT_WORK(&dev->work, android_work);
-@@ -1689,14 +1640,12 @@ int late_init_android_gadget(int romtype)
- 	*/
- 	err = create_terminal_attribute(&dev->dev);
- 	if (err) {
--		printk(KERN_ERR "usb: %s To create terminal_atttrr is failed\n",
--			__func__);
-+		printk(KERN_ERR "usb: %s To create terminal_atttrr is failed\n", __func__);
- 		return err;
- 	}
- 	err = platform_driver_register(&android_platform_driver);
- 	if (err) {
--		printk(KERN_ERR "usb: %s platform register is failed\n",
--				__func__);
-+		printk(KERN_ERR "usb: %s platform register is failed\n", __func__);
- 		return err;
- 	}
- #endif
-@@ -1704,8 +1653,7 @@ int late_init_android_gadget(int romtype)
- #ifdef CONFIG_USB_DUN_SUPPORT
- 	err = modem_misc_register();
- 	if (err) {
--		printk(KERN_ERR "usb: %s modem misc register is failed\n",
--				__func__);
-+		printk(KERN_ERR "usb: %s modem misc register is failed\n", __func__);
- 		return err;
- 	}
- #endif
 diff --git a/drivers/video/omap2/displays/panel-ltn070nl01.c b/drivers/video/omap2/displays/panel-ltn070nl01.c
 index 9696d7a..df37837 100644
 --- a/drivers/video/omap2/displays/panel-ltn070nl01.c
@@ -12402,14 +11786,6 @@ index 9696d7a..df37837 100644
  	mutex_lock(&lcd->lock);
  	if (dssdev->state != OMAP_DSS_DISPLAY_SUSPENDED) {
  		ret = -EINVAL;
-@@ -679,7 +646,6 @@ static int __init ltn070nl01_init(void)
- 
- static void __exit ltn070nl01_exit(void)
- {
--
- 	omap_dss_unregister_driver(&ltn070nl01_omap_dss_driver);
- }
- 
 diff --git a/drivers/video/omap2/displays/panel-ltn101al03.c b/drivers/video/omap2/displays/panel-ltn101al03.c
 index 47c97c2..564399d 100644
 --- a/drivers/video/omap2/displays/panel-ltn101al03.c
@@ -12578,14 +11954,6 @@ index 0ae8524..cb1c6ca 100644
  }
  
  void omap_dss_reset_high_bandwidth(struct device *dss_dev)
-@@ -575,7 +574,6 @@ static void reset_device(struct device *dev, int check)
- 	dev->platform_data = saved_pdata;
- }
- 
--
- static void omap_dss_dev_release(struct device *dev)
- {
- 	reset_device(dev, 0);
 @@ -696,4 +694,3 @@ device_initcall(omap_dss_init2);
  MODULE_AUTHOR("Tomi Valkeinen <tomi.valkeinen@nokia.com>");
  MODULE_DESCRIPTION("OMAP2/3 Display Subsystem");
@@ -12737,63 +12105,6 @@ index 88066af..24a9be5 100644
  #define PIS(x) \
  	if (status & DSI_CIO_IRQ_##x) \
  		printk(#x " ");
-@@ -1158,8 +1154,6 @@ static void _dsi_print_reset_status(struct platform_device *dsidev)
- 	 * I/O. */
- 	l = dsi_read_reg(dsidev, DSI_DSIPHY_CFG5);
- 
--	printk(KERN_DEBUG "DSI resets: ");
--
- 	l = dsi_read_reg(dsidev, DSI_PLL_STATUS);
- 	printk("PLL (%d) ", FLD_GET(l, 0, 0));
- 
-@@ -2871,7 +2865,6 @@ static int dsi_vc_config_vp(struct platform_device *dsidev, int channel)
- 	return 0;
- }
- 
--
- void omapdss_dsi_vc_enable_hs(struct omap_dss_device *dssdev, int channel,
- 		bool enable)
- {
-@@ -3413,7 +3406,6 @@ int dsi_vc_dcs_read_2(struct omap_dss_device *dssdev, int channel, u8 dcs_cmd,
- }
- EXPORT_SYMBOL(dsi_vc_dcs_read_2);
- 
--
- int dsi_vc_gen_write_nosync(struct omap_dss_device *dssdev, int channel,
- 		u8 *data, int len)
- {
-@@ -3580,7 +3572,6 @@ err:
- }
- EXPORT_SYMBOL(dsi_vc_gen_read_2);
- 
--
- int dsi_vc_set_max_rx_packet_size(struct omap_dss_device *dssdev, int channel,
- 		u16 len)
- {
-@@ -4135,7 +4126,6 @@ static void dsi_proto_timings(struct omap_dss_device *dssdev)
- 			enter_hs_mode_lat, exit_hs_mode_lat);
- }
- 
--
- #define DSI_DECL_VARS \
- 	int __dsi_cb = 0; u32 __dsi_cv = 0;
- 
-@@ -4546,7 +4536,6 @@ static int dsi_display_init_dispc(struct omap_dss_device *dssdev)
- 	dispc_set_lcd_display_type(dssdev->manager->id,
- 			OMAP_DSS_LCD_DISPLAY_TFT);
- 
--
- 	dispc_set_tft_data_lines(dssdev->manager->id, dssdev->ctrl.pixel_size);
- 
- 	if (dssdev->phy.dsi.type == OMAP_DSS_DSI_TYPE_CMD_MODE) {
-@@ -4650,7 +4639,6 @@ static int dsi_save_dsi_clocks(struct omap_dss_device *dssdev)
- 	return 0;
- }
- 
--
- static int dsi_configure_dispc_clocks(struct omap_dss_device *dssdev)
- {
- 	struct platform_device *dsidev = dsi_get_dsidev_from_dssdev(dssdev);
 diff --git a/drivers/video/omap2/dss/hdmi.c b/drivers/video/omap2/dss/hdmi.c
 index 3386839..9136473 100644
 --- a/drivers/video/omap2/dss/hdmi.c
@@ -12907,27 +12218,6 @@ index e208318..d1d87dc 100644
  		r = -ENODEV;
  		goto done;
  	}
-@@ -2244,7 +2229,6 @@ int omap_dss_wb_apply(struct omap_overlay_manager *mgr,
- 	else
- 		r = configure_dispc();
- 
--
- 	spin_unlock_irqrestore(&dss_cache.lock, flags);
- 	return r;
- }
-@@ -2350,7 +2334,6 @@ int omap_dss_ovl_set_info(struct omap_overlay *ovl,
- 	return 0;
- }
- 
--
- static int omap_dss_mgr_set_info(struct omap_overlay_manager *mgr,
- 		struct omap_overlay_manager_info *info)
- {
-@@ -2543,4 +2526,3 @@ struct omap_overlay_manager *omap_dss_get_overlay_manager(int num)
- 	return NULL;
- }
- EXPORT_SYMBOL(omap_dss_get_overlay_manager);
--
 diff --git a/drivers/video/omap2/dss/overlay.c b/drivers/video/omap2/dss/overlay.c
 index 957e680..f86a757 100644
 --- a/drivers/video/omap2/dss/overlay.c
@@ -13516,46 +12806,6 @@ index 29ffda0..10dc02d 100644
  /*-----------------------------------------------------------------------------
   * Function: hdcp_wq_start_authentication
   *-----------------------------------------------------------------------------
-@@ -198,7 +181,6 @@ static void hdcp_wq_check_r0(void)
- 	}
- }
- 
--
- /*-----------------------------------------------------------------------------
-  * Function: hdcp_wq_step2_authentication
-  *-----------------------------------------------------------------------------
-@@ -465,7 +447,6 @@ static void hdcp_cancel_work(struct delayed_work **work)
- 	}
- }
- 
--
- /******************************************************************************
-  * HDCP callbacks
-  *****************************************************************************/
-@@ -585,7 +566,6 @@ static void hdcp_irq_cb(int status)
-  * HDCP control from ioctl
-  *****************************************************************************/
- 
--
- /*-----------------------------------------------------------------------------
-  * Function: hdcp_enable_ctl
-  *-----------------------------------------------------------------------------
-@@ -620,7 +600,6 @@ static long hdcp_enable_ctl(void __user *argp)
- 	if (hdcp_submit_work(HDCP_ENABLE_CTL, 0) == 0)
- 		return -EFAULT;
- 
--
- 	return 0;
- }
- 
-@@ -839,7 +818,6 @@ long hdcp_ioctl(struct file *fd, unsigned int cmd, unsigned long arg)
- 	} /* End switch */
- }
- 
--
- /******************************************************************************
-  * HDCP driver init/exit
-  *****************************************************************************/
 diff --git a/drivers/video/omap2/omapfb/Kconfig b/drivers/video/omap2/omapfb/Kconfig
 index d4c5d83..369e85f 100644
 --- a/drivers/video/omap2/omapfb/Kconfig
@@ -15267,32 +14517,6 @@ index b874233..91b712a
  			OMAPLFBSetDevInfoPtr(psDevInfo->uiFBDevID, psDevInfo);
  			uiDevicesFound++;
  		}
-@@ -1797,19 +1632,17 @@ static OMAPLFB_BOOL OMAPLFBDeInitDev(OMAPLFB_DEVINFO *psDevInfo)
- 		return OMAPLFB_FALSE;
- 	}
- 
--	
- 	if (psPVRJTable->pfnPVRSRVRemoveDCDevice(psDevInfo->uiPVRDevID) != PVRSRV_OK)
- 	{
- 		printk(KERN_ERR DRIVER_PREFIX
- 			": %s: Device %u: PVR Device %u: Couldn't remove device from PVR Services\n", __FUNCTION__, psDevInfo->uiFBDevID, psDevInfo->uiPVRDevID);
- 		return OMAPLFB_FALSE;
- 	}
--	
-+
- 	OMAPLFBDeInitFBDev(psDevInfo);
- 
- 	OMAPLFBSetDevInfoPtr(psDevInfo->uiFBDevID, NULL);
- 
--	
- 	OMAPLFBFreeKernelMem(psDevInfo);
- 
- 	return OMAPLFB_TRUE;
-@@ -1833,4 +1666,3 @@ OMAPLFB_ERROR OMAPLFBDeInit(void)
- 
- 	return (bError) ? OMAPLFB_ERROR_INIT_FAILURE : OMAPLFB_OK;
- }
--
 diff --git a/drivers/video/omap2/omaplfb/omaplfb_linux.c b/drivers/video/omap2/omaplfb/omaplfb_linux.c
 old mode 100755
 new mode 100644
@@ -15787,167 +15011,6 @@ index 86c73ae..c7e4711 100644
  static int hdmi_rx_write_reg(struct sii9234_data *sii9234, unsigned int offset,
  		u8 value)
  {
-diff --git a/fs/Kconfig b/fs/Kconfig
-index 62aeb09..2419cbe 100644
---- a/fs/Kconfig
-+++ b/fs/Kconfig
-@@ -11,7 +11,6 @@ source "fs/ext3/Kconfig"
- source "fs/ext4/Kconfig"
- 
- config FS_XIP
--# execute in place
- 	bool
- 	depends on EXT2_FS_XIP
- 	default y
-@@ -20,7 +19,6 @@ source "fs/jbd/Kconfig"
- source "fs/jbd2/Kconfig"
- 
- config FS_MBCACHE
--# Meta block cache for Extended Attributes (ext2/ext3/ext4)
- 	tristate
- 	default y if EXT2_FS=y && EXT2_FS_XATTR
- 	default y if EXT3_FS=y && EXT3_FS_XATTR
-@@ -29,7 +27,6 @@ config FS_MBCACHE
- 
- source "fs/reiserfs/Kconfig"
- source "fs/jfs/Kconfig"
--
- source "fs/xfs/Kconfig"
- source "fs/gfs2/Kconfig"
- source "fs/ocfs2/Kconfig"
-@@ -39,10 +36,9 @@ source "fs/nilfs2/Kconfig"
- endif # BLOCK
- 
- # Posix ACL utility routines
--#
--# Note: Posix ACLs can be implemented without these helpers.  Never use
--# this symbol for ifdefs in core code.
--#
-+# Note: Posix ACLs can be implemented without these helpers.
-+# Never use this symbol for ifdefs in core code.
-+
- config FS_POSIX_ACL
- 	def_bool n
- 
-@@ -58,14 +54,12 @@ config FILE_LOCKING
-           call. Disabling this option saves about 11k.
- 
- source "fs/notify/Kconfig"
--
- source "fs/quota/Kconfig"
--
- source "fs/autofs4/Kconfig"
- source "fs/fuse/Kconfig"
- 
- config CUSE
--	tristate "Character device in Userspace support"
-+	tristate "Character device in userspace support"
- 	depends on FUSE_FS
- 	help
- 	  This FUSE extension allows character devices to be
-@@ -95,9 +89,10 @@ endmenu
- endif # BLOCK
- 
- if BLOCK
--menu "DOS/FAT/NT Filesystems"
-+menu "DOS/FAT/exFAT/NT Filesystems"
- 
- source "fs/fat/Kconfig"
-+source "fs/exfat/Kconfig"
- source "fs/ntfs/Kconfig"
- 
- endmenu
-@@ -115,11 +110,8 @@ config TMPFS
- 	  Tmpfs is a file system which keeps all files in virtual memory.
- 
- 	  Everything in tmpfs is temporary in the sense that no files will be
--	  created on your hard drive. The files live in memory and swap
--	  space. If you unmount a tmpfs instance, everything stored therein is
--	  lost.
--
--	  See <file:Documentation/filesystems/tmpfs.txt> for details.
-+	  created on your hard drive. The files live in memory and swap space.
-+	  If you unmount a tmpfs instance, everything stored therein is lost.
- 
- config TMPFS_POSIX_ACL
- 	bool "Tmpfs POSIX Access Control Lists"
-@@ -184,6 +176,9 @@ menuconfig MISC_FILESYSTEMS
- 
- if MISC_FILESYSTEMS
- 
-+source "fs/f2fs/Kconfig"
-+source "fs/squashfs/Kconfig"
-+source "fs/yaffs2/Kconfig"
- source "fs/adfs/Kconfig"
- source "fs/affs/Kconfig"
- source "fs/ecryptfs/Kconfig"
-@@ -192,16 +187,10 @@ source "fs/hfsplus/Kconfig"
- source "fs/befs/Kconfig"
- source "fs/bfs/Kconfig"
- source "fs/efs/Kconfig"
--
--# Patched by YAFFS
--source "fs/yaffs2/Kconfig"
--
- source "fs/jffs2/Kconfig"
--# UBIFS File system configuration
- source "fs/ubifs/Kconfig"
- source "fs/logfs/Kconfig"
- source "fs/cramfs/Kconfig"
--source "fs/squashfs/Kconfig"
- source "fs/freevxfs/Kconfig"
- source "fs/minix/Kconfig"
- source "fs/omfs/Kconfig"
-@@ -213,7 +202,6 @@ source "fs/sysv/Kconfig"
- source "fs/ufs/Kconfig"
- source "fs/exofs/Kconfig"
- 
--
- endif # MISC_FILESYSTEMS
- 
- menuconfig NETWORK_FILESYSTEMS
-diff --git a/fs/Makefile b/fs/Makefile
-index 5063ef9..7489f80 100644
---- a/fs/Makefile
-+++ b/fs/Makefile
-@@ -3,7 +3,7 @@
- #
- # 14 Sep 2000, Christoph Hellwig <hch@infradead.org>
- # Rewritten to use lists instead of if-statements.
--# 
-+#
- 
- obj-y :=	open.o read_write.o file_table.o super.o \
- 		char_dev.o stat.o exec.o pipe.o namei.o fcntl.o \
-@@ -60,7 +60,7 @@ obj-y				+= devpts/
- 
- obj-$(CONFIG_PROFILING)		+= dcookies.o
- obj-$(CONFIG_DLM)		+= dlm/
-- 
-+
- # Do not add any filesystems before this line
- obj-$(CONFIG_FSCACHE)		+= fscache/
- obj-$(CONFIG_REISERFS_FS)	+= reiserfs/
-@@ -78,6 +78,7 @@ obj-$(CONFIG_HUGETLBFS)		+= hugetlbfs/
- obj-$(CONFIG_CODA_FS)		+= coda/
- obj-$(CONFIG_MINIX_FS)		+= minix/
- obj-$(CONFIG_FAT_FS)		+= fat/
-+obj-$(CONFIG_EXFAT_FS)		+= exfat/
- obj-$(CONFIG_BFS_FS)		+= bfs/
- obj-$(CONFIG_ISO9660_FS)	+= isofs/
- obj-$(CONFIG_HFSPLUS_FS)	+= hfsplus/ # Before hfs to find wrapped HFS+
-@@ -121,10 +122,10 @@ obj-$(CONFIG_DEBUG_FS)		+= debugfs/
- obj-$(CONFIG_OCFS2_FS)		+= ocfs2/
- obj-$(CONFIG_BTRFS_FS)		+= btrfs/
- obj-$(CONFIG_GFS2_FS)           += gfs2/
-+obj-$(CONFIG_F2FS_FS)           += f2fs/
- obj-$(CONFIG_EXOFS_FS)          += exofs/
- obj-$(CONFIG_CEPH_FS)		+= ceph/
- obj-$(CONFIG_PSTORE)		+= pstore/
- 
- # Patched by YAFFS
- obj-$(CONFIG_YAFFS_FS)		+= yaffs2/
--
 diff --git a/fs/cifs/xattr.c b/fs/cifs/xattr.c
 index 2a22fb2..6b9e867 100644
 --- a/fs/cifs/xattr.c
@@ -16016,23 +15079,6 @@ index f00b0a0..3bda91c 100644
  	if (filp)
  		ext4_error_file(filp, function, line, bh ? bh->b_blocknr : 0,
  				"bad entry in directory: %s - offset=%u(%u), "
-@@ -333,7 +328,6 @@ static void free_rb_tree_fname(struct rb_root *root)
- 	}
- }
- 
--
- static struct dir_private_info *ext4_htree_create_dir_info(loff_t pos)
- {
- 	struct dir_private_info *p;
-@@ -410,8 +404,6 @@ int ext4_htree_store_dirent(struct file *dir_file, __u32 hash,
- 	return 0;
- }
- 
--
--
- /*
-  * This is a helper function for ext4_dx_readdir.  It calls filldir
-  * for all entres on the fname linked list.  (Normally there is only
 diff --git a/fs/ext4/ext4.h b/fs/ext4/ext4.h
 index f9132e0..7ebc236 100644
 --- a/fs/ext4/ext4.h
@@ -17154,14 +16200,6 @@ index ff12650..0f91173 100644
  			ext4_grp_locked_error(sb, e4b->bd_group,
  					      inode ? inode->i_ino : 0,
  					      blocknr,
-@@ -2729,7 +2719,6 @@ void ext4_exit_mballoc(void)
- 	ext4_remove_debugfs_entry();
- }
- 
--
- /*
-  * Check quota and mark chosen space (ac->ac_b_ex) non-free in bitmaps
-  * Returns 0 if success or error code
 diff --git a/fs/ext4/namei.c b/fs/ext4/namei.c
 index d92d07f..31b8390 100644
 --- a/fs/ext4/namei.c
@@ -17218,31 +16256,6 @@ index d92d07f..31b8390 100644
  			brelse(bh);
  
  			EXT4_ERROR_INODE(dir, "bad inode number: %u", ino);
-@@ -1059,7 +1049,6 @@ static struct dentry *ext4_lookup(struct inode *dir, struct dentry *dentry, stru
- 	return d_splice_alias(inode, dentry);
- }
- 
--
- struct dentry *ext4_get_parent(struct dentry *child)
- {
- 	__u32 ino;
-@@ -1723,7 +1712,6 @@ static void ext4_dec_count(handle_t *handle, struct inode *inode)
- 		inc_nlink(inode);
- }
- 
--
- static int ext4_add_nondir(handle_t *handle,
- 		struct dentry *dentry, struct inode *inode)
- {
-@@ -2310,7 +2298,7 @@ retry:
- 		 * for transaction commit if we are running out of space
- 		 * and thus we deadlock. So we have to stop transaction now
- 		 * and restart it when symlink contents is written.
--		 * 
-+		 *
- 		 * To keep fs consistent in case of crash, we have to put inode
- 		 * to orphan list in the mean time.
- 		 */
 diff --git a/fs/ext4/page-io.c b/fs/ext4/page-io.c
 index d99d74a..39a3686 100644
 --- a/fs/ext4/page-io.c
@@ -17592,42 +16605,6 @@ index 35388d5..f3d65ef 100644
  	break_time = 0;
  	if (lease_break_time > 0) {
  		break_time = jiffies + lease_break_time * HZ;
-@@ -1720,7 +1717,7 @@ int fcntl_getlk(struct file *filp, struct flock __user *l)
- 	error = vfs_test_lock(filp, &file_lock);
- 	if (error)
- 		goto out;
-- 
-+
- 	flock.l_type = file_lock.fl_type;
- 	if (file_lock.fl_type != F_UNLCK) {
- 		error = posix_lock_to_flock(&flock, &file_lock);
-@@ -1839,7 +1836,7 @@ again:
- 	if (cmd == F_SETLKW) {
- 		file_lock->fl_flags |= FL_SLEEP;
- 	}
--	
-+
- 	error = -EBADF;
- 	switch (flock.l_type) {
- 	case F_RDLCK:
-@@ -1913,7 +1910,7 @@ int fcntl_getlk64(struct file *filp, struct flock64 __user *l)
- 	error = -EFAULT;
- 	if (!copy_to_user(l, &flock, sizeof(flock)))
- 		error = 0;
--  
-+
- out:
- 	return error;
- }
-@@ -1957,7 +1954,7 @@ again:
- 	if (cmd == F_SETLKW64) {
- 		file_lock->fl_flags |= FL_SLEEP;
- 	}
--	
-+
- 	error = -EBADF;
- 	switch (flock.l_type) {
- 	case F_RDLCK:
 diff --git a/fs/namei.c b/fs/namei.c
 index 16bda6c..661f35c 100644
 --- a/fs/namei.c
@@ -18085,23 +17062,6 @@ index 905ea72..8a38d74 100644
  /*********************************************************************
   *                     FREQUENCY TABLE HELPERS                       *
   *********************************************************************/
-@@ -376,8 +375,7 @@ extern struct cpufreq_governor cpufreq_gov_hotplug;
- 
- struct cpufreq_frequency_table {
- 	unsigned int	index;     /* any */
--	unsigned int	frequency; /* kHz - doesn't need to be in ascending
--				    * order */
-+	unsigned int	frequency; /* kHz - doesn't need to be in ascending order */
- };
- 
- int cpufreq_frequency_table_cpuinfo(struct cpufreq_policy *policy,
-@@ -414,5 +412,4 @@ extern int cpufreq_frequency_table_next_highest(struct cpufreq_policy *policy,
- 					struct cpufreq_frequency_table *table,
- 					int *index);
- 
--
- #endif /* _LINUX_CPUFREQ_H */
-
 diff --git a/include/linux/fs.h b/include/linux/fs.h
 index 96b1035..ddddb89 100644
 --- a/include/linux/fs.h
@@ -21355,14 +20315,6 @@ index e73799d..31e8364 100644
  #define vm_swap_full() (nr_swap_pages*2 < total_swap_pages)
  
  /* linux/mm/page_alloc.c */
-@@ -213,7 +217,6 @@ extern unsigned int nr_free_pagecache_pages(void);
- /* Definition of global_page_state not available yet */
- #define nr_free_pages() global_page_state(NR_FREE_PAGES)
- 
--
- /* linux/mm/swap.c */
- extern void __lru_cache_add(struct page *, enum lru_list lru);
- extern void lru_cache_add_lru(struct page *, enum lru_list lru);
 diff --git a/init/Kconfig b/init/Kconfig
 index fe338c9..acfc9b1 100644
 --- a/init/Kconfig
@@ -21800,86 +20752,6 @@ index 856cc66..97ded87 100644
  #ifdef CONFIG_EPOLL
  	{
  		.procname	= "epoll",
-@@ -1879,7 +1877,7 @@ static void try_attach(struct ctl_table_header *p, struct ctl_table_header *q)
-  * cover common cases -
-  *
-  * proc_dostring(), proc_dointvec(), proc_dointvec_jiffies(),
-- * proc_dointvec_userhz_jiffies(), proc_dointvec_minmax(), 
-+ * proc_dointvec_userhz_jiffies(), proc_dointvec_minmax(),
-  * proc_doulongvec_ms_jiffies_minmax(), proc_doulongvec_minmax()
-  *
-  * It is the handler's job to read the input buffer from user memory
-@@ -2319,12 +2317,12 @@ static int __do_proc_dointvec(void *tbl_data, struct ctl_table *table,
- 	unsigned long page = 0;
- 	size_t left;
- 	char *kbuf;
--	
-+
- 	if (!tbl_data || !table->maxlen || !*lenp || (*ppos && !write)) {
- 		*lenp = 0;
- 		return 0;
- 	}
--	
-+
- 	i = (int *) tbl_data;
- 	vleft = table->maxlen / sizeof(*i);
- 	left = *lenp;
-@@ -2413,7 +2411,7 @@ static int do_proc_dointvec(struct ctl_table *table, int write,
-  * @ppos: file position
-  *
-  * Reads/writes up to table->maxlen/sizeof(unsigned int) integer
-- * values from/to the user buffer, treated as an ASCII string. 
-+ * values from/to the user buffer, treated as an ASCII string.
-  *
-  * Returns 0 on success.
-  */
-@@ -2663,7 +2661,6 @@ int proc_doulongvec_ms_jiffies_minmax(struct ctl_table *table, int write,
- 				     lenp, ppos, HZ, 1000l);
- }
- 
--
- static int do_proc_dointvec_jiffies_conv(bool *negp, unsigned long *lvalp,
- 					 int *valp,
- 					 int write, void *data)
-@@ -2740,7 +2737,7 @@ static int do_proc_dointvec_ms_jiffies_conv(bool *negp, unsigned long *lvalp,
-  * @ppos: file position
-  *
-  * Reads/writes up to table->maxlen/sizeof(unsigned int) integer
-- * values from/to the user buffer, treated as an ASCII string. 
-+ * values from/to the user buffer, treated as an ASCII string.
-  * The values read are assumed to be in seconds, and are converted into
-  * jiffies.
-  *
-@@ -2762,8 +2759,8 @@ int proc_dointvec_jiffies(struct ctl_table *table, int write,
-  * @ppos: pointer to the file position
-  *
-  * Reads/writes up to table->maxlen/sizeof(unsigned int) integer
-- * values from/to the user buffer, treated as an ASCII string. 
-- * The values read are assumed to be in 1/USER_HZ seconds, and 
-+ * values from/to the user buffer, treated as an ASCII string.
-+ * The values read are assumed to be in 1/USER_HZ seconds, and
-  * are converted into jiffies.
-  *
-  * Returns 0 on success.
-@@ -2785,8 +2782,8 @@ int proc_dointvec_userhz_jiffies(struct ctl_table *table, int write,
-  * @ppos: the current position in the file
-  *
-  * Reads/writes up to table->maxlen/sizeof(unsigned int) integer
-- * values from/to the user buffer, treated as an ASCII string. 
-- * The values read are assumed to be in 1/1000 seconds, and 
-+ * values from/to the user buffer, treated as an ASCII string.
-+ * The values read are assumed to be in 1/1000 seconds, and
-  * are converted into jiffies.
-  *
-  * Returns 0 on success.
-@@ -3022,7 +3019,6 @@ int proc_doulongvec_ms_jiffies_minmax(struct ctl_table *table, int write,
-     return -ENOSYS;
- }
- 
--
- #endif /* CONFIG_PROC_SYSCTL */
- 
- /*
 diff --git a/kernel/time/timekeeping.c b/kernel/time/timekeeping.c
 index 9e53052..7191b7d 100644
 --- a/kernel/time/timekeeping.c
@@ -21934,54 +20806,6 @@ index 9e53052..7191b7d 100644
  		boot.tv_sec = 0;
  		boot.tv_nsec = 0;
  	}
-@@ -660,7 +651,6 @@ static void __timekeeping_inject_sleeptime(struct timespec *delta)
- 	update_sleep_time(timespec_add(total_sleep_time, *delta));
- }
- 
--
- /**
-  * timekeeping_inject_sleeptime - Adds suspend interval to timeekeeping values
-  * @delta: pointer to a timespec delta value
-@@ -694,7 +684,6 @@ void timekeeping_inject_sleeptime(struct timespec *delta)
- 	clock_was_set();
- }
- 
--
- /**
-  * timekeeping_resume - Resumes the generic timekeeping subsystem.
-  *
-@@ -848,7 +837,6 @@ static void timekeeping_adjust(s64 offset)
- 				timekeeper.ntp_error_shift;
- }
- 
--
- /**
-  * logarithmic_accumulation - shifted accumulation of cycles
-  *
-@@ -902,7 +890,6 @@ static cycle_t logarithmic_accumulation(cycle_t offset, int shift)
- 	return offset;
- }
- 
--
- /**
-  * update_wall_time - Uses the current clocksource to increment the wall time
-  *
-@@ -975,7 +962,6 @@ static void update_wall_time(void)
- 		timekeeper.ntp_error += neg << timekeeper.ntp_error_shift;
- 	}
- 
--
- 	/*
- 	 * Store full nanoseconds into xtime after rounding it up and
- 	 * add the remainder to the error difference.
-@@ -1025,7 +1011,6 @@ void getboottime(struct timespec *ts)
- }
- EXPORT_SYMBOL_GPL(getboottime);
- 
--
- /**
-  * get_monotonic_boottime - Returns monotonic time since boot
-  * @ts:		pointer to the timespec to be set
 diff --git a/kernel/trace/ftrace.c b/kernel/trace/ftrace.c
 index 0d704b0..71edb70 100644
 --- a/kernel/trace/ftrace.c
@@ -23410,26 +22234,6 @@ index 21d589e..0fe209a 100644
  		goto migrate;
  	}
  
-diff --git a/mm/page_cgroup.c b/mm/page_cgroup.c
-index 53bffc6..41d5938 100644
---- a/mm/page_cgroup.c
-+++ b/mm/page_cgroup.c
-@@ -22,7 +22,6 @@ static unsigned long total_usage;
- 
- #if !defined(CONFIG_SPARSEMEM)
- 
--
- void __meminit pgdat_page_cgroup_init(struct pglist_data *pgdat)
- {
- 	pgdat->node_page_cgroup = NULL;
-@@ -347,7 +346,6 @@ void __meminit pgdat_page_cgroup_init(struct pglist_data *pgdat)
- 
- #endif
- 
--
- #ifdef CONFIG_CGROUP_MEM_RES_CTLR_SWAP
- 
- static DEFINE_MUTEX(swap_cgroup_mutex);
 diff --git a/mm/page_io.c b/mm/page_io.c
 index dc76b4d..91076b8 100644
 --- a/mm/page_io.c
@@ -23577,58 +22381,6 @@ index 10ab233..cdb0855 100644
  	int ret = 0;
  
  	/*
-diff --git a/mm/swap_state.c b/mm/swap_state.c
-index 43b957e..4be8bc3 100644
---- a/mm/swap_state.c
-+++ b/mm/swap_state.c
-@@ -104,7 +104,6 @@ static int __add_to_swap_cache(struct page *page, swp_entry_t entry)
- 	return error;
- }
- 
--
- int add_to_swap_cache(struct page *page, swp_entry_t entry, gfp_t gfp_mask)
- {
- 	int error;
-@@ -140,7 +139,7 @@ void __delete_from_swap_cache(struct page *page)
-  * @page: page we want to move to swap
-  *
-  * Allocate swap space for the page and add the page to the
-- * swap cache.  Caller needs to hold the page lock. 
-+ * swap cache.  Caller needs to hold the page lock.
-  */
- int add_to_swap(struct page *page)
- {
-@@ -207,9 +206,9 @@ void delete_from_swap_cache(struct page *page)
- 	page_cache_release(page);
- }
- 
--/* 
-- * If we are the only user, then try to free up the swap cache. 
-- * 
-+/*
-+ * If we are the only user, then try to free up the swap cache.
-+ *
-  * Its ok to check for PageSwapCache without the page lock
-  * here because we are going to recheck again inside
-  * try_to_free_swap() _with_ the lock.
-@@ -223,7 +222,7 @@ static inline void free_swap_cache(struct page *page)
- 	}
- }
- 
--/* 
-+/*
-  * Perform a free_page(), also freeing any swap cache associated with
-  * this page if it is the last user of the page.
-  */
-@@ -273,7 +272,7 @@ struct page * lookup_swap_cache(swp_entry_t entry)
- 	return page;
- }
- 
--/* 
-+/*
-  * Locate a page of swap in physical memory, reserving swap cache space
-  * and reading the disk if it is not already cached.
-  * A failure return means that either the page allocation failed or that
 diff --git a/mm/swapfile.c b/mm/swapfile.c
 index c8f4338..9ec0abf 100644
 --- a/mm/swapfile.c
@@ -25081,46 +23833,6 @@ index b43e260..bab8c88 100644
  	}
  }
  
-@@ -1330,7 +1327,6 @@ void __init sk_init(void)
-  *	Simple resource managers for sockets.
-  */
- 
--
- /*
-  * Write buffer destructor automatically called from kfree_skb.
-  */
-@@ -1370,7 +1366,6 @@ void sock_rfree(struct sk_buff *skb)
- }
- EXPORT_SYMBOL(sock_rfree);
- 
--
- int sock_i_uid(struct sock *sk)
- {
- 	int uid;
-@@ -1484,7 +1479,6 @@ static long sock_wait_for_wmem(struct sock *sk, long timeo)
- 	return timeo;
- }
- 
--
- /*
-  *	Generic send/receive buffer handlers
-  */
-@@ -1761,7 +1755,6 @@ void __sk_mem_reclaim(struct sock *sk)
- }
- EXPORT_SYMBOL(__sk_mem_reclaim);
- 
--
- /*
-  * Set of default routines for initialising struct proto_ops when
-  * the protocol does not support a particular function. In certain
-@@ -2559,7 +2552,6 @@ static __net_exit void proto_exit_net(struct net *net)
- 	proc_net_remove(net, "protocols");
- }
- 
--
- static __net_initdata struct pernet_operations proto_net_ops = {
- 	.init = proto_init_net,
- 	.exit = proto_exit_net,
 diff --git a/net/ipv4/netfilter/arp_tables.c b/net/ipv4/netfilter/arp_tables.c
 index fd7a3f6..0a614cf 100644
 --- a/net/ipv4/netfilter/arp_tables.c
@@ -25608,19 +24320,6 @@ index fd7a3f6..0a614cf 100644
  	return 0;
  
  err4:
-diff --git a/net/ipv4/netfilter/arptable_filter.c b/net/ipv4/netfilter/arptable_filter.c
-index 79ca5e7..d55d9f2 100644
---- a/net/ipv4/netfilter/arptable_filter.c
-+++ b/net/ipv4/netfilter/arptable_filter.c
-@@ -41,7 +41,7 @@ static struct nf_hook_ops *arpfilter_ops __read_mostly;
- static int __net_init arptable_filter_net_init(struct net *net)
- {
- 	struct arpt_replace *repl;
--	
-+
- 	repl = arpt_alloc_initial_table(&packet_filter);
- 	if (repl == NULL)
- 		return -ENOMEM;
 diff --git a/net/ipv4/netfilter/ip_tables.c b/net/ipv4/netfilter/ip_tables.c
 index 24e556e..db515d8 100644
 --- a/net/ipv4/netfilter/ip_tables.c
@@ -26086,68 +24785,6 @@ index d7d63f4..282bfd7 100644
 -			 nhoff, iph->ihl << 2, skb->len);
  		return -NF_ACCEPT;
  	}
- 
-diff --git a/net/ipv6/addrconf.c b/net/ipv6/addrconf.c
-index 66905eb..736d883 100644
---- a/net/ipv6/addrconf.c
-+++ b/net/ipv6/addrconf.c
-@@ -486,7 +486,6 @@ static void dev_forward_change(struct inet6_dev *idev)
- 	}
- }
- 
--
- static void addrconf_forward_change(struct net *net, __s32 newf)
- {
- 	struct net_device *dev;
-@@ -2248,7 +2247,6 @@ static int inet6_addr_del(struct net *net, int ifindex, const struct in6_addr *p
- 	return -EADDRNOTAVAIL;
- }
- 
--
- int addrconf_add_ifaddr(struct net *net, void __user *arg)
- {
- 	struct in6_ifreq ireq;
-@@ -2416,7 +2414,6 @@ static void addrconf_add_linklocal(struct inet6_dev *idev, const struct in6_addr
- 		addr_flags |= IFA_F_OPTIMISTIC;
- #endif
- 
--
- 	ifp = ipv6_add_addr(idev, addr, 64, IFA_LINK, addr_flags);
- 	if (!IS_ERR(ifp)) {
- 		addrconf_prefix_route(&ifp->addr, ifp->prefix_len, idev->dev, 0, 0);
-@@ -3739,7 +3736,6 @@ static int inet6_dump_ifmcaddr(struct sk_buff *skb, struct netlink_callback *cb)
- 	return inet6_dump_addr(skb, cb, type);
- }
- 
--
- static int inet6_dump_ifacaddr(struct sk_buff *skb, struct netlink_callback *cb)
- {
- 	enum addr_type_t type = ANYCAST_ADDR;
-@@ -4547,7 +4543,6 @@ static int __addrconf_sysctl_register(struct net *net, char *dev_name,
- 		{ },
- 	};
- 
--
- 	t = kmemdup(&addrconf_sysctl, sizeof(*t), GFP_KERNEL);
- 	if (t == NULL)
- 		goto out;
-@@ -4613,7 +4608,6 @@ static void addrconf_sysctl_unregister(struct inet6_dev *idev)
- 	neigh_sysctl_unregister(idev->nd_parms);
- }
- 
--
- #endif
- 
- static int __net_init addrconf_init_net(struct net *net)
-@@ -4753,8 +4747,7 @@ int __init addrconf_init(void)
- 	if (err < 0)
- 		goto errout_af;
- 
--	err = __rtnl_register(PF_INET6, RTM_GETLINK, NULL, inet6_dump_ifinfo,
--			      NULL);
-+	err = __rtnl_register(PF_INET6, RTM_GETLINK, NULL, inet6_dump_ifinfo, NULL);
- 	if (err < 0)
- 		goto errout;
  
 diff --git a/net/netfilter/nf_conntrack_core.c b/net/netfilter/nf_conntrack_core.c
 index dff164e..d849432 100644
@@ -27946,251 +26583,6 @@ index 2eb4d3c..e18bdfb 100644
  		}
  		pos = 0;
  	}
-@@ -513,7 +509,7 @@ void snd_pcm_set_ops(struct snd_pcm *pcm, int direction, struct snd_pcm_ops *ops
- {
- 	struct snd_pcm_str *stream = &pcm->streams[direction];
- 	struct snd_pcm_substream *substream;
--	
-+
- 	for (substream = stream->substream; substream != NULL; substream = substream->next)
- 		substream->ops = ops;
- }
-@@ -529,7 +525,7 @@ EXPORT_SYMBOL(snd_pcm_set_ops);
- void snd_pcm_set_sync(struct snd_pcm_substream *substream)
- {
- 	struct snd_pcm_runtime *runtime = substream->runtime;
--	
-+
- 	runtime->sync.id32[0] = substream->pcm->card->number;
- 	runtime->sync.id32[1] = -1;
- 	runtime->sync.id32[2] = -1;
-@@ -542,7 +538,7 @@ EXPORT_SYMBOL(snd_pcm_set_sync);
-  *  Standard ioctl routine
-  */
- 
--static inline unsigned int div32(unsigned int a, unsigned int b, 
-+static inline unsigned int div32(unsigned int a, unsigned int b,
- 				 unsigned int *r)
- {
- 	if (b == 0) {
-@@ -797,11 +793,10 @@ void snd_interval_mulkdiv(const struct snd_interval *a, unsigned int k,
- 
- /* ---- */
- 
--
- /**
-  * snd_interval_ratnum - refine the interval value
-  * @i: interval to refine
-- * @rats_count: number of ratnum_t 
-+ * @rats_count: number of ratnum_t
-  * @rats: ratnum_t array
-  * @nump: pointer to store the resultant numerator
-  * @denp: pointer to store the resultant denominator
-@@ -855,7 +850,7 @@ int snd_interval_ratnum(struct snd_interval *i,
- 	}
- 	t.min = div_down(best_num, best_den);
- 	t.openmin = !!(best_num % best_den);
--	
-+
- 	result_num = best_num;
- 	result_diff = best_diff;
- 	result_den = best_den;
-@@ -966,7 +961,7 @@ static int snd_interval_ratden(struct snd_interval *i,
- 	}
- 	t.min = div_down(best_num, best_den);
- 	t.openmin = !!(best_num % best_den);
--	
-+
- 	best_num = best_den = best_diff = 0;
- 	for (k = 0; k < rats_count; ++k) {
- 		unsigned int num;
-@@ -1196,7 +1191,7 @@ EXPORT_SYMBOL(snd_pcm_hw_constraint_integer);
-  * @var: hw_params variable to apply the range
-  * @min: the minimal value
-  * @max: the maximal value
-- * 
-+ *
-  * Apply the min/max range constraint to an interval parameter.
-  */
- int snd_pcm_hw_constraint_minmax(struct snd_pcm_runtime *runtime, snd_pcm_hw_param_t var,
-@@ -1218,8 +1213,7 @@ static int snd_pcm_hw_rule_list(struct snd_pcm_hw_params *params,
- {
- 	struct snd_pcm_hw_constraint_list *list = rule->private;
- 	return snd_interval_list(hw_param_interval(params, rule->var), list->count, list->list, list->mask);
--}		
--
-+}
- 
- /**
-  * snd_pcm_hw_constraint_list - apply a list of constraints to a parameter
-@@ -1227,7 +1221,7 @@ static int snd_pcm_hw_rule_list(struct snd_pcm_hw_params *params,
-  * @cond: condition bits
-  * @var: hw_params variable to apply the list constraint
-  * @l: list
-- * 
-+ *
-  * Apply the list of constraints to an interval parameter.
-  */
- int snd_pcm_hw_constraint_list(struct snd_pcm_runtime *runtime,
-@@ -1264,7 +1258,7 @@ static int snd_pcm_hw_rule_ratnums(struct snd_pcm_hw_params *params,
-  * @var: hw_params variable to apply the ratnums constraint
-  * @r: struct snd_ratnums constriants
-  */
--int snd_pcm_hw_constraint_ratnums(struct snd_pcm_runtime *runtime, 
-+int snd_pcm_hw_constraint_ratnums(struct snd_pcm_runtime *runtime,
- 				  unsigned int cond,
- 				  snd_pcm_hw_param_t var,
- 				  struct snd_pcm_hw_constraint_ratnums *r)
-@@ -1297,7 +1291,7 @@ static int snd_pcm_hw_rule_ratdens(struct snd_pcm_hw_params *params,
-  * @var: hw_params variable to apply the ratdens constraint
-  * @r: struct snd_ratdens constriants
-  */
--int snd_pcm_hw_constraint_ratdens(struct snd_pcm_runtime *runtime, 
-+int snd_pcm_hw_constraint_ratdens(struct snd_pcm_runtime *runtime,
- 				  unsigned int cond,
- 				  snd_pcm_hw_param_t var,
- 				  struct snd_pcm_hw_constraint_ratdens *r)
-@@ -1328,7 +1322,7 @@ static int snd_pcm_hw_rule_msbits(struct snd_pcm_hw_params *params,
-  * @width: sample bits width
-  * @msbits: msbits width
-  */
--int snd_pcm_hw_constraint_msbits(struct snd_pcm_runtime *runtime, 
-+int snd_pcm_hw_constraint_msbits(struct snd_pcm_runtime *runtime,
- 				 unsigned int cond,
- 				 unsigned int width,
- 				 unsigned int msbits)
-@@ -1361,7 +1355,7 @@ int snd_pcm_hw_constraint_step(struct snd_pcm_runtime *runtime,
- 			       snd_pcm_hw_param_t var,
- 			       unsigned long step)
- {
--	return snd_pcm_hw_rule_add(runtime, cond, var, 
-+	return snd_pcm_hw_rule_add(runtime, cond, var,
- 				   snd_pcm_hw_rule_step, (void *) step,
- 				   var, -1);
- }
-@@ -1378,7 +1372,7 @@ static int snd_pcm_hw_rule_pow2(struct snd_pcm_hw_params *params, struct snd_pcm
- 	};
- 	return snd_interval_list(hw_param_interval(params, rule->var),
- 				 ARRAY_SIZE(pow2_sizes), pow2_sizes, 0);
--}		
-+}
- 
- /**
-  * snd_pcm_hw_constraint_pow2 - add a hw constraint power-of-2 rule
-@@ -1390,7 +1384,7 @@ int snd_pcm_hw_constraint_pow2(struct snd_pcm_runtime *runtime,
- 			       unsigned int cond,
- 			       snd_pcm_hw_param_t var)
- {
--	return snd_pcm_hw_rule_add(runtime, cond, var, 
-+	return snd_pcm_hw_rule_add(runtime, cond, var,
- 				   snd_pcm_hw_rule_pow2, NULL,
- 				   var, -1);
- }
-@@ -1496,7 +1490,6 @@ static int _snd_pcm_hw_param_first(struct snd_pcm_hw_params *params,
- 	return changed;
- }
- 
--
- /**
-  * snd_pcm_hw_param_first - refine config space and return minimum value
-  * @pcm: PCM instance
-@@ -1508,8 +1501,8 @@ static int _snd_pcm_hw_param_first(struct snd_pcm_hw_params *params,
-  * values > minimum. Reduce configuration space accordingly.
-  * Return the minimum.
-  */
--int snd_pcm_hw_param_first(struct snd_pcm_substream *pcm, 
--			   struct snd_pcm_hw_params *params, 
-+int snd_pcm_hw_param_first(struct snd_pcm_substream *pcm,
-+			   struct snd_pcm_hw_params *params,
- 			   snd_pcm_hw_param_t var, int *dir)
- {
- 	int changed = _snd_pcm_hw_param_first(params, var);
-@@ -1542,7 +1535,6 @@ static int _snd_pcm_hw_param_last(struct snd_pcm_hw_params *params,
- 	return changed;
- }
- 
--
- /**
-  * snd_pcm_hw_param_last - refine config space and return maximum value
-  * @pcm: PCM instance
-@@ -1554,7 +1546,7 @@ static int _snd_pcm_hw_param_last(struct snd_pcm_hw_params *params,
-  * values < maximum. Reduce configuration space accordingly.
-  * Return the maximum.
-  */
--int snd_pcm_hw_param_last(struct snd_pcm_substream *pcm, 
-+int snd_pcm_hw_param_last(struct snd_pcm_substream *pcm,
- 			  struct snd_pcm_hw_params *params,
- 			  snd_pcm_hw_param_t var, int *dir)
- {
-@@ -1812,7 +1804,7 @@ static int wait_for_avail(struct snd_pcm_substream *substream,
- 		case SNDRV_PCM_STATE_DRAINING:
- 			if (is_playback)
- 				err = -EPIPE;
--			else 
-+			else
- 				avail = 0; /* indicate draining */
- 			goto _endloop;
- 		case SNDRV_PCM_STATE_OPEN:
-@@ -1834,7 +1826,7 @@ static int wait_for_avail(struct snd_pcm_substream *substream,
- 	*availp = avail;
- 	return err;
- }
--	
-+
- static int snd_pcm_lib_write_transfer(struct snd_pcm_substream *substream,
- 				      unsigned int hwoff,
- 				      unsigned long data, unsigned int off,
-@@ -1853,12 +1845,12 @@ static int snd_pcm_lib_write_transfer(struct snd_pcm_substream *substream,
- 	}
- 	return 0;
- }
-- 
-+
- typedef int (*transfer_f)(struct snd_pcm_substream *substream, unsigned int hwoff,
- 			  unsigned long data, unsigned int off,
- 			  snd_pcm_uframes_t size);
- 
--static snd_pcm_sframes_t snd_pcm_lib_write1(struct snd_pcm_substream *substream, 
-+static snd_pcm_sframes_t snd_pcm_lib_write1(struct snd_pcm_substream *substream,
- 					    unsigned long data,
- 					    snd_pcm_uframes_t size,
- 					    int nonblock,
-@@ -2036,7 +2028,7 @@ static int snd_pcm_lib_writev_transfer(struct snd_pcm_substream *substream,
- 	}
- 	return 0;
- }
-- 
-+
- snd_pcm_sframes_t snd_pcm_lib_writev(struct snd_pcm_substream *substream,
- 				     void __user **bufs,
- 				     snd_pcm_uframes_t frames)
-@@ -2059,7 +2051,7 @@ snd_pcm_sframes_t snd_pcm_lib_writev(struct snd_pcm_substream *substream,
- 
- EXPORT_SYMBOL(snd_pcm_lib_writev);
- 
--static int snd_pcm_lib_read_transfer(struct snd_pcm_substream *substream, 
-+static int snd_pcm_lib_read_transfer(struct snd_pcm_substream *substream,
- 				     unsigned int hwoff,
- 				     unsigned long data, unsigned int off,
- 				     snd_pcm_uframes_t frames)
-@@ -2192,7 +2184,7 @@ snd_pcm_sframes_t snd_pcm_lib_read(struct snd_pcm_substream *substream, void __u
- 	struct snd_pcm_runtime *runtime;
- 	int nonblock;
- 	int err;
--	
-+
- 	err = pcm_sanity_check(substream);
- 	if (err < 0)
- 		return err;
-@@ -2240,7 +2232,7 @@ static int snd_pcm_lib_readv_transfer(struct snd_pcm_substream *substream,
- 	}
- 	return 0;
- }
-- 
-+
- snd_pcm_sframes_t snd_pcm_lib_readv(struct snd_pcm_substream *substream,
- 				    void __user **bufs,
- 				    snd_pcm_uframes_t frames)
 diff --git a/sound/core/rawmidi.c b/sound/core/rawmidi.c
 index cd2c134..aab8a0c 100644
 --- a/sound/core/rawmidi.c
@@ -28297,24 +26689,6 @@ index cd2c134..aab8a0c 100644
  		return -EINVAL;
  	}
  	spin_lock_irqsave(&runtime->lock, flags);
-@@ -1152,7 +1148,7 @@ int snd_rawmidi_transmit_ack(struct snd_rawmidi_substream *substream, int count)
-  * @substream: the rawmidi substream
-  * @buffer: the buffer pointer
-  * @count: the data size to transfer
-- * 
-+ *
-  * Copies data from the buffer to the device and advances the pointer.
-  *
-  * Returns the copied size if successful, or a negative error code on failure.
-@@ -1681,7 +1677,7 @@ void snd_rawmidi_set_ops(struct snd_rawmidi *rmidi, int stream,
- 			 struct snd_rawmidi_ops *ops)
- {
- 	struct snd_rawmidi_substream *substream;
--	
-+
- 	list_for_each_entry(substream, &rmidi->streams[stream].substreams, list)
- 		substream->ops = ops;
- }
 diff --git a/sound/core/sound.c b/sound/core/sound.c
 index e9b79b5..2d99e1c 100644
 --- a/sound/core/sound.c
@@ -28528,14 +26902,6 @@ index 0293763..5184e07 100644
  		return -EBUSY;
  	}
  
-@@ -924,7 +908,6 @@ void wm8958_dsp2_init(struct snd_soc_codec *codec)
- 	snd_soc_add_controls(codec, wm8958_enh_eq_snd_controls,
- 			     ARRAY_SIZE(wm8958_enh_eq_snd_controls));
- 
--
- 	/* We don't *require* firmware and don't want to delay boot */
- 	request_firmware_nowait(THIS_MODULE, FW_ACTION_HOTPLUG,
- 				"wm8958_mbc.wfw", codec->dev, GFP_KERNEL,
 diff --git a/sound/soc/codecs/wm8994.c b/sound/soc/codecs/wm8994.c
 index 963ea4e..eeb5c4b 100644
 --- a/sound/soc/codecs/wm8994.c
@@ -29176,15 +27542,6 @@ index 7669ebd..ded74ea 100644
  	snd_soc_update_bits(codec, WM8993_CLASS_W_0,
  			    WM8993_CP_DYN_V | WM8993_CP_DYN_FREQ, enable);
  }
-@@ -844,7 +829,7 @@ SND_SOC_DAPM_MIXER("Right Output Mixer", WM8993_POWER_MANAGEMENT_3, 4, 0,
- SND_SOC_DAPM_PGA("Left Output PGA", WM8993_POWER_MANAGEMENT_3, 7, 0, NULL, 0),
- SND_SOC_DAPM_PGA("Right Output PGA", WM8993_POWER_MANAGEMENT_3, 6, 0, NULL, 0),
- 
--SND_SOC_DAPM_SUPPLY("Headphone Supply", SND_SOC_NOPM, 0, 0, hp_supply_event, 
-+SND_SOC_DAPM_SUPPLY("Headphone Supply", SND_SOC_NOPM, 0, 0, hp_supply_event,
- 		    SND_SOC_DAPM_PRE_PMU | SND_SOC_DAPM_PRE_PMD),
- SND_SOC_DAPM_OUT_DRV_E("Headphone PGA", SND_SOC_NOPM, 0, 0, NULL, 0,
- 		       hp_event, SND_SOC_DAPM_POST_PMU | SND_SOC_DAPM_PRE_PMD),
 diff --git a/sound/soc/omap/mid_omap_wm8994.c b/sound/soc/omap/mid_omap_wm8994.c
 index c884c04..83dc3b6 100644
 --- a/sound/soc/omap/mid_omap_wm8994.c
@@ -29437,11 +27794,6 @@ index 05842c8..0472b4f 100644
  		err = snd_usb_add_audio_endpoint(chip, stream, fp);
  		if (err < 0) {
  			kfree(fp->rate_table);
-@@ -445,4 +438,3 @@ int snd_usb_parse_audio_endpoints(struct snd_usb_audio *chip, int iface_no)
- 	}
- 	return 0;
- }
--
 diff --git a/sound/usb/format.c b/sound/usb/format.c
 index b30fcd0..e8d07a6 100644
 --- a/sound/usb/format.c
@@ -29559,11 +27911,6 @@ index b30fcd0..e8d07a6 100644
  		return -ENOTSUPP;
  	}
  	fp->fmt_type = fmt->bFormatType;
-@@ -512,4 +485,3 @@ int snd_usb_parse_audio_format(struct snd_usb_audio *chip, struct audioformat *f
- #endif
- 	return 0;
- }
--
 diff --git a/sound/usb/midi.c b/sound/usb/midi.c
 index c635a2d..256063f 100644
 --- a/sound/usb/midi.c
@@ -30163,14 +28510,6 @@ index e9c47a4..cb1440c 100644
  	return changed;
  }
  
-@@ -719,7 +690,6 @@ static int snd_usb_pcm_check_knot(struct snd_pcm_runtime *runtime,
- 	return 0;
- }
- 
--
- /*
-  * set up the runtime hardware information.
-  */
 diff --git a/sound/usb/quirks.c b/sound/usb/quirks.c
 index 4a650ab..b306b56 100644
 --- a/sound/usb/quirks.c
@@ -30201,8 +28540,3 @@ index 4a650ab..b306b56 100644
  		return -ENODEV; /* quit this anyway */
  	}
  	return 0;
-@@ -650,4 +647,3 @@ void snd_usb_set_format_quirk(struct snd_usb_substream *subs,
- 		break;
- 	}
- }
--

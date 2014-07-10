@@ -1,0 +1,26 @@
+From c2e35e5c5b5a83af678e2132d637430848c0f19f Mon Sep 17 00:00:00 2001
+From: andi34 <skate4life@gmx.de>
+Date: Thu, 10 Jul 2014 23:35:28 +0200
+Subject: [PATCH] Change sys attr of screen_off_freq
+
+---
+ arch/arm/mach-omap2/omap2plus-cpufreq.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/arch/arm/mach-omap2/omap2plus-cpufreq.c b/arch/arm/mach-omap2/omap2plus-cpufreq.c
+index 7f47128..5876ad5 100644
+--- a/arch/arm/mach-omap2/omap2plus-cpufreq.c
++++ b/arch/arm/mach-omap2/omap2plus-cpufreq.c
+@@ -851,7 +851,7 @@ static ssize_t store_screen_off_freq(struct cpufreq_policy *policy,
+ 
+ struct freq_attr omap_cpufreq_attr_screen_off_freq = {
+ 	.attr = { .name = "screen_off_max_freq",
+-		  .mode = 0644,
++		  .mode = 0664,
+ 		},
+ 	.show = show_screen_off_freq,
+ 	.store = store_screen_off_freq,
+-- 
+1.9.3
+
+

@@ -1,0 +1,25 @@
+From 95ccb9a7aeaa8003c2936d143c861baef2d1f251 Mon Sep 17 00:00:00 2001
+From: tuxafgmur <usuario@localhost.localdomain>
+Date: Tue, 10 Dec 2013 19:13:31 +0100
+Subject: [PATCH] Change sys attr of gpu
+
+---
+ arch/arm/mach-omap2/omap2plus-cpufreq.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/arch/arm/mach-omap2/omap2plus-cpufreq.c b/arch/arm/mach-omap2/omap2plus-cpufreq.c
+index f65a2c6..bdfb581 100644
+--- a/arch/arm/mach-omap2/omap2plus-cpufreq.c
++++ b/arch/arm/mach-omap2/omap2plus-cpufreq.c
+@@ -903,7 +903,7 @@ static ssize_t store_gpu_top_speed(struct cpufreq_policy *policy, const char *bu
+ 
+ static struct freq_attr omap_cpufreq_attr_gpu_top_speed = {
+ 	.attr = { .name = "gpu_oc",
+-	.mode = 0644,
++	.mode = 0664,
+ 	},
+ 	.show = show_gpu_top_speed,
+ 	.store = store_gpu_top_speed,
+-- 
+1.9.3
+

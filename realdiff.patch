@@ -3124,15 +3124,6 @@ index 7f47128..e396407 100644
  	if (!max_thermal)
  		max_thermal = max_freq;
  
-@@ -851,7 +787,7 @@ out:
- 
- struct freq_attr omap_cpufreq_attr_screen_off_freq = {
- 	.attr = { .name = "screen_off_max_freq",
--		  .mode = 0644,
-+		  .mode = 0664,
- 		},
- 	.show = show_screen_off_freq,
- 	.store = store_screen_off_freq,
 diff --git a/arch/arm/mach-omap2/omap4-common.c b/arch/arm/mach-omap2/omap4-common.c
 index dc55dfb..f102fff 100644
 --- a/arch/arm/mach-omap2/omap4-common.c

@@ -11082,15 +11082,6 @@ diff --git a/drivers/staging/android/logger.c b/drivers/staging/android/logger.c
 index 53d0190..3963187 100644
 --- a/drivers/staging/android/logger.c
 +++ b/drivers/staging/android/logger.c
-@@ -708,7 +703,7 @@ static struct logger_log VAR = { \
- 	.size = SIZE, \
- };
- 
--DEFINE_LOGGER_DEVICE(log_main, LOGGER_LOG_MAIN, 512*1024)
-+DEFINE_LOGGER_DEVICE(log_main, LOGGER_LOG_MAIN, 256*1024)
- DEFINE_LOGGER_DEVICE(log_events, LOGGER_LOG_EVENTS, 256*1024)
- DEFINE_LOGGER_DEVICE(log_radio, LOGGER_LOG_RADIO, 512*1024)
- DEFINE_LOGGER_DEVICE(log_system, LOGGER_LOG_SYSTEM, 256*1024)
 @@ -737,9 +732,6 @@ static int __init init_log(struct logger_log *log)
  		return ret;
  	}

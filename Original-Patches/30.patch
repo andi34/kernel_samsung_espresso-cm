@@ -1,0 +1,16 @@
+From: andi34 <skate4life@gmx.de>
+Date: Sat, 12 Jul 2014 11:55:20 +0200
+Subject: [PATCH] arch/arm/include/asm/mach/map.h: revert JB Update 1/3
+
+diff --git a/arch/arm/include/asm/mach/map.h b/arch/arm/include/asm/mach/map.h
+index a6efcdd..b36f365 100644
+--- a/arch/arm/include/asm/mach/map.h
++++ b/arch/arm/include/asm/mach/map.h
+@@ -30,7 +30,6 @@ struct map_desc {
+ #define MT_MEMORY_DTCM		12
+ #define MT_MEMORY_ITCM		13
+ #define MT_MEMORY_SO		14
+-#define MT_MEMORY_DMA_READY	15
+ 
+ #ifdef CONFIG_MMU
+ extern void iotable_init(struct map_desc *, int);

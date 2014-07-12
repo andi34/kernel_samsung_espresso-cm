@@ -615,43 +615,6 @@ index 75373a9..a08032f 100644
  	tail = (struct frame_tail __user *)regs->ARM_fp - 1;
  
  	while ((entry->nr < PERF_MAX_STACK_DEPTH) &&
-diff --git a/arch/arm/kernel/setup.c b/arch/arm/kernel/setup.c
-index b02c88b..3fbdf04 100644
---- a/arch/arm/kernel/setup.c
-+++ b/arch/arm/kernel/setup.c
-@@ -75,7 +75,6 @@ __setup("fpe=", fpe_setup);
- extern void paging_init(struct machine_desc *desc);
- extern void sanity_check_meminfo(void);
- extern void reboot_setup(char *str);
--extern void setup_dma_zone(struct machine_desc *desc);
- 
- unsigned int processor_id;
- EXPORT_SYMBOL(processor_id);
-@@ -98,7 +97,6 @@ EXPORT_SYMBOL(system_serial_high);
- unsigned int elf_hwcap __read_mostly;
- EXPORT_SYMBOL(elf_hwcap);
- 
--
- #ifdef MULTI_CPU
- struct processor processor __read_mostly;
- #endif
-@@ -874,7 +872,6 @@ static struct machine_desc * __init setup_machine_tags(unsigned int nr)
- 	return mdesc;
- }
- 
--
- void __init setup_arch(char **cmdline_p)
- {
- 	struct machine_desc *mdesc;
-@@ -888,8 +885,6 @@ void __init setup_arch(char **cmdline_p)
- 	machine_desc = mdesc;
- 	machine_name = mdesc->name;
- 
--	setup_dma_zone(mdesc);
--
- 	if (mdesc->soft_reboot)
- 		reboot_setup("s");
- 
 diff --git a/arch/arm/kernel/smp.c b/arch/arm/kernel/smp.c
 index be15dac..1a6e62a 100644
 --- a/arch/arm/kernel/smp.c

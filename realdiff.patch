@@ -879,28 +879,6 @@ index f688010..23937f0 100644
  
  #endif /* __ARCH_ARM_MACH_OMAP2_CONTROL_H */
 -
-diff --git a/arch/arm/mach-omap2/display.c b/arch/arm/mach-omap2/display.c
-index 417bd66..dd91c20 100644
---- a/arch/arm/mach-omap2/display.c
-+++ b/arch/arm/mach-omap2/display.c
-@@ -27,8 +27,6 @@
- #include <plat/omap_device.h>
- #include <plat/omap-pm.h>
- 
--#include "dvfs.h"
--
- static struct platform_device omap_display_device = {
- 	.name          = "omapdss",
- 	.id            = -1,
-@@ -99,7 +97,7 @@ int __init omap_display_init(struct omap_dss_board_info *board_data)
- 	}
- 
- 	pdata.board_data = board_data;
--	pdata.device_scale = omap_device_scale;
-+
- 	for (i = 0; i < oh_count; i++) {
- 		oh = omap_hwmod_lookup(curr_dss_hwmod[i].oh_name);
- 		if (!oh) {
 diff --git a/arch/arm/mach-omap2/dpll3xxx.c b/arch/arm/mach-omap2/dpll3xxx.c
 index a3c79ae..94dbf1b 100644
 --- a/arch/arm/mach-omap2/dpll3xxx.c

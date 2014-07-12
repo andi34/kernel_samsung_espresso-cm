@@ -1,0 +1,27 @@
+From 2c2ead353fc86ad7dd2f7f2856a98a9519081ba8 Mon Sep 17 00:00:00 2001
+From: andi34 <skate4life@gmx.de>
+Date: Sat, 12 Jul 2014 14:56:19 +0200
+Subject: [PATCH] arch/arm/mach-omap2/display.c: revert JB Update 1/3
+
+diff --git a/arch/arm/mach-omap2/display.c b/arch/arm/mach-omap2/display.c
+index 417bd66..dd91c20 100644
+--- a/arch/arm/mach-omap2/display.c
++++ b/arch/arm/mach-omap2/display.c
+@@ -27,8 +27,6 @@
+ #include <plat/omap_device.h>
+ #include <plat/omap-pm.h>
+ 
+-#include "dvfs.h"
+-
+ static struct platform_device omap_display_device = {
+ 	.name          = "omapdss",
+ 	.id            = -1,
+@@ -99,7 +97,7 @@ int __init omap_display_init(struct omap_dss_board_info *board_data)
+ 	}
+ 
+ 	pdata.board_data = board_data;
+-	pdata.device_scale = omap_device_scale;
++
+ 	for (i = 0; i < oh_count; i++) {
+ 		oh = omap_hwmod_lookup(curr_dss_hwmod[i].oh_name);
+ 		if (!oh) {

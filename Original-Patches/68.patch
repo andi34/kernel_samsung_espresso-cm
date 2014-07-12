@@ -1,0 +1,23 @@
+From aa754d5580e211740bf063842707bd32db866306 Mon Sep 17 00:00:00 2001
+From: andi34 <skate4life@gmx.de>
+Date: Sat, 12 Jul 2014 16:25:18 +0200
+Subject: [PATCH] arch/arm/plat-omap/include/plat/android-display.h: revert JB Update 1/3
+
+---
+diff --git a/arch/arm/plat-omap/include/plat/android-display.h b/arch/arm/plat-omap/include/plat/android-display.h
+index 038ab20..349514b 100644
+--- a/arch/arm/plat-omap/include/plat/android-display.h
++++ b/arch/arm/plat-omap/include/plat/android-display.h
+@@ -20,7 +20,7 @@
+ 
+ #define NUM_ANDROID_TILER1D_SLOTS 2
+ 
+-int omap_android_display_setup(struct omap_dss_board_info *dss,
++void omap_android_display_setup(struct omap_dss_board_info *dss,
+ 				struct dsscomp_platform_data *dsscomp,
+ 				struct sgx_omaplfb_platform_data *sgx,
+ 				struct omapfb_platform_data *fb,
+--
+1.9.3
+
+

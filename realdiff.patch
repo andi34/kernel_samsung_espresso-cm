@@ -1422,19 +1422,6 @@ index 90ae3ec..1ce12ff 100644
  		p->dma_write(1 << ch, IRQSTATUS_L0, ch);
  		return 0;
  	}
-diff --git a/arch/arm/plat-omap/include/plat/android-display.h b/arch/arm/plat-omap/include/plat/android-display.h
-index 038ab20..349514b 100644
---- a/arch/arm/plat-omap/include/plat/android-display.h
-+++ b/arch/arm/plat-omap/include/plat/android-display.h
-@@ -20,7 +20,7 @@
- 
- #define NUM_ANDROID_TILER1D_SLOTS 2
- 
--int omap_android_display_setup(struct omap_dss_board_info *dss,
-+void omap_android_display_setup(struct omap_dss_board_info *dss,
- 				struct dsscomp_platform_data *dsscomp,
- 				struct sgx_omaplfb_platform_data *sgx,
- 				struct omapfb_platform_data *fb,
 diff --git a/arch/arm/plat-omap/include/plat/cpu.h b/arch/arm/plat-omap/include/plat/cpu.h
 index a34b157..f0bfec9 100644
 --- a/arch/arm/plat-omap/include/plat/cpu.h

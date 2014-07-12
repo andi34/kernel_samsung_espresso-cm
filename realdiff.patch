@@ -216,14 +216,6 @@ diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
 index 1b7b8f0..5ac6780 100644
 --- a/arch/arm/Kconfig
 +++ b/arch/arm/Kconfig
-@@ -4,7 +4,6 @@ config ARM
- 	select HAVE_AOUT
- 	select HAVE_DMA_API_DEBUG
- 	select HAVE_IDE
--	select HAVE_DMA_CONTIGUOUS if (CPU_V6 || CPU_V6K || CPU_V7)
- 	select HAVE_MEMBLOCK
- 	select RTC_LIB
- 	select SYS_SUPPORTS_APM_EMULATION
 @@ -21,7 +20,6 @@ config ARM
  	select HAVE_KERNEL_GZIP
  	select HAVE_KERNEL_LZO
@@ -232,16 +224,6 @@ index 1b7b8f0..5ac6780 100644
  	select HAVE_PERF_EVENTS
  	select PERF_USE_VMALLOC
  	select HAVE_REGS_AND_STACK_ACCESS_API
-@@ -39,9 +37,6 @@ config ARM
- 	  Europe.  There is an ARM Linux project with a web page at
- 	  <http://www.arm.linux.org.uk/>.
- 
--config ARM_HAS_SG_CHAIN
--	bool
--
- config HAVE_PWM
- 	bool
- 
 @@ -141,10 +136,10 @@ config GENERIC_LOCKBREAK
  
  config RWSEM_GENERIC_SPINLOCK

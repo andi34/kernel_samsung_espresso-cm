@@ -1,0 +1,24 @@
+From aa754d5580e211740bf063842707bd32db866306 Mon Sep 17 00:00:00 2001
+From: andi34 <skate4life@gmx.de>
+Date: Sat, 12 Jul 2014 16:25:18 +0200
+Subject: [PATCH] arch/arm/mach-omap2/omap_hwmod.c: revert JB Update 1/3
+
+---
+diff --git a/arch/arm/mach-omap2/omap_hwmod.c b/arch/arm/mach-omap2/omap_hwmod.c
+index 144a27a..cc6e720 100644
+--- a/arch/arm/mach-omap2/omap_hwmod.c
++++ b/arch/arm/mach-omap2/omap_hwmod.c
+@@ -1646,6 +1646,9 @@ void omap_hwmod_write(u32 v, struct omap_hwmod *oh, u16 reg_offs)
+  */
+ int omap_hwmod_softreset(struct omap_hwmod *oh)
+ {
++	u32 v;
++	int ret;
++
+ 	if (!oh || !(oh->_sysc_cache))
+ 		return -EINVAL;
+ 
+-- 
+1.9.3
+
+

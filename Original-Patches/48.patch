@@ -1,0 +1,27 @@
+From 2c2ead353fc86ad7dd2f7f2856a98a9519081ba8 Mon Sep 17 00:00:00 2001
+From: andi34 <skate4life@gmx.de>
+Date: Sat, 12 Jul 2014 14:56:19 +0200
+Subject: [PATCH] arch/arm/mach-omap2/board-espresso10-sdio.c: revert JB Update 1/3
+
+---
+diff --git a/arch/arm/mach-omap2/board-espresso10.c b/arch/arm/mach-omap2/board-espresso10.c
+index e4ce70b..193448c 100644
+--- a/arch/arm/mach-omap2/board-espresso10.c
++++ b/arch/arm/mach-omap2/board-espresso10.c
+@@ -56,7 +56,6 @@
+ #include "sec_debug.h"
+ #include "sec_getlog.h"
+ #include "sec_muxtbl.h"
+-#include "sec_log_buf.h"
+ 
+ /* gpio to distinguish WiFi and USA-BBY
+  *
+@@ -308,8 +307,6 @@ static void __init espresso10_reserve(void)
+ 				    OMAP4_ION_HEAP_SECURE_INPUT_SIZE +
+ 				    OMAP4_ION_HEAP_SECURE_OUTPUT_WFDHDCP_SIZE);
+ 	omap_reserve();
+-
+-	sec_log_buf_reserve();
+ }
+ 
+ MACHINE_START(OMAP4_SAMSUNG, "Espresso10")

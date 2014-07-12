@@ -1,0 +1,37 @@
+From aa754d5580e211740bf063842707bd32db866306 Mon Sep 17 00:00:00 2001
+From: andi34 <skate4life@gmx.de>
+Date: Sat, 12 Jul 2014 16:25:18 +0200
+Subject: [PATCH] arch/arm/plat-omap/mailbox.c: revert JB Update 1/3
+
+---
+ddiff --git a/arch/arm/plat-omap/mailbox.c b/arch/arm/plat-omap/mailbox.c
+index e26277d..c006751 100644
+--- a/arch/arm/plat-omap/mailbox.c
++++ b/arch/arm/plat-omap/mailbox.c
+@@ -313,10 +313,10 @@ static void omap_mbox_fini(struct omap_mbox *mbox)
+ {
+ 	mutex_lock(&mbox_configured_lock);
+ 
+-	flush_work_sync(&mbox->rxq->work);
+ 	if (!--mbox->use_count) {
+ 		free_irq(mbox->irq, mbox);
+ 		tasklet_kill(&mbox->txq->tasklet);
++		flush_work_sync(&mbox->rxq->work);
+ 		mbox_queue_free(mbox->txq);
+ 		mbox_queue_free(mbox->rxq);
+ 	}
+@@ -364,9 +364,9 @@ EXPORT_SYMBOL(omap_mbox_get);
+ 
+ void omap_mbox_put(struct omap_mbox *mbox, struct notifier_block *nb)
+ {
+-	omap_mbox_fini(mbox);
+ 	if (nb)
+ 		blocking_notifier_chain_unregister(&mbox->notifier, nb);
++	omap_mbox_fini(mbox);
+ }
+ EXPORT_SYMBOL(omap_mbox_put);
+
+--
+1.9.3
+
+

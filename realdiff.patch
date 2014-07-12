@@ -1448,6 +1448,7 @@ index 0dfb781..08ca599 100644
 +unsigned long rpres_get_max_freq(struct rpres *obj);
 +
  #endif /* _PLAT_OMAP_RPRES_H */
+
 diff --git a/arch/arm/plat-omap/iommu.c b/arch/arm/plat-omap/iommu.c
 index 99a3661..5cd738f 100644
 --- a/arch/arm/plat-omap/iommu.c
@@ -1513,34 +1514,7 @@ index 99a3661..5cd738f 100644
 -
  	return 0;
  }
- 
-diff --git a/arch/arm/plat-omap/mailbox.c b/arch/arm/plat-omap/mailbox.c
-index e26277d..c006751 100644
---- a/arch/arm/plat-omap/mailbox.c
-+++ b/arch/arm/plat-omap/mailbox.c
-@@ -313,10 +313,10 @@ static void omap_mbox_fini(struct omap_mbox *mbox)
- {
- 	mutex_lock(&mbox_configured_lock);
- 
--	flush_work_sync(&mbox->rxq->work);
- 	if (!--mbox->use_count) {
- 		free_irq(mbox->irq, mbox);
- 		tasklet_kill(&mbox->txq->tasklet);
-+		flush_work_sync(&mbox->rxq->work);
- 		mbox_queue_free(mbox->txq);
- 		mbox_queue_free(mbox->rxq);
- 	}
-@@ -364,9 +364,9 @@ EXPORT_SYMBOL(omap_mbox_get);
- 
- void omap_mbox_put(struct omap_mbox *mbox, struct notifier_block *nb)
- {
--	omap_mbox_fini(mbox);
- 	if (nb)
- 		blocking_notifier_chain_unregister(&mbox->notifier, nb);
-+	omap_mbox_fini(mbox);
- }
- EXPORT_SYMBOL(omap_mbox_put);
- 
+  
 diff --git a/arch/arm/plat-omap/mcbsp.c b/arch/arm/plat-omap/mcbsp.c
 index 1f7a799..1be15a8 100644
 --- a/arch/arm/plat-omap/mcbsp.c

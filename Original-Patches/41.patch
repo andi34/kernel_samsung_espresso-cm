@@ -1,0 +1,39 @@
+From: andi34 <skate4life@gmx.de>
+Date: Sat, 12 Jul 2014 11:55:20 +0200
+Subject: [PATCH] arch/arm/mach-omap2/board-espresso-sdio.c: revert JB Update 1/3
+
+diff --git a/arch/arm/mach-omap2/board-espresso-sdio.c b/arch/arm/mach-omap2/board-espresso-sdio.c
+index f23792d..8ea1ed2 100644
+--- a/arch/arm/mach-omap2/board-espresso-sdio.c
++++ b/arch/arm/mach-omap2/board-espresso-sdio.c
+@@ -29,10 +29,6 @@
+ /*for sysfs to update sd detect pin's status*/
+ static struct device *sd_detection_cmd_dev;
+ 
+-struct mmc_platform_data espresso_emmc_data = {
+-		.built_in	= 1,
+-};
+-
+ static struct omap2_hsmmc_info espresso_mmc_info[] = {
+ 	{
+ 		.mmc		= 2,
+@@ -44,9 +40,8 @@ static struct omap2_hsmmc_info espresso_mmc_info[] = {
+ 		.gpio_wp	= -EINVAL,
+ 		.gpio_cd	= -EINVAL,
+ #ifdef CONFIG_PM_RUNTIME
+-		.power_saving = false,
++		.power_saving = true,
+ #endif
+-		.mmc_data       = &espresso_emmc_data,
+ 	},
+ 	{
+ 		.mmc		= 1,
+@@ -54,7 +49,7 @@ static struct omap2_hsmmc_info espresso_mmc_info[] = {
+ 		.gpio_wp	= -EINVAL,
+ 		.gpio_cd	= -EINVAL,
+ #ifdef CONFIG_PM_RUNTIME
+-		.power_saving = false,
++		.power_saving = true,
+ #endif
+ 	},
+ 	{

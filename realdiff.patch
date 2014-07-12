@@ -891,39 +891,6 @@ index 96896d1..583cd6e 100644
  #define OMAP_1_5GHz	1500000000
  #define OMAP_1_2GHz	1200000000
  #define OMAP_1GHz	1000000000
-
-diff --git a/arch/arm/mach-omap2/mailbox.c b/arch/arm/mach-omap2/mailbox.c
-index e7e2d37..13bdf9d 100644
---- a/arch/arm/mach-omap2/mailbox.c
-+++ b/arch/arm/mach-omap2/mailbox.c
-@@ -41,11 +41,7 @@
- #define MBOX_NR_REGS                   2
- #define OMAP4_MBOX_NR_REGS             3
- 
--#ifdef CONFIG_ENABLE_GPIO_TO_ALLOW_C2_IN_CAMERA
--#define SET_MPU_CORE_CONSTRAINT		400
--#else
- #define SET_MPU_CORE_CONSTRAINT		10
--#endif
- 
- static void __iomem *mbox_base;
- 
-diff --git a/arch/arm/mach-omap2/omap-iommu.c b/arch/arm/mach-omap2/omap-iommu.c
-index 1736020..e49c9d5 100644
---- a/arch/arm/mach-omap2/omap-iommu.c
-+++ b/arch/arm/mach-omap2/omap-iommu.c
-@@ -54,11 +54,7 @@ static struct iommu_platform_data omap3_devices_data[] = {
- #ifdef CONFIG_ARCH_OMAP4
- 
- #define SET_DSP_CONSTRAINT	10
--#ifdef CONFIG_ENABLE_GPIO_TO_ALLOW_C2_IN_CAMERA
--#define SET_MPU_CORE_CONSTRAINT	400
--#else
- #define SET_MPU_CORE_CONSTRAINT	10
--#endif
- 
- static struct iommu_platform_data omap4_devices_data[] = {
- 	{
 diff --git a/arch/arm/mach-omap2/omap2plus-cpufreq.c b/arch/arm/mach-omap2/omap2plus-cpufreq.c
 index 7f47128..e396407 100644
 --- a/arch/arm/mach-omap2/omap2plus-cpufreq.c

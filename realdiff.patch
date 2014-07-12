@@ -1515,27 +1515,6 @@ index 99a3661..5cd738f 100644
  	return 0;
  }
   
-diff --git a/arch/arm/plat-omap/mcbsp.c b/arch/arm/plat-omap/mcbsp.c
-index 1f7a799..1be15a8 100644
---- a/arch/arm/plat-omap/mcbsp.c
-+++ b/arch/arm/plat-omap/mcbsp.c
-@@ -549,7 +549,6 @@ int omap_st_is_enabled(unsigned int id)
- 	if (!st_data)
- 		return -ENODEV;
- 
--
- 	return st_data->enabled;
- }
- EXPORT_SYMBOL(omap_st_is_enabled);
-@@ -1778,7 +1777,7 @@ static inline void __devinit omap34xx_device_init(struct omap_mcbsp *mcbsp)
- 		 */
- 		mcbsp->max_tx_thres = max_thres(mcbsp) - 0x10;
- 		mcbsp->max_rx_thres = max_thres(mcbsp) - 0x10;
--#ifdef CONFIG_SND_OPEN_SOC_SOURCE
-+#ifdef CONFIG_SND_OMAP_SOC_WM8994
- 		mcbsp->dma_op_mode = MCBSP_DMA_MODE_THRESHOLD;
- #endif
- 		/*
 diff --git a/arch/arm/plat-omap/omap-pm-helper.c b/arch/arm/plat-omap/omap-pm-helper.c
 index 2fdd7af..8e343f9 100644
 --- a/arch/arm/plat-omap/omap-pm-helper.c
@@ -1617,24 +1596,6 @@ index 9debd70..dc98eab 100644
  		rpdev->vdev.dev.release = omap_rpmsg_vproc_release;
  
  		ret = register_virtio_device(&rpdev->vdev);
-diff --git a/arch/arm/plat-omap/sgx_omaplfb.c b/arch/arm/plat-omap/sgx_omaplfb.c
-index 5f726f3..569f3c8 100644
---- a/arch/arm/plat-omap/sgx_omaplfb.c
-+++ b/arch/arm/plat-omap/sgx_omaplfb.c
-@@ -33,7 +33,12 @@
- #define OMAPLFB_NUM_DEV 1
- #endif
- 
--static struct sgx_omaplfb_config omaplfb_config[OMAPLFB_NUM_DEV];
-+static struct sgx_omaplfb_config omaplfb_config[OMAPLFB_NUM_DEV] = {
-+	{
-+	.tiler2d_buffers = 2,
-+	.swap_chain_length = 2,
-+	}
-+};
- 
- static struct sgx_omaplfb_platform_data omaplfb_plat_data = {
- 	.num_configs = OMAPLFB_NUM_DEV,
 diff --git a/arch/arm/plat-omap/sram.c b/arch/arm/plat-omap/sram.c
 index 7c3d3d7..5ca7bf9 100644
 --- a/arch/arm/plat-omap/sram.c
@@ -4962,28 +4923,6 @@ index c54989b..e9b5b5a 100644
  #endif
  
  enum dhd_bus_wake_state {
-diff --git a/drivers/net/wireless/bcmdhd/dhd_sec_feature.h b/drivers/net/wireless/bcmdhd/dhd_sec_feature.h
-index 6a387ab..4260bb8 100644
---- a/drivers/net/wireless/bcmdhd/dhd_sec_feature.h
-+++ b/drivers/net/wireless/bcmdhd/dhd_sec_feature.h
-@@ -82,12 +82,12 @@
- 
- /* REGION CODE */
- 
--#if (WLAN_REGION_CODE >= 100) && (WLAN_REGION_CODE < 200) /*EUR*/
--#if (WLAN_REGION_CODE == 101) /*EUR ORG*/
-+//#if (WLAN_REGION_CODE >= 100) && (WLAN_REGION_CODE < 200) /*EUR*/
-+//#if (WLAN_REGION_CODE == 101) /*EUR ORG*/
- /* GAN LITE NAT KEEPALIVE FILTER */
--#define GAN_LITE_NAT_KEEPALIVE_FILTER
--#endif /* WLAN_REGION_CODE == 101 */
--#endif /* WLAN_REGION_CODE >= 100 && WLAN_REGION_CODE < 200 */
-+//#define GAN_LITE_NAT_KEEPALIVE_FILTER
-+//#endif
-+//#endif
- 
- #if (WLAN_REGION_CODE >= 200) && (WLAN_REGION_CODE < 300) /* KOR */
- #undef USE_INITIAL_2G_SCAN_ORG
 diff --git a/drivers/net/wireless/bcmdhd/wl_android.c b/drivers/net/wireless/bcmdhd/wl_android.c
 index 6c066cf..afc5ae3 100644
 --- a/drivers/net/wireless/bcmdhd/wl_android.c

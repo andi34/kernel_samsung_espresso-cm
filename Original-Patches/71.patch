@@ -1,0 +1,89 @@
+From aa754d5580e211740bf063842707bd32db866306 Mon Sep 17 00:00:00 2001
+From: andi34 <skate4life@gmx.de>
+Date: Sat, 12 Jul 2014 16:25:18 +0200
+Subject: [PATCH] revert some more parts from JB Update 1/3
+
+Only Partially reverted:
+drivers/net/wireless/bcmdhd/dhd_sec_feature.h
+
+---
+diff --git a/arch/arm/plat-omap/mcbsp.c b/arch/arm/plat-omap/mcbsp.c
+index 1f7a799..1be15a8 100644
+--- a/arch/arm/plat-omap/mcbsp.c
++++ b/arch/arm/plat-omap/mcbsp.c
+@@ -1778,7 +1778,7 @@ static inline void __devinit omap34xx_device_init(struct omap_mcbsp *mcbsp)
+ 		 */
+ 		mcbsp->max_tx_thres = max_thres(mcbsp) - 0x10;
+ 		mcbsp->max_rx_thres = max_thres(mcbsp) - 0x10;
+-#ifdef CONFIG_SND_OPEN_SOC_SOURCE
++#ifdef CONFIG_SND_OMAP_SOC_WM8994
+ 		mcbsp->dma_op_mode = MCBSP_DMA_MODE_THRESHOLD;
+ #endif
+ 		/*
+diff --git a/arch/arm/plat-omap/sgx_omaplfb.c b/arch/arm/plat-omap/sgx_omaplfb.c
+index 5f726f3..569f3c8 100644
+--- a/arch/arm/plat-omap/sgx_omaplfb.c
++++ b/arch/arm/plat-omap/sgx_omaplfb.c
+@@ -33,7 +33,12 @@
+ #define OMAPLFB_NUM_DEV 1
+ #endif
+ 
+-static struct sgx_omaplfb_config omaplfb_config[OMAPLFB_NUM_DEV];
++static struct sgx_omaplfb_config omaplfb_config[OMAPLFB_NUM_DEV] = {
++	{
++	.tiler2d_buffers = 2,
++	.swap_chain_length = 2,
++	}
++};
+ 
+ static struct sgx_omaplfb_platform_data omaplfb_plat_data = {
+ 	.num_configs = OMAPLFB_NUM_DEV,
+diff --git a/drivers/net/wireless/bcmdhd/dhd_sec_feature.h b/drivers/net/wireless/bcmdhd/dhd_sec_feature.h
+index 6a387ab..4260bb8 100644
+--- a/drivers/net/wireless/bcmdhd/dhd_sec_feature.h
++++ b/drivers/net/wireless/bcmdhd/dhd_sec_feature.h
+@@ -82,12 +82,12 @@
+ 
+ /* REGION CODE */
+ 
+-#if (WLAN_REGION_CODE >= 100) && (WLAN_REGION_CODE < 200) /*EUR*/
+-#if (WLAN_REGION_CODE == 101) /*EUR ORG*/
++//#if (WLAN_REGION_CODE >= 100) && (WLAN_REGION_CODE < 200) /*EUR*/
++//#if (WLAN_REGION_CODE == 101) /*EUR ORG*/
+ /* GAN LITE NAT KEEPALIVE FILTER */
+-#define GAN_LITE_NAT_KEEPALIVE_FILTER
+-#endif /* WLAN_REGION_CODE == 101 */
+-#endif /* WLAN_REGION_CODE >= 100 && WLAN_REGION_CODE < 200 */
++//#define GAN_LITE_NAT_KEEPALIVE_FILTER
++//#endif /* WLAN_REGION_CODE == 101 */
++//#endif /* WLAN_REGION_CODE >= 100 && WLAN_REGION_CODE < 200 */
+ 
+ #if (WLAN_REGION_CODE >= 200) && (WLAN_REGION_CODE < 300) /* KOR */
+ #undef USE_INITIAL_2G_SCAN_ORG
+diff --git a/include/linux/migrate.h b/include/linux/migrate.h
+index 8982004..e39aeec 100644
+--- a/include/linux/migrate.h
++++ b/include/linux/migrate.h
+@@ -14,7 +14,7 @@ extern int migrate_page(struct address_space *,
+ 			struct page *, struct page *);
+ extern int migrate_pages(struct list_head *l, new_page_t x,
+ 			unsigned long private, bool offlining,
+-			bool sync, int tries);
++			bool sync);
+ extern int migrate_huge_pages(struct list_head *l, new_page_t x,
+ 			unsigned long private, bool offlining,
+ 			bool sync);
+@@ -36,7 +36,7 @@ extern int migrate_huge_page_move_mapping(struct address_space *mapping,
+ static inline void putback_lru_pages(struct list_head *l) {}
+ static inline int migrate_pages(struct list_head *l, new_page_t x,
+ 		unsigned long private, bool offlining,
+-		bool sync, int tries) { return -ENOSYS; }
++		bool sync) { return -ENOSYS; }
+ static inline int migrate_huge_pages(struct list_head *l, new_page_t x,
+ 		unsigned long private, bool offlining,
+ 		bool sync) { return -ENOSYS; }
+
+--
+1.9.3
+
+

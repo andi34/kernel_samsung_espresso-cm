@@ -1,0 +1,19 @@
+From 2c2ead353fc86ad7dd2f7f2856a98a9519081ba8 Mon Sep 17 00:00:00 2001
+From: andi34 <skate4life@gmx.de>
+Date: Sat, 12 Jul 2014 14:56:19 +0200
+Subject: [PATCH] arch/arm/mach-omap2/emif.c: revert JB Update 1/3
+
+diff --git a/arch/arm/mach-omap2/emif.c b/arch/arm/mach-omap2/emif.c
+index 1be084c..ea33d85 100644
+--- a/arch/arm/mach-omap2/emif.c
++++ b/arch/arm/mach-omap2/emif.c
+@@ -852,9 +852,7 @@ static irqreturn_t emif_threaded_isr(int irq, void *dev_id)
+ 		pr_emerg("%s %d: SDRAM temperature exceeds operating"
+ 			"limit.. Shutdown system...\n", __func__, emif_nr + 1);
+ 
+-		/*
+ 		kernel_power_off();
+-		*/
+ 	}
+ 
+ 	return IRQ_HANDLED;

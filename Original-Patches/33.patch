@@ -1,0 +1,24 @@
+From: andi34 <skate4life@gmx.de>
+Date: Sat, 12 Jul 2014 11:55:20 +0200
+Subject: [PATCH] arch/arm/mach-omap2/Kconfig.chn: revert JB Update 1/3
+
+diff --git a/arch/arm/mach-omap2/Kconfig.chn b/arch/arm/mach-omap2/Kconfig.chn
+old mode 100755
+new mode 100644
+index 49e391d..9237500
+--- a/arch/arm/mach-omap2/Kconfig.chn
++++ b/arch/arm/mach-omap2/Kconfig.chn
+@@ -20,13 +20,6 @@ config TARGET_LOCALE_CHN
+ 	default n
+ 	select MACH_OMAP4_SAMSUNG
+ 
+-config MACH_SAMSUNG_KONA_CHN_OPEN
+-	bool "Samsung Kona CHINA OPEN (GT-N5100) Board"
+-	default n
+-	select MACH_OMAP4_SAMSUNG
+-	select FW_SAMSUNG_KONA_TSP
+-	select FW_SAMSUNG_KONA_WACOM
+-
+ config MACH_SAMSUNG_T1_CHN_CMCC
+ 	bool "Samsung T1 CHINA CMCC Board"
+ 	default n

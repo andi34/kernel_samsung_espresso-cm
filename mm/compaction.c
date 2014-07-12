@@ -663,26 +663,27 @@ static int compact_zone(struct zone *zone, struct compact_control *cc)
                 err = migrate_pages(&cc->migratepages, compaction_alloc,
 				(unsigned long)cc, false,
 				cc->sync ? MIGRATE_SYNC_LIGHT : MIGRATE_ASYNC);
-                update_nr_listpages(cc);
-                nr_remaining = cc->nr_migratepages;
+		update_nr_listpages(cc);
+		nr_remaining = cc->nr_migratepages;
 
-                count_vm_event(COMPACTBLOCKS);
-                count_vm_events(COMPACTPAGES, nr_migrate - nr_remaining);
-                if (nr_remaining)
-                        count_vm_events(COMPACTPAGEFAILED, nr_remaining);
-                trace_mm_compaction_migratepages(nr_migrate - nr_remaining,
-                                                nr_remaining);
+		count_vm_event(COMPACTBLOCKS);
+		count_vm_events(COMPACTPAGES, nr_migrate - nr_remaining);
+		if (nr_remaining)
+			count_vm_events(COMPACTPAGEFAILED, nr_remaining);
+		trace_mm_compaction_migratepages(nr_migrate - nr_remaining,
+						nr_remaining);
 
-                /* Release LRU pages not migrated */
-                if (err) {
-                        putback_lru_pages(&cc->migratepages);
-                        cc->nr_migratepages = 0;
-                        if (err == -ENOMEM) {
-                                ret = COMPACT_PARTIAL;
-                                goto out;
-                        }
-                }
-        }
+		/* Release LRU pages not migrated */
+		if (err) {
+			putback_lru_pages(&cc->migratepages);
+			cc->nr_migratepages = 0;
+			if (err == -ENOMEM) {
+				ret = COMPACT_PARTIAL;
+				goto out;
+			}
+		}
+
+	}
 
 out:
         /* Release free pages and check accounting */

@@ -1113,25 +1113,6 @@ index 8ce1425..25a2761 100644
  	pool = kzalloc(sizeof(*pool), GFP_KERNEL);
  	if (pool) {
  		pool->st_base = paddr1;
-diff --git a/arch/arm/mach-omap2/sec_logger.c b/arch/arm/mach-omap2/sec_logger.c
-index 98db33a..0e2e29c 100644
---- a/arch/arm/mach-omap2/sec_logger.c
-+++ b/arch/arm/mach-omap2/sec_logger.c
-@@ -208,14 +208,12 @@ void sec_logger_update_buffer(const char *log_str, int count)
- 		sec_klog_buf[len] = '\0';
- 	}
- }
--EXPORT_SYMBOL(sec_logger_update_buffer);
- 
- void sec_logger_print_buffer(void)
- {
- 	if (sec_klog_buf[0])
- 		pr_info("%s\n", sec_klog_buf);
- }
--EXPORT_SYMBOL(sec_logger_print_buffer);
- 
- static void __init sec_logger_message_init(void)
- {
 diff --git a/arch/arm/mach-omap2/usb-musb.c b/arch/arm/mach-omap2/usb-musb.c
 index 8c74f23..7f6f678 100644
 --- a/arch/arm/mach-omap2/usb-musb.c

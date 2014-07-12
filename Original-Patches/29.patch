@@ -1,0 +1,40 @@
+From: andi34 <skate4life@gmx.de>
+Date: Sat, 12 Jul 2014 11:55:20 +0200
+Subject: [PATCH] arch/arm/include/asm/dma-mapping.h: revert JB Update 1/3
+
+diff --git a/arch/arm/include/asm/dma-mapping.h b/arch/arm/include/asm/dma-mapping.h
+index b12ae07..df00064 100644
+--- a/arch/arm/include/asm/dma-mapping.h
++++ b/arch/arm/include/asm/dma-mapping.h
+@@ -9,9 +9,6 @@
+ 
+ #include <asm-generic/dma-coherent.h>
+ #include <asm/memory.h>
+-#ifdef CONFIG_CMA
+-#include <linux/dma-contiguous.h>
+-#endif
+ 
+ #ifdef __arch_page_to_dma
+ #error Please update to __arch_pfn_to_dma
+@@ -175,21 +172,6 @@ static inline void dma_free_noncoherent(struct device *dev, size_t size,
+ {
+ }
+ 
+-#ifdef CONFIG_CMA
+-static inline int dma_prepare_alloc_coherent(struct device *dev, size_t size)
+-{
+-	int count = PAGE_ALIGN(size) >> PAGE_SHIFT;
+-	int align = get_order(PAGE_ALIGN(size));
+-
+-	return dma_prepare_alloc_from_contiguous(dev, count, align);
+-}
+-#else
+-static inline int dma_prepare_alloc_coherent(struct device *dev, size_t size)
+-{
+-	return 0;
+-}
+-#endif
+-
+ /**
+  * dma_alloc_coherent - allocate consistent memory for DMA
+  * @dev: valid struct device pointer, or NULL for ISA and EISA-like devices

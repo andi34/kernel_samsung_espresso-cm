@@ -400,42 +400,6 @@ index caddb9d..191a7ee 100644
  		orr	r0, r0, #0x5000		@ I-cache enable, RR cache replacement
  		orr	r0, r0, #0x003c		@ write buffer
  #ifdef CONFIG_MMU
-diff --git a/arch/arm/include/asm/dma-mapping.h b/arch/arm/include/asm/dma-mapping.h
-index b12ae07..df00064 100644
---- a/arch/arm/include/asm/dma-mapping.h
-+++ b/arch/arm/include/asm/dma-mapping.h
-@@ -9,9 +9,6 @@
- 
- #include <asm-generic/dma-coherent.h>
- #include <asm/memory.h>
--#ifdef CONFIG_CMA
--#include <linux/dma-contiguous.h>
--#endif
- 
- #ifdef __arch_page_to_dma
- #error Please update to __arch_pfn_to_dma
-@@ -175,21 +172,6 @@ static inline void dma_free_noncoherent(struct device *dev, size_t size,
- {
- }
- 
--#ifdef CONFIG_CMA
--static inline int dma_prepare_alloc_coherent(struct device *dev, size_t size)
--{
--	int count = PAGE_ALIGN(size) >> PAGE_SHIFT;
--	int align = get_order(PAGE_ALIGN(size));
--
--	return dma_prepare_alloc_from_contiguous(dev, count, align);
--}
--#else
--static inline int dma_prepare_alloc_coherent(struct device *dev, size_t size)
--{
--	return 0;
--}
--#endif
--
- /**
-  * dma_alloc_coherent - allocate consistent memory for DMA
-  * @dev: valid struct device pointer, or NULL for ISA and EISA-like devices
 diff --git a/arch/arm/include/asm/mach/map.h b/arch/arm/include/asm/mach/map.h
 index a6efcdd..b36f365 100644
 --- a/arch/arm/include/asm/mach/map.h

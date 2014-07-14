@@ -42,7 +42,6 @@ static int snd_hwdep_dev_free(struct snd_device *device);
 static int snd_hwdep_dev_register(struct snd_device *device);
 static int snd_hwdep_dev_disconnect(struct snd_device *device);
 
-
 static struct snd_hwdep *snd_hwdep_search(struct snd_card *card, int device)
 {
 	struct snd_hwdep *hwdep;
@@ -67,7 +66,7 @@ static ssize_t snd_hwdep_read(struct file * file, char __user *buf,
 	struct snd_hwdep *hw = file->private_data;
 	if (hw->ops.read)
 		return hw->ops.read(hw, buf, count, offset);
-	return -ENXIO;	
+	return -ENXIO;
 }
 
 static ssize_t snd_hwdep_write(struct file * file, const char __user *buf,
@@ -76,7 +75,7 @@ static ssize_t snd_hwdep_write(struct file * file, const char __user *buf,
 	struct snd_hwdep *hw = file->private_data;
 	if (hw->ops.write)
 		return hw->ops.write(hw, buf, count, offset);
-	return -ENXIO;	
+	return -ENXIO;
 }
 
 static int snd_hwdep_open(struct inode *inode, struct file * file)
@@ -188,10 +187,10 @@ static int snd_hwdep_info(struct snd_hwdep *hw,
 			  struct snd_hwdep_info __user *_info)
 {
 	struct snd_hwdep_info info;
-	
+
 	memset(&info, 0, sizeof(info));
 	info.card = hw->card->number;
-	strlcpy(info.id, hw->id, sizeof(info.id));	
+	strlcpy(info.id, hw->id, sizeof(info.id));
 	strlcpy(info.name, hw->name, sizeof(info.name));
 	info.iface = hw->iface;
 	if (copy_to_user(_info, &info, sizeof(info)))
@@ -204,7 +203,7 @@ static int snd_hwdep_dsp_status(struct snd_hwdep *hw,
 {
 	struct snd_hwdep_dsp_status info;
 	int err;
-	
+
 	if (! hw->ops.dsp_status)
 		return -ENXIO;
 	memset(&info, 0, sizeof(info));
@@ -221,7 +220,7 @@ static int snd_hwdep_dsp_load(struct snd_hwdep *hw,
 {
 	struct snd_hwdep_dsp_image info;
 	int err;
-	
+
 	if (! hw->ops.dsp_load)
 		return -ENXIO;
 	memset(&info, 0, sizeof(info));
@@ -512,7 +511,6 @@ static void __exit snd_hwdep_proc_done(void)
 #define snd_hwdep_proc_init()
 #define snd_hwdep_proc_done()
 #endif /* CONFIG_PROC_FS */
-
 
 /*
  *  ENTRY functions

@@ -603,7 +603,6 @@ typedef struct {
 	s32 equ_param3;
 } abe_equ_t;
 
-
 /* subroutine with no parameter */
 typedef void (*abe_subroutine0) (void);
 /* subroutine with one parameter */
@@ -612,9 +611,7 @@ typedef void (*abe_subroutine2) (u32, u32);
 typedef void (*abe_subroutine3) (u32, u32, u32);
 typedef void (*abe_subroutine4) (u32, u32, u32, u32);
 
-
 extern u32 abe_irq_pingpong_player_id;
-
 
 void abe_init_mem(void __iomem **_io_base);
 u32 abe_reset_hal(void);

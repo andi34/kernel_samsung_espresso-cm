@@ -31,7 +31,6 @@
 #include "cifs_fs_sb.h"
 #include "fscache.h"
 
-
 static void cifs_set_ops(struct inode *inode)
 {
 	struct cifs_sb_info *cifs_sb = CIFS_SB(inode->i_sb);
@@ -1154,7 +1153,6 @@ undo_setattr:
 
 	goto out_close;
 }
-
 
 /*
  * If dentry->d_inode is null (usually meaning the cached dentry

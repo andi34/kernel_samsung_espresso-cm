@@ -475,7 +475,7 @@ static struct ctl_table pty_table[] = {
 		.mode		= 0444,
 		.data		= &pty_count,
 		.proc_handler	= proc_dointvec,
-	}, 
+	},
 	{}
 };
 
@@ -496,7 +496,6 @@ static struct ctl_table pty_root_table[] = {
 	},
 	{}
 };
-
 
 static int pty_unix98_ioctl(struct tty_struct *tty,
 			    unsigned int cmd, unsigned long arg)

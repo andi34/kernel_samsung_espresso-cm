@@ -222,7 +222,6 @@ int btrfs_end_log_trans(struct btrfs_root *root)
 	return 0;
 }
 
-
 /*
  * the walk control struct is used to pass state down the chain when
  * processing the log tree.  The stage field tells us which part
@@ -823,7 +822,6 @@ out:
 	return match;
 }
 
-
 /*
  * replay one inode back reference item found in the log tree.
  * eb, slot and key refer to the buffer and key found in the log tree.
@@ -1003,7 +1001,6 @@ static int insert_orphan_item(struct btrfs_trans_handle *trans,
 	return ret;
 }
 
-
 /*
  * There are a few corners where the link count of the file can't
  * be properly maintained during replay.  So, instead of adding
@@ -1141,7 +1138,6 @@ out:
 	btrfs_release_path(path);
 	return ret;
 }
-
 
 /*
  * record a given inode in the fixup dir so we can check its link
@@ -3056,7 +3052,6 @@ static int inode_in_log(struct btrfs_trans_handle *trans,
 	return ret;
 }
 
-
 /*
  * helper function around btrfs_log_inode to make sure newly created
  * parent directories also end up in the log.  A minimal inode and backref
@@ -3378,4 +3373,3 @@ int btrfs_log_new_name(struct btrfs_trans_handle *trans,
 
 	return btrfs_log_inode_parent(trans, root, inode, parent, 1);
 }
-

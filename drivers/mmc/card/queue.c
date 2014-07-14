@@ -272,7 +272,6 @@ int mmc_init_queue(struct mmc_queue *mq, struct mmc_card *card,
 		if (ret)
 			goto cleanup_queue;
 
-
 		mqrq_prev->sg = mmc_alloc_sg(host->max_segs, &ret);
 		if (ret)
 			goto cleanup_queue;
@@ -494,4 +493,3 @@ void mmc_queue_bounce_post(struct mmc_queue_req *mqrq)
 	sg_copy_from_buffer(mqrq->bounce_sg, mqrq->bounce_sg_len,
 		mqrq->bounce_buf, mqrq->sg[0].length);
 }
-

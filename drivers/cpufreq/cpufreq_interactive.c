@@ -34,7 +34,6 @@
 #include <linux/earlysuspend.h>
 #endif
 
-
 #define CREATE_TRACE_POINTS
 #include <trace/events/cpufreq_interactive.h>
 
@@ -655,7 +654,6 @@ static ssize_t store_hispeed_freq(struct kobject *kobj,
 static struct global_attr hispeed_freq_attr = __ATTR(hispeed_freq, 0644,
 		show_hispeed_freq, store_hispeed_freq);
 
-
 static ssize_t show_go_hispeed_load(struct kobject *kobj,
 				     struct attribute *attr, char *buf)
 {
@@ -834,7 +832,6 @@ static ssize_t store_boostpulse(struct kobject *kobj, struct attribute *attr,
 	cpufreq_interactive_boost();
 	return count;
 }
-
 
 #ifdef CONFIG_HAS_EARLYSUSPEND
 static unsigned long save_go_hispeed_load;
@@ -1027,7 +1024,6 @@ static int cpufreq_interactive_idle_notifier(struct notifier_block *nb,
 
 	return 0;
 }
-
 
 static int __init cpufreq_interactive_init(void)
 {

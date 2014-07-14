@@ -234,7 +234,6 @@ bool hsi_is_hst_controller_busy(struct hsi_dev *hsi_ctrl)
 	return false;
 }
 
-
 /* Enables the CAWAKE, BREAK, or ERROR interrupt for the given port.
  *
  * Since these 3 interrupts ENABLE and STATUS bits are duplicated in both

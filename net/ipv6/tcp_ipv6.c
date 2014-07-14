@@ -474,7 +474,6 @@ out:
 	sock_put(sk);
 }
 
-
 static int tcp_v6_send_synack(struct sock *sk, struct request_sock *req,
 			      struct request_values *rvp)
 {
@@ -1134,7 +1133,6 @@ static void tcp_v6_reqsk_send_ack(struct sock *sk, struct sk_buff *skb,
 			tcp_v6_md5_do_lookup(sk, &ipv6_hdr(skb)->daddr));
 }
 
-
 static struct sock *tcp_v6_hnd_req(struct sock *sk,struct sk_buff *skb)
 {
 	struct request_sock *req, **prev;
@@ -1681,7 +1679,6 @@ discard:
 csum_err:
 	TCP_INC_STATS_BH(sock_net(sk), TCP_MIB_INERRS);
 	goto discard;
-
 
 ipv6_pktoptions:
 	/* Do you ask, what is it?

@@ -14,7 +14,7 @@
 #define NETLINK_SELINUX		7	/* SELinux event notifications */
 #define NETLINK_ISCSI		8	/* Open-iSCSI */
 #define NETLINK_AUDIT		9	/* auditing */
-#define NETLINK_FIB_LOOKUP	10	
+#define NETLINK_FIB_LOOKUP	10
 #define NETLINK_CONNECTOR	11
 #define NETLINK_NETFILTER	12	/* netfilter subsystem */
 #define NETLINK_IP6_FW		13
@@ -26,8 +26,7 @@
 #define NETLINK_ECRYPTFS	19
 #define NETLINK_RDMA		20
 
-
-#define MAX_LINKS 32		
+#define MAX_LINKS 32
 
 struct sockaddr_nl {
 	sa_family_t	nl_family;	/* AF_NETLINK	*/
@@ -167,7 +166,6 @@ struct netlink_skb_parms {
 #define NETLINK_CB(skb)		(*(struct netlink_skb_parms*)&((skb)->cb))
 #define NETLINK_CREDS(skb)	(&NETLINK_CB((skb)).creds)
 
-
 extern void netlink_table_grab(void);
 extern void netlink_table_ungrab(void);
 
@@ -214,7 +212,6 @@ int netlink_sendskb(struct sock *sk, struct sk_buff *skb);
 #endif
 
 #define NLMSG_DEFAULT_SIZE (NLMSG_GOODSIZE - NLMSG_HDRLEN)
-
 
 struct netlink_callback {
 	struct sk_buff		*skb;
@@ -263,7 +260,6 @@ extern int netlink_dump_start(struct sock *ssk, struct sk_buff *skb,
 			      int (*dump)(struct sk_buff *skb, struct netlink_callback*),
 			      int (*done)(struct netlink_callback*),
 			      u16 min_dump_alloc);
-
 
 #define NL_NONROOT_RECV 0x1
 #define NL_NONROOT_SEND 0x2

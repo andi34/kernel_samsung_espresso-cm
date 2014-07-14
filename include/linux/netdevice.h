@@ -201,7 +201,6 @@ struct net_device_stats {
 
 #endif  /*  __KERNEL__  */
 
-
 /* Media selection options. */
 enum {
         IF_PORT_UNKNOWN = 0,
@@ -333,7 +332,6 @@ enum netdev_state_t {
 	__LINK_STATE_LINKWATCH_PENDING,
 	__LINK_STATE_DORMANT,
 };
-
 
 /*
  * This structure holds at boot time configured netdevice settings. They
@@ -1086,7 +1084,6 @@ struct net_device {
 #define NETIF_F_GSO_SOFTWARE	(NETIF_F_TSO | NETIF_F_TSO_ECN | \
 				 NETIF_F_TSO6 | NETIF_F_UFO)
 
-
 #define NETIF_F_GEN_CSUM	(NETIF_F_NO_CSUM | NETIF_F_HW_CSUM)
 #define NETIF_F_V4_CSUM		(NETIF_F_GEN_CSUM | NETIF_F_IP_CSUM)
 #define NETIF_F_V6_CSUM		(NETIF_F_GEN_CSUM | NETIF_F_IPV6_CSUM)
@@ -1170,7 +1167,6 @@ struct net_device {
 	int			uc_promisc;
 	unsigned int		promiscuity;
 	unsigned int		allmulti;
-
 
 	/* Protocol specific pointers */
 
@@ -1554,7 +1550,6 @@ struct packet_type {
 #include <linux/notifier.h>
 
 extern rwlock_t				dev_base_lock;		/* Device list lock */
-
 
 #define for_each_netdev(net, d)		\
 		list_for_each_entry(d, &(net)->dev_base_head, dev_list)
@@ -2204,7 +2199,6 @@ static inline int netif_dormant(const struct net_device *dev)
 {
 	return test_bit(__LINK_STATE_DORMANT, &dev->state);
 }
-
 
 /**
  *	netif_oper_up - test if device is operational

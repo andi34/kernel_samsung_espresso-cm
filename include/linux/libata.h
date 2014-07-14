@@ -58,7 +58,6 @@
 #undef ATA_IRQ_TRAP		/* define to ack screaming irqs */
 #undef ATA_NDEBUG		/* define to disable quick runtime checks */
 
-
 /* note: prints function name for you */
 #ifdef ATA_DEBUG
 #define DPRINTK(fmt, args...) printk(KERN_ERR "%s: " fmt, __func__, ## args)
@@ -199,7 +198,6 @@ enum {
 	ATA_FLAG_NO_DIPM	= (1 << 23), /* host not happy with DIPM */
 
 	/* bits 24:31 of ap->flags are reserved for LLD specific flags */
-
 
 	/* struct ata_port pflags */
 	ATA_PFLAG_EH_PENDING	= (1 << 0), /* EH pending */
@@ -1574,7 +1572,6 @@ extern void sata_pmp_error_handler(struct ata_port *ap);
 #define sata_pmp_error_handler		ata_std_error_handler
 
 #endif /* CONFIG_SATA_PMP */
-
 
 /**************************************************************************
  * SFF - drivers/ata/libata-sff.c

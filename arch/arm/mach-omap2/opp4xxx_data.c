@@ -443,7 +443,6 @@ static struct omap_opp_def __initdata omap446x_opp_def_list[] = {
 	/* IVA OPP5 - OPP-Nitro SpeedBin*/
 	OPP_INITIALIZER("iva", "virt_iva_ck", "iva", false,
 			500000000, OMAP4460_VDD_IVA_OPPNITROSB_UV),
-
 	/* SGX OPP1 - OPP50 */
 	OPP_INITIALIZER("gpu", "dpll_per_m7x2_ck", "core", true,
 			153600000, OMAP4460_VDD_CORE_OPP50_UV),
@@ -692,7 +691,6 @@ static struct omap_opp_def __initdata omap447x_opp_low_def_list[] = {
 	/* IVA OPP5 - OPP-Nitro SpeedBin*/
 	OPP_INITIALIZER("iva", "virt_iva_ck", "iva", false,
 			500000000, OMAP4470_VDD_IVA_OPPNITROSB_UV),
-
 	/* SGX OPP1 - OPP50 */
 	OPP_INITIALIZER("gpu", "dpll_per_m7x2_ck", "core", true,
 			153600000, OMAP4470_VDD_CORE_OPP50_UV),
@@ -792,7 +790,6 @@ static struct omap_opp_def __initdata omap447x_opp_high_def_list[] = {
 	/* IVA OPP5 - OPP-Nitro SpeedBin*/
 	OPP_INITIALIZER("iva", "virt_iva_ck", "iva", false,
 			500000000, OMAP4470_VDD_IVA_OPPNITROSB_UV),
-
 	/* SGX OPP1 - OPP50 */
 	OPP_INITIALIZER("gpu", "dpll_per_m7x2_ck", "core", true,
 			192000000, OMAP4470_VDD_CORE_OPP50_UV),

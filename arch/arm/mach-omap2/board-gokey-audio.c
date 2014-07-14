@@ -28,7 +28,6 @@
 #include <linux/mfd/wm8994/pdata.h>
 #include <linux/mfd/wm8994/gpio.h>
 
-
 static const struct regulator_consumer_supply vbatt_supplies[] = {
 	REGULATOR_SUPPLY("LDO1VDD", "1-001a"),
 	REGULATOR_SUPPLY("SPKVDD1", "1-001a"),

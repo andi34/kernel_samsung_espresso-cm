@@ -50,7 +50,6 @@
  *  input device framework and control via sysfs attributes.
  */
 
-
 #define gp2a_dbgmsg(str, args...) pr_debug("%s: " str, __func__, ##args)
 
 /* ADDSEL is LOW */
@@ -121,9 +120,8 @@ struct gp2a_data {
 
 int gp2a_i2c_read(struct gp2a_data *gp2a, u8 reg, u8 *val)
 {
-
 	int err;
-	u8 buf[1];
+	u8 buf[2];
 	struct i2c_msg msg[2];
 	struct i2c_client *client = gp2a->i2c_client;
 	int retry = 2;
@@ -201,7 +199,6 @@ static ssize_t poll_delay_show(struct device *dev,
 	struct gp2a_data *gp2a = dev_get_drvdata(dev);
 	return sprintf(buf, "%lld\n", ktime_to_ns(gp2a->light_poll_delay));
 }
-
 
 static ssize_t poll_delay_store(struct device *dev,
 				struct device_attribute *attr,
@@ -369,7 +366,6 @@ static struct device_attribute dev_attr_light_sensor_vendor =
 	__ATTR(vendor, S_IRUSR | S_IRGRP, gp2a_light_vendor_show, NULL);
 static struct device_attribute dev_attr_proximity_sensor_vendor =
 	__ATTR(vendor, S_IRUSR | S_IRGRP, gp2a_light_vendor_show, NULL);
-
 
 static ssize_t gp2a_light_name_show(struct device *dev,
 					   struct device_attribute *attr,
@@ -884,7 +880,6 @@ static struct i2c_driver gp2a_i2c_driver = {
 	.shutdown = gp2a_i2c_shutdown,
 	.id_table = gp2a_device_id,
 };
-
 
 static int __init gp2a_init(void)
 {

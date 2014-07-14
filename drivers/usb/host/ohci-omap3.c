@@ -74,7 +74,6 @@ static int ohci_omap3_bus_suspend(struct usb_hcd *hcd)
 	return ret;
 }
 
-
 static int ohci_omap3_bus_resume(struct usb_hcd *hcd)
 {
 	struct device *dev = hcd->self.controller;
@@ -86,7 +85,6 @@ static int ohci_omap3_bus_resume(struct usb_hcd *hcd)
 
 	return ohci_bus_resume(hcd);
 }
-
 
 /*-------------------------------------------------------------------------*/
 
@@ -206,7 +204,6 @@ static int __devinit ohci_hcd_omap3_probe(struct platform_device *pdev)
 		dev_err(dev, "UHH OHCI ioremap failed\n");
 		return -ENOMEM;
 	}
-
 
 	hcd = usb_create_hcd(&ohci_omap3_hc_driver, dev,
 			dev_name(dev));

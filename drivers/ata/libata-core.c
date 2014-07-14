@@ -165,7 +165,6 @@ MODULE_DESCRIPTION("Library module for ATA devices");
 MODULE_LICENSE("GPL");
 MODULE_VERSION(DRV_VERSION);
 
-
 static bool ata_sstatus_online(u32 sstatus)
 {
 	return (sstatus & 0xf) == 0x3;
@@ -5938,7 +5937,6 @@ int ata_port_probe(struct ata_port *ap)
 	return rc;
 }
 
-
 static void async_port_probe(void *data, async_cookie_t cookie)
 {
 	struct ata_port *ap = data;
@@ -5999,7 +5997,6 @@ int ata_host_register(struct ata_host *host, struct scsi_host_template *sht)
 	/* give ports names and add SCSI hosts */
 	for (i = 0; i < host->n_ports; i++)
 		host->ports[i]->print_id = ata_print_id++;
-
 
 	/* Create associated sysfs transport objects  */
 	for (i = 0; i < host->n_ports; i++) {

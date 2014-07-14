@@ -280,7 +280,6 @@ int dsi_vc_gen_read_2(struct omap_dss_device *dssdev, int channel, u16 cmd,
 		u8 *buf, int buflen);
 void dsi_videomode_panel_preinit(struct omap_dss_device *dssdev);
 
-
 /* Board specific data */
 struct omap_dss_board_info {
 	int (*get_context_loss_count)(struct device *dev);

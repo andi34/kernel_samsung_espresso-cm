@@ -87,7 +87,6 @@ struct trace_iterator {
 	/* All new field here will be zeroed out in pipe_read */
 };
 
-
 struct trace_event;
 
 typedef enum print_line_t (*trace_print_func)(struct trace_iterator *iter,

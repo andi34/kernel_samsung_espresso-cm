@@ -280,7 +280,6 @@ static void board_gokey_early_suspend(struct early_suspend *h)
 	if (likely(uart4_hwmod))
 		uart4_hwmod->flags = HWMOD_SWSUP_SIDLE;
 
-
 	if (!cpufreq_lpmode.wifi_enabled  && !cpufreq_lpmode.bt_enabled
 		&& is_playback_lpmode_available()
 		&& (gokey_get_charging_type() != USB_EVENT_VBUS)) {

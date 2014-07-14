@@ -84,7 +84,6 @@ extern "C" {
 #define MPL_LOG_SILENT (8)
 #endif
 
-
 /*
  * This is the local tag used for the following simplified
  * logging macros.  You can change this preprocessor definition

@@ -2525,7 +2525,6 @@ out:
 	return status;
 }
 
-
 /**
  *  ixgbe_acquire_swfw_sync - Acquire SWFW semaphore
  *  @hw: pointer to hardware structure

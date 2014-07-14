@@ -132,7 +132,7 @@ struct acpi_video_device_attrib {
 	u32 display_type:4;	/*Describe the specific type in use */
 	u32 vendor_specific:4;	/*Chipset Vendor Specific */
 	u32 bios_can_detect:1;	/*BIOS can detect the device */
-	u32 depend_on_vga:1;	/*Non-VGA output device whose power is related to 
+	u32 depend_on_vga:1;	/*Non-VGA output device whose power is related to
 				   the VGA device. */
 	u32 pipe_id:3;		/*For VGA multiple-head devices. */
 	u32 reserved:10;	/*Must be 0 */
@@ -325,7 +325,6 @@ acpi_video_device_lcd_query_levels(struct acpi_video_device *device,
 	int status;
 	struct acpi_buffer buffer = { ACPI_ALLOCATE_BUFFER, NULL };
 	union acpi_object *obj;
-
 
 	*levels = NULL;
 

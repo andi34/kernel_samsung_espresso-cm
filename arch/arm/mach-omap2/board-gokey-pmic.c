@@ -110,7 +110,6 @@ static struct regulator_init_data gokey_vaux3 = {
 	.consumer_supplies	= gokey_vaux3_supply,
 };
 
-
 static struct regulator_consumer_supply gokey_vmmc_supply[] = {
 	REGULATOR_SUPPLY("VLCD_1P8V", NULL),
 };
@@ -408,10 +407,8 @@ static void gokey_twl6030_init(void)
 	if (ret)
 		pr_err("%s:PHOENIX_MSK_TRANSITION write fail!\n", __func__);
 
-
 	ret = twl_i2c_read_u8(TWL6030_MODULE_ID0,
 			&val, TWL6030_BBSPOR_CFG);
-
 
 	/*enable backkup battery charge*/
 	val |= (1<<3);
@@ -524,7 +521,6 @@ static struct regulator_init_data gokey_vdd_io_1V8 = {
 		.always_on = true,
 		},
 };
-
 
 static struct twl4030_platform_data gokey_twl6032_pdata = {
 	.irq_base	= TWL6030_IRQ_BASE,

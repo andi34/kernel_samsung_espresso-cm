@@ -245,7 +245,6 @@ void alarm_init(struct alarm *alarm,
 	pr_alarm(FLOW, "created alarm, type %d, func %pF\n", type, function);
 }
 
-
 /**
  * alarm_start_range - (re)start an alarm
  * @alarm:	the alarm to be added
@@ -671,4 +670,3 @@ static void  __exit alarm_exit(void)
 late_initcall(alarm_late_init);
 module_init(alarm_driver_init);
 module_exit(alarm_exit);
-

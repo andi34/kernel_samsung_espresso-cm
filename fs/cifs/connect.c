@@ -2625,7 +2625,6 @@ void reset_cifs_unix_caps(int xid, struct cifs_tcon *tcon,
 			}
 		}
 
-
 		cFYI(1, "Negotiate caps 0x%x", (int)cap);
 #ifdef CONFIG_CIFS_DEBUG2
 		if (cap & CIFS_UNIX_FCNTL_CAP)
@@ -2855,7 +2854,6 @@ cifs_cleanup_volume_info(struct smb_vol *volume_info)
 	cleanup_volume_info_contents(volume_info);
 	kfree(volume_info);
 }
-
 
 #ifdef CONFIG_CIFS_DFS_UPCALL
 /* build_path_to_root returns full path to root when
@@ -3328,7 +3326,6 @@ CIFSTCon(unsigned int xid, struct cifs_ses *ses,
 		else
 			is_unicode = false;
 
-
 		/* skip service field (NB: this field is always ASCII) */
 		if (length == 3) {
 			if ((bcc_ptr[0] == 'I') && (bcc_ptr[1] == 'P') &&
@@ -3426,7 +3423,6 @@ int cifs_negotiate_protocol(unsigned int xid, struct cifs_ses *ses)
 
 	return rc;
 }
-
 
 int cifs_setup_session(unsigned int xid, struct cifs_ses *ses,
 			struct nls_table *nls_info)

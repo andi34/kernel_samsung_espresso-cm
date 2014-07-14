@@ -30,7 +30,6 @@
 #include "modem_prj.h"
 #include "modem_link_device_mipi.h"
 
-
 static int mipi_hsi_attach_io_dev(struct link_device *ld,
 			struct io_device *iod)
 {
@@ -1889,4 +1888,3 @@ struct link_device *mipi_create_link_device(struct platform_device *pdev)
 
 	return ld;
 }
-

@@ -168,7 +168,6 @@ config FUNCTION_GRAPH_TRACER
 	  the return value. This is done by setting the current return
 	  address on the current task structure into a stack of calls.
 
-
 config IRQSOFF_TRACER
 	bool "Interrupts-off Latency Tracer"
 	default n
@@ -399,7 +398,6 @@ config DYNAMIC_FTRACE
 	  image. When this is enabled, functions can be individually
 	  enabled, and the functions not enabled will not affect
 	  performance of the system.
-
 	  See the files in /sys/kernel/debug/tracing:
 	    available_filter_functions
 	    set_ftrace_filter
@@ -494,4 +492,3 @@ config RING_BUFFER_BENCHMARK
 endif # FTRACE
 
 endif # TRACING_SUPPORT
-

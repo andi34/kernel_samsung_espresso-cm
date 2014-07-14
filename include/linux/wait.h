@@ -382,7 +382,6 @@ do {									\
 	__ret;								\
 })
 
-
 #define __wait_event_interruptible_locked(wq, condition, exclusive, irq) \
 ({									\
 	int __ret = 0;							\
@@ -411,7 +410,6 @@ do {									\
 	__set_current_state(TASK_RUNNING);				\
 	__ret;								\
 })
-
 
 /**
  * wait_event_interruptible_locked - sleep until a condition gets true
@@ -529,7 +527,6 @@ do {									\
 	((condition)							\
 	 ? 0 : __wait_event_interruptible_locked(wq, condition, 1, 1))
 
-
 #define __wait_event_interruptible_lock_irq_timeout(wq, condition,	\
 						    lock, ret)		\
 do {									\
@@ -586,7 +583,6 @@ do {									\
 					wq, condition, lock, __ret);	\
 	__ret;								\
 })
-
 
 #define __wait_event_killable(wq, condition, ret)			\
 do {									\
@@ -725,7 +721,7 @@ static inline int wait_on_bit_lock(void *word, int bit,
 		return 0;
 	return out_of_line_wait_on_bit_lock(word, bit, action, mode);
 }
-	
+
 #endif /* __KERNEL__ */
 
 #endif

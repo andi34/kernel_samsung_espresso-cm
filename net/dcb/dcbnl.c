@@ -1235,7 +1235,6 @@ static int dcbnl_build_peer_app(struct net_device *netdev, struct sk_buff* skb,
 	u16 app_count;
 	int err;
 
-
 	/**
 	 * retrieve the peer app configuration form the driver. If the driver
 	 * handlers fail exit without doing anything

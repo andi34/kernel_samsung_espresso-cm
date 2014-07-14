@@ -127,8 +127,7 @@ static int bq2415x_read_block(struct bq2415x_device_info *di, u8 *value,
 		count++;
 		ret = i2c_transfer(di->client->adapter, msg, 2);
 		if (ret != 2)
-			dev_err(di->dev,
-				"i2c_write failed to transfer all messages\n");
+			dev_err(di->dev, "i2c_write failed to transfer all messages\n");
 		} while (ret != 2 && count < 0xff);
 
 	if (ret != 2) {
@@ -157,7 +156,6 @@ static int bq2415x_read_byte(struct bq2415x_device_info *di, u8 *value, u8 reg)
 {
 	return bq2415x_read_block(di, value, reg, 1);
 }
-
 
 static void bq2415x_config_status_reg(struct bq2415x_device_info *di)
 {
@@ -318,7 +316,6 @@ static void bq2415x_config_safety_reg(struct bq2415x_device_info *di,
 	else if (max_currentmA > 1550)
 		max_currentmA = 1550;
 
-
 	if (max_voltagemV < 4200)
 		max_voltagemV = 4200;
 	else if (max_voltagemV > 4440)
@@ -442,7 +439,6 @@ static irqreturn_t bq2415x_vf_isr(int irq, void *data)
 	return IRQ_HANDLED;
 }
 
-
 static void set_charge_current(struct bq2415x_charger_callbacks *ptr,
 			int cable_type)
 {
@@ -462,7 +458,6 @@ static void set_term_current(struct bq2415x_charger_callbacks *ptr,
 {
 	struct bq2415x_device_info *di = container_of(ptr,
 	struct bq2415x_device_info, callbacks);
-
 
 	switch (term_type) {
 	case 1:

@@ -103,7 +103,6 @@
 /* PLL output/desired sampling rate = (32768 * 6000)/88200 */
 #define EVENT_GENERATOR_COUNTER_44100	(2228-1)
 
-
 int omap_abe_start_event_generator(struct omap_abe *abe);
 int omap_abe_stop_event_generator(struct omap_abe *abe);
 int omap_abe_write_event_generator(struct omap_abe *abe, u32 e);

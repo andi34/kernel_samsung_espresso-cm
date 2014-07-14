@@ -2,7 +2,7 @@
  * SD-SPI Protocol Conversion - BCMSDH->gSPI Translation Layer
  *
  * Copyright (C) 1999-2012, Broadcom Corporation
- * 
+ *
  *      Unless you and Broadcom execute a separate written software license
  * agreement governing use of this software, this software is licensed to you
  * under the terms of the GNU General Public License version 2 (the "GPL"),

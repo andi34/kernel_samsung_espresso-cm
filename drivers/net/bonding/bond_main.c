@@ -822,7 +822,6 @@ static void bond_mc_del(struct bonding *bond, void *addr)
 	}
 }
 
-
 static void __bond_resend_igmp_join_requests(struct net_device *dev)
 {
 	struct in_device *in_dev;
@@ -1673,7 +1672,6 @@ int bond_enslave(struct net_device *bond_dev, struct net_device *slave_dev)
 		memcpy(bond->dev->dev_addr, slave_dev->dev_addr,
 		       slave_dev->addr_len);
 
-
 	new_slave = kzalloc(sizeof(struct slave), GFP_KERNEL);
 	if (!new_slave) {
 		res = -ENOMEM;
@@ -2401,7 +2399,6 @@ static int bond_slave_info_query(struct net_device *bond_dev, struct ifslave *in
 
 /*-------------------------------- Monitoring -------------------------------*/
 
-
 static int bond_miimon_inspect(struct bonding *bond)
 {
 	struct slave *slave;
@@ -2710,7 +2707,6 @@ static void bond_arp_send(struct net_device *slave_dev, int arp_op, __be32 dest_
 	}
 	arp_xmit(skb);
 }
-
 
 static void bond_arp_send_all(struct bonding *bond, struct slave *slave)
 {
@@ -3684,7 +3680,6 @@ static int bond_do_ioctl(struct net_device *bond_dev, struct ifreq *ifr, int cmd
 		if (!mii)
 			return -EINVAL;
 
-
 		if (mii->reg_num == 1) {
 			struct bonding *bond = netdev_priv(bond_dev);
 			mii->val_out = 0;
@@ -3796,10 +3791,8 @@ static void bond_set_multicast_list(struct net_device *bond_dev)
 		 */
 		bond_set_promiscuity(bond, 1);
 
-
 	if (!(bond_dev->flags & IFF_PROMISC) && (bond->flags & IFF_PROMISC))
 		bond_set_promiscuity(bond, -1);
-
 
 	/* set allmulti flag to slaves */
 	if ((bond_dev->flags & IFF_ALLMULTI) && !(bond->flags & IFF_ALLMULTI))
@@ -3809,10 +3802,8 @@ static void bond_set_multicast_list(struct net_device *bond_dev)
 		 */
 		bond_set_allmulti(bond, 1);
 
-
 	if (!(bond_dev->flags & IFF_ALLMULTI) && (bond->flags & IFF_ALLMULTI))
 		bond_set_allmulti(bond, -1);
-
 
 	read_lock(&bond->lock);
 
@@ -3944,7 +3935,6 @@ static int bond_set_mac_address(struct net_device *bond_dev, void *addr)
 	if (bond->params.mode == BOND_MODE_ALB)
 		return bond_alb_set_mac_address(bond_dev, addr);
 
-
 	pr_debug("bond=%p, name=%s\n",
 		 bond, bond_dev ? bond_dev->name : "None");
 
@@ -4075,7 +4065,6 @@ out:
 
 	return NETDEV_TX_OK;
 }
-
 
 /*
  * in active-backup mode, we know that bond->curr_active_slave is always valid if
@@ -4240,7 +4229,6 @@ static inline int bond_slave_override(struct bonding *bond,
 
 	return res;
 }
-
 
 static u16 bond_select_queue(struct net_device *dev, struct sk_buff *skb)
 {
@@ -4971,7 +4959,7 @@ static int __net_init bond_net_init(struct net *net)
 	INIT_LIST_HEAD(&bn->dev_list);
 
 	bond_create_proc_dir(bn);
-	
+
 	return 0;
 }
 

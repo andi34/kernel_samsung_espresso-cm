@@ -5,13 +5,13 @@
  * Definitions subject to change without notice.
  *
  * Copyright (C) 1999-2012, Broadcom Corporation
- * 
+ *
  *      Unless you and Broadcom execute a separate written software license
  * agreement governing use of this software, this software is licensed to you
  * under the terms of the GNU General Public License version 2 (the "GPL"),
  * available at http://www.broadcom.com/licenses/GPLv2.php, with the
  * following added to such license:
- * 
+ *
  *      As a special exception, the copyright holders of this software give you
  * permission to link this software with independent modules, and to copy and
  * distribute the resulting executable under terms of your choice, provided that
@@ -19,7 +19,7 @@
  * the license of that module.  An independent module is a module which is not
  * derived from this software.  The special exception does not apply to any
  * modifications of the software.
- * 
+ *
  *      Notwithstanding the above, under no circumstances may you combine this
  * software in any way with any other Broadcom software provided under a license
  * other than the GPL, without Broadcom's express prior written consent.
@@ -47,7 +47,6 @@
  *  a no-op for most cases. For hybrid and other open source releases,
  *  its defined during a second pass and mogrified out for distribution.
  */
-
 
 #ifndef LINUX_POSTMOGRIFY_REMOVAL
 
@@ -103,7 +102,6 @@ typedef struct wl_sa_query {
 /* require default structure packing */
 #define BWL_DEFAULT_PACKING
 #include <packed_section_start.h>
-
 
 #ifndef LINUX_POSTMOGRIFY_REMOVAL
 /* Legacy structure to help keep backward compatible wl tool and tray app */
@@ -1061,7 +1059,6 @@ typedef struct wl_led_info {
 	uint8       activehi;
 } wl_led_info_t;
 
-
 /* srom read/write struct passed through ioctl */
 typedef struct {
 	uint	byteoff;	/* byte offset */
@@ -1769,7 +1766,6 @@ typedef struct {
 	void *param;
 } ndconfig_item_t;
 #endif
-
 
 /* WLC_GET_AUTH, WLC_SET_AUTH values */
 #define WL_AUTH_OPEN_SYSTEM		0	/* d11 open authentication */
@@ -2666,7 +2662,6 @@ typedef struct tx_inst_power {
 	uint8 txpwr_est_Pout[2];			/* Latest estimate for 2.4 and 5 Ghz */
 	uint8 txpwr_est_Pout_gofdm;			/* Pwr estimate for 2.4 OFDM */
 } tx_inst_power_t;
-
 
 typedef struct {
 	uint32 flags;
@@ -3671,7 +3666,6 @@ typedef	struct wme_max_bandwidth {
 #define TSPEC_DEFAULT_DIALOG_TOKEN	42	/* default dialog token */
 #define TSPEC_DEFAULT_SBW_FACTOR	0x3000	/* default surplus bw */
 
-
 #define WL_WOWL_KEEPALIVE_MAX_PACKET_SIZE  80
 #define WLC_WOWL_MAX_KEEPALIVE	2
 
@@ -4077,7 +4071,6 @@ typedef struct wl_pkteng_stats {
 	uint16 rxpktcnt[NUM_80211_RATES+1];
 } wl_pkteng_stats_t;
 
-
 #define WL_WOWL_MAGIC       (1 << 0)    /* Wakeup on Magic packet */
 #define WL_WOWL_NET         (1 << 1)    /* Wakeup on Netpattern */
 #define WL_WOWL_DIS         (1 << 2)    /* Wakeup on loss-of-link due to Disassoc/Deauth */
@@ -4122,15 +4115,12 @@ typedef struct {
 	uint16	ucode_wakeind;	/* What wakeup-event indication was set by ucode */
 } wl_wowl_wakeind_t;
 
-
 /* per AC rate control related data structure */
 typedef struct wl_txrate_class {
 	uint8		init_rate;
 	uint8		min_rate;
 	uint8		max_rate;
 } wl_txrate_class_t;
-
-
 
 /* Overlap BSS Scan parameters default, minimum, maximum */
 #define WLC_OBSS_SCAN_PASSIVE_DWELL_DEFAULT		20	/* unit TU */
@@ -4196,7 +4186,6 @@ typedef struct wl_action_obss_coex_req {
 	uint8 ch_list[1];
 } wl_action_obss_coex_req_t;
 
-
 /* IOVar parameter block for small MAC address array with type indicator */
 #define WL_IOV_MAC_PARAM_LEN  4
 
@@ -4207,7 +4196,6 @@ typedef struct {
 	char   addr_type[WL_IOV_MAC_PARAM_LEN];
 	struct ether_addr ea[WL_IOV_MAC_PARAM_LEN];
 } wl_iov_mac_params_t;
-
 
 /* Parameter block for PKTQ_LOG statistics */
 typedef struct {
@@ -4247,7 +4235,6 @@ typedef struct {
 	char                 headings[1];
 } pktq_log_format_v01_t;
 
-
 typedef struct {
 	uint32               version;
 	wl_iov_mac_params_t  params;
@@ -4255,7 +4242,6 @@ typedef struct {
 		pktq_log_format_v01_t v01;
 	} pktq_log;
 } wl_iov_pktq_log_t;
-
 
 /* **** EXTLOG **** */
 #define EXTLOG_CUR_VER		0x0100
@@ -4470,7 +4456,6 @@ typedef BWL_PRE_PACKED_STRUCT struct sta_prbreq_wps_ie_list {
 	uint32 totLen;
 	uint8 ieDataList[1];
 } BWL_POST_PACKED_STRUCT sta_prbreq_wps_ie_list_t;
-
 
 #ifdef WLMEDIA_TXFAILEVENT
 typedef BWL_PRE_PACKED_STRUCT struct {
@@ -4910,7 +4895,6 @@ typedef struct wl_bcmdcs_data {
 #define PSTA_MODE_PROXY			1
 #define PSTA_MODE_REPEATER		2
 
-
 /* NAT configuration */
 typedef struct {
 	uint32 ipaddr;		/* interface ip address */
@@ -5021,7 +5005,6 @@ typedef struct wl_mempool_stats {
 	bcm_mp_stats_t s[1];	/* Variable array of memory pool stats. */
 } wl_mempool_stats_t;
 
-
 /* D0 Coalescing */
 #define IPV4_ARP_FILTER		0x0001
 #define IPV4_NETBT_FILTER	0x0002
@@ -5117,7 +5100,6 @@ typedef struct trf_mgmt_shaping_info_array {
 	trf_mgmt_global_info_t   rx_global_shaping_info;
 	trf_mgmt_shaping_info_t  rx_queue_shaping_info[TRF_MGMT_MAX_PRIORITIES];
 } trf_mgmt_shaping_info_array_t;
-
 
 /* Traffic management statistical counters */
 typedef struct trf_mgmt_stats {

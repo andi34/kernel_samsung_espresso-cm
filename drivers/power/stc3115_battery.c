@@ -229,7 +229,6 @@ static void stc311x_get_status(struct i2c_client *client)
 		chip->status = POWER_SUPPLY_STATUS_FULL;
 }
 
-
 /* -------------------------------------------------------------------------- */
 /* I2C interface */
 
@@ -260,7 +259,6 @@ static int STC31xx_Write(int length, int reg, unsigned char *values)
 	return ret;
 }
 
-
 /*******************************************************************************
 * Function Name  : STC31xx_Read
 * Description    : utility function to read several bytes from STC311x registers
@@ -279,7 +277,6 @@ static int STC31xx_Read(int length, int reg, unsigned char *values)
 		dev_err(&sav_client->dev, "%s: err %d\n", __func__, ret);
 	return ret;
 }
-
 
 /* ---- end of I2C primitive interface -------------------------- */
 
@@ -306,7 +303,6 @@ static int STC31xx_ReadByte(int RegAddress)
 	return value;
 }
 
-
 /*******************************************************************************
 * Function Name  : STC31xx_WriteByte
 * Description    : utility function to write a 8-bit value into a register
@@ -321,7 +317,6 @@ static int STC31xx_WriteByte(int RegAddress, unsigned char Value)
 	res = STC31xx_Write(1, RegAddress, data);
 	return res;
 }
-
 
 /*******************************************************************************
 * Function Name  : STC31xx_ReadWord
@@ -348,7 +343,6 @@ static int STC31xx_ReadWord(int RegAddress)
 	return value;
 }
 
-
 /*******************************************************************************
 * Function Name  : STC31xx_WriteWord
 * Description    : utility function to write a 16-bit value into a register pair
@@ -364,7 +358,6 @@ static int STC31xx_WriteWord(int RegAddress, int Value)
 	res = STC31xx_Write(2, RegAddress, data);
 	return res;
 }
-
 
 /* ---- end of I2C R/W interface ----------------------------------- */
 
@@ -396,7 +389,6 @@ static int STC311x_Status(void)
 	value &= 0x7fff;
 	return value;
 }
-
 
 /*******************************************************************************
 * Function Name  : STC311x_SetParam
@@ -455,7 +447,6 @@ static void STC311x_SetParam(void)
 	return;
 }
 
-
 /*******************************************************************************
 * Function Name  : STC311x_Startup
 * Description    :  initialize and start the STC311x at application startup
@@ -480,7 +471,6 @@ static int STC311x_Startup(void)
 	    STC31xx_WriteWord(STC311x_REG_OCV, ocv);
 	return 0;
 }
-
 
 /*******************************************************************************
 * Function Name  : STC311x_Restore
@@ -515,7 +505,6 @@ static int STC311x_Restore(void)
 	return 0;
 }
 
-
 /*******************************************************************************
 * Function Name  : STC311x_Powerdown
 * Description    :  stop the STC311x at application power down
@@ -536,7 +525,6 @@ static int STC311x_Powerdown(void)
 		return res;
 	return OK;
 }
-
 
 /*******************************************************************************
 * Function Name  : STC311x_xxxx
@@ -658,7 +646,6 @@ static int STC311x_SaveVMCnf(void)
 	return 0;
 }
 
-
 /*******************************************************************************
 * Function Name  : conv
 * Description    : conversion utility
@@ -675,7 +662,6 @@ static int conv(short value, unsigned short factor)
 	v = (v + 1) / 2;
 	return v;
 }
-
 
 /*******************************************************************************
 * Function Name  : STC311x_ReadBatteryData
@@ -774,7 +760,6 @@ static int STC311x_ReadBatteryData(struct STC311x_BattDataTypeDef *BattData)
 	return OK;
 }
 
-
 /*******************************************************************************
 * Function Name  : STC311x_ReadRamData
 * Description    : utility function to read the RAM data from STC311x
@@ -786,7 +771,6 @@ static int STC311x_ReadRamData(unsigned char *RamData)
 	return STC31xx_Read(RAM_SIZE, STC311x_REG_RAM, RamData);
 }
 
-
 /*******************************************************************************
 * Function Name  : STC311x_WriteRamData
 * Description    : utility function to write the RAM data into STC311x
@@ -797,7 +781,6 @@ static int STC311x_WriteRamData(unsigned char *RamData)
 {
 	return STC31xx_Write(RAM_SIZE, STC311x_REG_RAM, RamData);
 }
-
 
 /*******************************************************************************
 * Function Name  : Interpolate
@@ -834,7 +817,6 @@ static int interpolate(int x, int n, int const *tabx, int const *taby)
 	return y;
 }
 
-
 /*******************************************************************************
 * Function Name  : calcCRC8
 * Description    : calculate the CRC8
@@ -856,7 +838,6 @@ static int calcCRC8(unsigned char *data, int n)
 	return crc & 255;
 }
 
-
 /*******************************************************************************
 * Function Name  : UpdateRamCrc
 * Description    : calculate the RAM CRC
@@ -870,7 +851,6 @@ static int UpdateRamCrc(void)
 	GG_Ram.db[RAM_SIZE - 1] = res;	/* last byte holds the CRC */
 	return res;
 }
-
 
 /*******************************************************************************
 * Function Name  : Init_RAM
@@ -890,7 +870,6 @@ static void Init_RAM(void)
 	    /* update the crc */
 	    UpdateRamCrc();
 }
-
 
 /*******************************************************************************
 * Function Name  : UpdateParam
@@ -950,7 +929,6 @@ static void UpdateParam(void)
 	}
 }
 
-
 /* compensate SOC with temperature, SOC in 0.1% units */
 static int CompensateSOC(int value, int temp)
 {
@@ -972,7 +950,6 @@ static int CompensateSOC(int value, int temp)
 		v = MAX_SOC;
 	return v;
 }
-
 
 /*******************************************************************************
 * Function Name  : MM_FSM
@@ -1096,7 +1073,6 @@ static void VM_FSM(void)
 		}
 }
 
-
 /*******************************************************************************
 * Function Name  : Reset_FSM_GG
 * Description    : reset the gas gauge state machine and flags
@@ -1109,7 +1085,6 @@ static void Reset_FSM_GG(void)
 	if (BattData.Adaptive)
 		Capacity_Adjust = 0;
 }
-
 
 /* -------------------- firmware interface functions --------------- */
 
@@ -1191,7 +1166,6 @@ int GasGauge_Start(struct GasGauge_DataTypeDef *GG)
 	return res;
 }
 
-
 /*******************************************************************************
 Restart sequence:
 Usage:
@@ -1236,7 +1210,6 @@ int GasGauge_Stop(void)
 		return -1;	/* error */
 	return 0;
 }
-
 
 /*******************************************************************************
 * Function Name  : GasGauge_Task
@@ -1436,7 +1409,6 @@ int GasGauge_Task(struct GasGauge_DataTypeDef *GG)
 		return 0;	/* only SOC, OCV and voltage are valid */
 }
 
-
 /*******************************************************************************
 * Function Name  : STC31xx_SetPowerSavingMode
 * Description    :  Set the power saving mode
@@ -1456,7 +1428,6 @@ int STC31xx_SetPowerSavingMode(void)
 		return res;
 	return OK;
 }
-
 
 /*******************************************************************************
 * Function Name  : STC31xx_StopPowerSavingMode
@@ -1478,7 +1449,6 @@ int STC31xx_StopPowerSavingMode(void)
 	return OK;
 }
 
-
 /*******************************************************************************
 * Function Name  : STC31xx_AlarmSet
 * Description    :  Set the alarm function and set the alarm threshold
@@ -1497,7 +1467,6 @@ int STC31xx_AlarmSet(void)
 		return res;
 	return OK;
 }
-
 
 /*******************************************************************************
 * Function Name  : STC31xx_AlarmStop
@@ -1519,7 +1488,6 @@ int STC31xx_AlarmStop(void)
 	return OK;
 }
 
-
 /*******************************************************************************
 * Function Name  : STC31xx_AlarmGet
 * Description    : Return the ALM status
@@ -1539,7 +1507,6 @@ int STC31xx_AlarmGet(void)
 	return res;
 }
 
-
 /*******************************************************************************
 * Function Name  : STC31xx_AlarmClear
 * Description    :  Clear the alarm signal
@@ -1556,7 +1523,6 @@ int STC31xx_AlarmClear(void)
 		return res;
 	return res;
 }
-
 
 /*******************************************************************************
 * Function Name  : STC31xx_AlarmSetVoltageThreshold
@@ -1577,7 +1543,6 @@ int STC31xx_AlarmSetVoltageThreshold(int VoltThresh)
 	return OK;
 }
 
-
 /*******************************************************************************
 * Function Name  : STC31xx_AlarmSetSOCThreshold
 * Description    : Set the alarm threshold
@@ -1593,7 +1558,6 @@ int STC31xx_AlarmSetSOCThreshold(int SOCThresh)
 		return res;
 	return OK;
 }
-
 
 /*******************************************************************************
 * Function Name  : STC31xx_RelaxTmrSet
@@ -1616,7 +1580,6 @@ int STC31xx_RelaxTmrSet(int CurrentThreshold)
 	return OK;
 }
 
-
 /*******************************************************************************
 * Function Name  : STC31xx_ForceCC
 * Description    :  Force the CC mode for CC eval
@@ -1628,7 +1591,6 @@ int STC31xx_ForceCC(void)
 	STC311x_ForceCC();
 	return OK;
 }
-
 
 /* -------------------------------------------------------------------------- */
 
@@ -1839,7 +1801,6 @@ static int __devinit stc311x_probe(struct i2c_client *client,
 
 	stc311x_get_online(client);
 
-
 	wake_lock_init(&chip->work_wake_lock, WAKE_LOCK_SUSPEND,
 				"wakelock-fuelgage");
 
@@ -1885,7 +1846,6 @@ static int __devexit stc311x_remove(struct i2c_client *client)
 	return 0;
 }
 
-
 #ifdef CONFIG_PM
 static int stc311x_suspend(struct i2c_client *client, pm_message_t state)
 {
@@ -1902,7 +1862,6 @@ static int stc311x_resume(struct i2c_client *client)
 	return 0;
 }
 
-
 #else	/*  */
 
 #define stc311x_suspend NULL
@@ -1913,7 +1872,6 @@ static int stc311x_resume(struct i2c_client *client)
 /* Every chip have a unique id */
 static const struct i2c_device_id stc311x_id[] = { {"stc3115", 0}, {}
 };
-
 
 /* Every chip have a unique id and we need to register
 this ID using MODULE_DEVICE_TABLE*/
@@ -1926,7 +1884,6 @@ static struct i2c_driver stc311x_i2c_driver = { .driver = {.name =
 	.resume = stc311x_resume,
 	.id_table = stc311x_id,
 };
-
 
 /*To register this I2C chip driver, the function i2c_add_driver should be called
 with a pointer to the struct i2c_driver*/

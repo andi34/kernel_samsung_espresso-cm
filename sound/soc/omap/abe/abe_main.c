@@ -66,7 +66,6 @@
 #include "abe_dbg.h"
 #include "abe_port.h"
 
-
 struct omap_abe_equ {
 	/* type of filter */
 	u32 equ_type;
@@ -91,7 +90,6 @@ struct omap_abe_equ {
 #include "abe_gain.h"
 #include "abe_aess.h"
 #include "abe_seq.h"
-
 
 int omap_abe_connect_debug_trace(struct omap_abe *abe,
 				 struct omap_abe_dma *dma2);
@@ -761,4 +759,3 @@ int abe_mono_mixer(u32 id, u32 on_off)
 EXPORT_SYMBOL(abe_mono_mixer);
 
 EXPORT_SYMBOL(abe_use_compensated_gain);
-

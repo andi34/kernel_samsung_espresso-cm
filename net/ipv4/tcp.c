@@ -1986,7 +1986,6 @@ adjudge_to_death:
 	/* It is the last release_sock in its life. It will remove backlog. */
 	release_sock(sk);
 
-
 	/* Now socket is owned by kernel and we acquire BH lock
 	   to finish close. No need to check for user refs.
 	 */
@@ -2987,7 +2986,6 @@ retry:
 }
 EXPORT_SYMBOL(tcp_alloc_md5sig_pool);
 
-
 /**
  *	tcp_get_md5sig_pool - get md5sig_pool for this user
  *
@@ -3296,7 +3294,6 @@ void __init tcp_init(void)
 		spin_lock_init(&tcp_hashinfo.bhash[i].lock);
 		INIT_HLIST_HEAD(&tcp_hashinfo.bhash[i].chain);
 	}
-
 
 	cnt = tcp_hashinfo.ehash_mask + 1;
 

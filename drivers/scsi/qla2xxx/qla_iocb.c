@@ -798,7 +798,6 @@ qla24xx_set_t10dif_tags(struct scsi_cmnd *cmd, struct fw_dif_context *pkt,
 	    (int)scsi_get_lba(cmd), scsi_get_prot_type(cmd)));
 }
 
-
 static int
 qla24xx_walk_and_build_sglist(struct qla_hw_data *ha, srb_t *sp, uint32_t *dsd,
 	uint16_t tot_dsds)
@@ -892,7 +891,6 @@ qla24xx_walk_and_build_prot_sglist(struct qla_hw_data *ha, srb_t *sp,
 	uint16_t	used_dsds = tot_dsds;
 
 	uint8_t		*cp;
-
 
 	cmd = sp->cmd;
 	scsi_for_each_prot_sg(cmd, sg, tot_dsds, i) {
@@ -1361,7 +1359,6 @@ queuing_error:
 	return QLA_FUNCTION_FAILED;
 }
 
-
 /**
  * qla24xx_dif_start_scsi() - Send a SCSI command to the ISP
  * @sp: command to send to the ISP
@@ -1546,7 +1543,6 @@ queuing_error:
 	    "CMD sent FAILED SCSI prot_op:%02x\n", scsi_get_prot_op(cmd)));
 	return QLA_FUNCTION_FAILED;
 }
-
 
 static void qla25xx_set_que(srb_t *sp, struct rsp_que **rsp)
 {

@@ -1650,7 +1650,6 @@ static int __perf_event_enable(void *info)
 	 * in perf_event_enable function and this place having:
 	 *   - IRQs on
 	 *   - ctx->lock unlocked
-	 *
 	 * where the task could be killed and 'ctx' deactivated
 	 * by perf_event_exit_task.
 	 */

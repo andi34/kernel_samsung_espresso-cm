@@ -33,7 +33,7 @@ static unsigned stack_dump_index[STACK_TRACE_ENTRIES];
  * added by the stack tracer itself.
  */
 static struct stack_trace max_stack_trace = {
-	.max_entries		= STACK_TRACE_ENTRIES - 1,
+	.max_entries	= STACK_TRACE_ENTRIES - 1,
 	.entries		= &stack_dump_trace[1],
 };
 

@@ -1201,7 +1201,6 @@ static int parse_cgroupfs_options(char *data, struct cgroup_sb_opts *opts)
 	    (opts->subsys_bits & mask))
 		return -EINVAL;
 
-
 	/* Can't specify "none" and some subsystems */
 	if (opts->subsys_bits && opts->none)
 		return -EINVAL;
@@ -3272,7 +3271,6 @@ err:
 	return ret;
 }
 
-
 /*
  * seq_file methods for the tasks/procs files. The seq_file position is the
  * next pid to display; the seq_file iterator is a pointer to the pid
@@ -3581,8 +3579,7 @@ static int cgroup_write_event_control(struct cgroup *cgrp, struct cftype *cft,
 	}
 
 	/*
-	 * The file to be monitored must be in the same cgroup as
-	 * cgroup.event_control is.
+	 * The file to be monitored must be in the same cgroup as cgroup.event_control is.
 	 */
 	cgrp_cfile = __d_cgrp(cfile->f_dentry->d_parent);
 	if (cgrp_cfile != cgrp) {

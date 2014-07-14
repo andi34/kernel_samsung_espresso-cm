@@ -265,7 +265,6 @@ static int lp855x_disable(struct lp855x_info *info)
 	return 0;
 }
 
-
 #ifdef CONFIG_HAS_EARLYSUSPEND
 static void lp855x_early_suspend(struct early_suspend *h)
 {

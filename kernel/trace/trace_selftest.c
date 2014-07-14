@@ -455,7 +455,6 @@ trace_selftest_startup_function(struct tracer *trace, struct trace_array *tr)
 }
 #endif /* CONFIG_FUNCTION_TRACER */
 
-
 #ifdef CONFIG_FUNCTION_GRAPH_TRACER
 
 /* Maximum number of functions to trace before diagnosing a hang */
@@ -472,7 +471,6 @@ static int trace_graph_entry_watchdog(struct ftrace_graph_ent *trace)
 		printk(KERN_WARNING "BUG: Function graph tracer hang!\n");
 		if (ftrace_dump_on_oops) {
 			ftrace_dump(DUMP_ALL);
-			/* ftrace_dump() disables tracing */
 			tracing_on();
 		}
 		return 0;
@@ -540,7 +538,6 @@ out:
 	return ret;
 }
 #endif /* CONFIG_FUNCTION_GRAPH_TRACER */
-
 
 #ifdef CONFIG_IRQSOFF_TRACER
 int
@@ -848,7 +845,6 @@ trace_selftest_startup_wakeup(struct tracer *trace, struct trace_array *tr)
 	if (!ret)
 		ret = trace_test_buffer(&max_tr, &count);
 
-
 	trace->reset(tr);
 	tracing_start();
 
@@ -929,4 +925,3 @@ trace_selftest_startup_branch(struct tracer *trace, struct trace_array *tr)
 	return ret;
 }
 #endif /* CONFIG_BRANCH_TRACER */
-

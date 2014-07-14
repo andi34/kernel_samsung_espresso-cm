@@ -105,7 +105,6 @@ struct efi_variable {
 	__u32         Attributes;
 } __attribute__((packed));
 
-
 struct efivar_entry {
 	struct efivars *efivars;
 	struct efi_variable var;
@@ -601,7 +600,6 @@ efivar_unregister(struct efivar_entry *var)
 {
 	kobject_put(&var->kobj);
 }
-
 
 static ssize_t efivar_create(struct file *filp, struct kobject *kobj,
 			     struct bin_attribute *bin_attr,
@@ -1134,4 +1132,3 @@ efivars_exit(void)
 
 module_init(efivars_init);
 module_exit(efivars_exit);
-

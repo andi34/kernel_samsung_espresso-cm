@@ -181,7 +181,6 @@ out_undo:
 	goto out;
 }
 
-
 #ifdef CONFIG_NET_NS
 static struct kmem_cache *net_cachep;
 static struct workqueue_struct *netns_wq;
@@ -500,7 +499,7 @@ again:
 
 static void unregister_pernet_operations(struct pernet_operations *ops)
 {
-	
+
 	__unregister_pernet_operations(ops);
 	rcu_barrier();
 	if (ops->id)

@@ -364,7 +364,6 @@ static int max77693_freeze(struct device *dev)
 						&max77693->reg_muic_dump[i]);
 	} while (i-- != 0);
 
-
 	i = ARRAY_SIZE(max77693_dumpaddr_haptic) - 1;
 	do {
 		max77693_read_reg(i2c, max77693_dumpaddr_haptic[i],

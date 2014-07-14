@@ -37,7 +37,7 @@ boards has not
 yet been added to the driver, mainly due to the fact that
 I don't know the device id numbers.  If you have one
 of these boards,
-please file a bug report at http://comedi.org/ 
+please file a bug report at http://comedi.org/
 so I can get the necessary information from you.
 
 The 1200 series boards have onboard calibration dacs for correcting
@@ -2159,7 +2159,6 @@ static void __exit driver_labpc_cleanup_module(void)
 module_init(driver_labpc_init_module);
 module_exit(driver_labpc_cleanup_module);
 #endif
-
 
 MODULE_AUTHOR("Comedi http://www.comedi.org");
 MODULE_DESCRIPTION("Comedi low-level driver");

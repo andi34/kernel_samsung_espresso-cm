@@ -46,7 +46,6 @@
 #include "musb_core.h"
 #include "musb_host.h"
 
-
 /* MUSB HOST status 22-mar-2006
  *
  * - There's still lots of partial code duplication for fault paths, so
@@ -81,7 +80,6 @@
  *   although ARP RX wins.  (That test was done with a full speed link.)
  */
 
-
 /*
  * NOTE on endpoint usage:
  *
@@ -95,7 +93,6 @@
  * "claimed" until its software queue is no longer refilled.  No multiplexing
  * of transfers between endpoints, or anything clever.
  */
-
 
 static void musb_ep_program(struct musb *musb, u8 epnum,
 			struct urb *urb, int is_out,
@@ -884,7 +881,6 @@ static void musb_ep_program(struct musb *musb, u8 epnum,
 	}
 }
 
-
 /*
  * Service the default endpoint (ep0) as host.
  * Return true until it's time to start the status stage.
@@ -1085,7 +1081,6 @@ irqreturn_t musb_h_ep0_irq(struct musb *musb)
 done:
 	return retval;
 }
-
 
 #ifdef CONFIG_USB_INVENTRA_DMA
 
@@ -1342,7 +1337,6 @@ void musb_host_tx(struct musb *musb, u8 epnum)
 	musb_writew(epio, MUSB_TXCSR,
 			MUSB_TXCSR_H_WZC_BITS | MUSB_TXCSR_TXPKTRDY);
 }
-
 
 #ifdef CONFIG_USB_INVENTRA_DMA
 
@@ -2082,7 +2076,6 @@ done:
 	return ret;
 }
 
-
 /*
  * abort a transfer that's at the head of a hardware queue.
  * called with controller locked, irqs blocked
@@ -2409,7 +2402,6 @@ static int musb_alloc_temp_buffer(struct urb *urb, gfp_t mem_flags)
 	/* Position our struct temp_buffer such that data is aligned */
 	temp = PTR_ALIGN(kmalloc_ptr, MUSB_USB_DMA_ALIGN);
 
-
 	temp->kmalloc_ptr = kmalloc_ptr;
 	temp->old_xfer_buffer = urb->transfer_buffer;
 	if (dir == DMA_TO_DEVICE)
@@ -2443,7 +2435,6 @@ static void musb_unmap_urb_for_dma(struct usb_hcd *hcd, struct urb *urb)
 	usb_hcd_unmap_urb_for_dma(hcd, urb);
 	musb_free_temp_buffer(urb);
 }
-
 
 const struct hc_driver musb_hc_driver = {
 	.description		= "musb-hcd",

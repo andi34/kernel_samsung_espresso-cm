@@ -263,7 +263,6 @@ static const struct key_entry asus_keymap[] = {
 	{KE_END, 0},
 };
 
-
 /*
  * This function evaluates an ACPI method, given an int as parameter, the
  * method is searched within the scope of the handle, can be NULL. The output
@@ -1217,7 +1216,6 @@ static mode_t asus_sysfs_is_visible(struct kobject *kobj,
 
 	return supported ? attr->mode : 0;
 }
-
 
 static const struct attribute_group asus_attr_group = {
 	.is_visible	= asus_sysfs_is_visible,

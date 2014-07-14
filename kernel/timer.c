@@ -770,7 +770,6 @@ unsigned long apply_slack(struct timer_list *timer, unsigned long expires)
 	bit = find_last_bit(&mask, BITS_PER_LONG);
 
 	mask = (1 << bit) - 1;
-
 	expires_limit = expires_limit & ~(mask);
 
 	return expires_limit;
@@ -1638,7 +1637,6 @@ static int __cpuinit init_timers_cpu(int cpu)
 		base = per_cpu(tvec_bases, cpu);
 	}
 
-
 	for (j = 0; j < TVN_SIZE; j++) {
 		INIT_LIST_HEAD(base->tv5.vec + j);
 		INIT_LIST_HEAD(base->tv4.vec + j);
@@ -1730,7 +1728,6 @@ static int __cpuinit timer_cpu_notify(struct notifier_block *self,
 static struct notifier_block __cpuinitdata timers_nb = {
 	.notifier_call	= timer_cpu_notify,
 };
-
 
 void __init init_timers(void)
 {

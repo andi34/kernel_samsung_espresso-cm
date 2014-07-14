@@ -320,7 +320,6 @@ static ssize_t superior_factory_store(struct device *dev,
 	return size;
 }
 
-
 static DEVICE_ATTR(usb_sel, S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP,
 			superior_usb_sel_show, superior_usb_sel_store);
 static DEVICE_ATTR(uart_sel, S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP,

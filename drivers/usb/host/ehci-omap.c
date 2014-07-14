@@ -64,7 +64,6 @@
 
 static struct hc_driver ehci_omap_hc_driver;
 
-
 static inline void ehci_write(void __iomem *base, u32 reg, u32 val)
 {
 	__raw_writel(val, base + reg);
@@ -412,7 +411,6 @@ static void omap_ehci_soft_phy_reset(struct platform_device *pdev, u8 port)
 	}
 }
 
-
 /* configure so an HC device and id are always provided */
 /* always called with process context; sleeping is OK */
 
@@ -562,7 +560,6 @@ err_add_hcd:
 err_io:
 	return ret;
 }
-
 
 /**
  * ehci_hcd_omap_remove - shutdown processing for EHCI HCDs
@@ -719,4 +716,3 @@ static struct hc_driver ehci_omap_hc_driver = {
 MODULE_ALIAS("platform:ehci-omap");
 MODULE_AUTHOR("Texas Instruments, Inc.");
 MODULE_AUTHOR("Felipe Balbi <felipe.balbi@nokia.com>");
-

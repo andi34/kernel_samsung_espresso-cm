@@ -100,7 +100,6 @@ static void gfs2_unpin(struct gfs2_sbd *sdp, struct buffer_head *bh,
 	atomic_dec(&sdp->sd_log_pinned);
 }
 
-
 static inline struct gfs2_log_descriptor *bh_log_desc(struct buffer_head *bh)
 {
 	return (struct gfs2_log_descriptor *)bh->b_data;
@@ -116,7 +115,6 @@ static inline __be64 *bh_ptr_end(struct buffer_head *bh)
 {
 	return (__force __be64 *)(bh->b_data + bh->b_size);
 }
-
 
 static struct buffer_head *gfs2_get_log_desc(struct gfs2_sbd *sdp, u32 ld_type)
 {
@@ -577,7 +575,7 @@ static void gfs2_write_blocks(struct gfs2_sbd *sdp, struct buffer_head *bh,
 	ld->ld_data1 = cpu_to_be32(n);
 
 	ptr = bh_log_ptr(bh);
-	
+
 	get_bh(bh);
 	submit_bh(WRITE_SYNC, bh);
 	gfs2_log_lock(sdp);
@@ -739,7 +737,6 @@ static void databuf_lo_after_commit(struct gfs2_sbd *sdp, struct gfs2_ail *ai)
 	gfs2_assert_warn(sdp, !sdp->sd_log_num_databuf);
 }
 
-
 const struct gfs2_log_operations gfs2_buf_lops = {
 	.lo_add = buf_lo_add,
 	.lo_before_commit = buf_lo_before_commit,
@@ -782,4 +779,3 @@ const struct gfs2_log_operations *gfs2_log_ops[] = {
 	&gfs2_revoke_lops,
 	NULL,
 };
-

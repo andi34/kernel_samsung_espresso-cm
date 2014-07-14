@@ -368,7 +368,6 @@ out:
 	return result;
 }
 
-
 /**
  * int journal_restart() - restart a handle.
  * @handle:  handle to restart
@@ -420,7 +419,6 @@ int journal_restart(handle_t *handle, int nblocks)
 	ret = start_this_handle(journal, handle);
 	return ret;
 }
-
 
 /**
  * void journal_lock_updates () - establish a transaction barrier.
@@ -687,7 +685,6 @@ repeat:
 		jh->b_next_transaction = transaction;
 	}
 
-
 	/*
 	 * Finally, if the buffer is not journaled right now, we need to make
 	 * sure it doesn't get written to disk before the caller actually
@@ -756,7 +753,6 @@ int journal_get_write_access(handle_t *handle, struct buffer_head *bh)
 	journal_put_journal_head(jh);
 	return rc;
 }
-
 
 /*
  * When the user wants to journal a newly created buffer_head
@@ -1837,8 +1833,7 @@ static int __dispose_buffer(struct journal_head *jh, transaction_t *transaction)
  * We're outside-transaction here.  Either or both of j_running_transaction
  * and j_committing_transaction may be NULL.
  */
-static int journal_unmap_buffer(journal_t *journal, struct buffer_head *bh,
-				int partial_page)
+static int journal_unmap_buffer(journal_t *journal, struct buffer_head *bh, int partial_page)
 {
 	transaction_t *transaction;
 	struct journal_head *jh;
@@ -1950,7 +1945,6 @@ retry:
 		 */
 		if (partial_page) {
 			tid_t tid = journal->j_committing_transaction->t_tid;
-
 			journal_put_journal_head(jh);
 			spin_unlock(&journal->j_list_lock);
 			jbd_unlock_bh_state(bh);
@@ -2043,8 +2037,7 @@ void journal_invalidatepage(journal_t *journal,
 		if (offset <= curr_off) {
 			/* This block is wholly outside the truncation point */
 			lock_buffer(bh);
-			may_free &= journal_unmap_buffer(journal, bh,
-							 offset > 0);
+			may_free &= journal_unmap_buffer(journal, bh, offset > 0);
 			unlock_buffer(bh);
 		}
 		curr_off = next_off;

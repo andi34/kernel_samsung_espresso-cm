@@ -1224,7 +1224,6 @@ static int aif2clk_ev(struct snd_soc_dapm_widget *w,
 		else
 			adc = WM8994_AIF2ADCL_ENA | WM8994_AIF2ADCR_ENA;
 
-
 		val = snd_soc_read(codec, WM8994_AIF2_CONTROL_2);
 		if ((val & WM8994_AIF2DACL_SRC) &&
 		    (val & WM8994_AIF2DACR_SRC))
@@ -2227,7 +2226,6 @@ static int _wm8994_set_fll(struct snd_soc_codec *codec, int id, int src,
 			id + 1);
 		return -EBUSY;
 	}
-
 
 	/* We always need to disable the FLL while reconfiguring */
 	snd_soc_update_bits(codec, WM8994_FLL1_CONTROL_1 + reg_offset,
@@ -3504,7 +3502,6 @@ static void wm8958_mic_id(void *data, u16 status)
 				    SND_JACK_HEADSET);
 	}
 
-
 	if (status & 0x4) {
 		dev_dbg(codec->dev, "Detected headphone\n");
 		wm8994->mic_detecting = false;
@@ -4458,7 +4455,6 @@ static __exit void wm8994_exit(void)
 	platform_driver_unregister(&wm8994_codec_driver);
 }
 module_exit(wm8994_exit);
-
 
 MODULE_DESCRIPTION("ASoC WM8994 driver");
 MODULE_AUTHOR("Mark Brown <broonie@opensource.wolfsonmicro.com>");

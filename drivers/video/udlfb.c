@@ -1086,7 +1086,6 @@ static struct fb_ops dlfb_ops = {
 	.fb_set_par = dlfb_ops_set_par,
 };
 
-
 /*
  * Assumes &info->lock held by caller
  * Assumes no active clients have framebuffer open
@@ -1894,4 +1893,3 @@ MODULE_AUTHOR("Roberto De Ioris <roberto@unbit.it>, "
 	      "Bernie Thompson <bernie@plugable.com>");
 MODULE_DESCRIPTION("DisplayLink kernel framebuffer driver");
 MODULE_LICENSE("GPL");
-

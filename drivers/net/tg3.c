@@ -15,7 +15,6 @@
  *	notice is accompanying it.
  */
 
-
 #include <linux/module.h>
 #include <linux/moduleparam.h>
 #include <linux/stringify.h>
@@ -383,7 +382,6 @@ static const struct {
 
 #define TG3_NUM_STATS	ARRAY_SIZE(ethtool_stats_keys)
 
-
 static const struct {
 	const char string[ETH_GSTRING_LEN];
 } ethtool_test_keys[] = {
@@ -396,7 +394,6 @@ static const struct {
 };
 
 #define TG3_NUM_TEST	ARRAY_SIZE(ethtool_test_keys)
-
 
 static void tg3_write32(struct tg3 *tp, u32 off, u32 val)
 {
@@ -1712,7 +1709,6 @@ static void tg3_phy_toggle_apd(struct tg3 *tp, bool enable)
 		reg |= MII_TG3_MISC_SHDW_SCR5_DLLAPD;
 
 	tg3_writephy(tp, MII_TG3_MISC_SHDW, reg);
-
 
 	reg = MII_TG3_MISC_SHDW_WREN |
 	      MII_TG3_MISC_SHDW_APD_SEL |
@@ -7608,7 +7604,6 @@ static int tg3_load_tso_firmware(struct tg3 *tp)
 	return 0;
 }
 
-
 static int tg3_set_mac_addr(struct net_device *dev, void *p)
 {
 	struct tg3 *tp = netdev_priv(dev);
@@ -7755,7 +7750,6 @@ static void tg3_rings_reset(struct tg3 *tp)
 	     txrcb < limit; txrcb += TG3_BDINFO_SIZE)
 		tg3_write_mem(tp, txrcb + TG3_BDINFO_MAXLEN_FLAGS,
 			      BDINFO_FLAGS_DISABLED);
-
 
 	/* Disable all receive return rings but the first. */
 	if (tg3_flag(tp, 5717_PLUS))
@@ -12020,7 +12014,6 @@ static void __devinit tg3_get_57780_nvram_info(struct tg3 *tp)
 	if (tp->nvram_pagesize != 264 && tp->nvram_pagesize != 528)
 		tg3_flag_set(tp, NO_NVRAM_ADDR_TRANS);
 }
-
 
 static void __devinit tg3_get_5717_nvram_info(struct tg3 *tp)
 {

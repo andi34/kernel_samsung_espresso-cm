@@ -40,7 +40,6 @@ config USB_STORAGE_REALTEK
 
 	  If this driver is compiled as a module, it will be named ums-realtek.
 
-
 config USB_STORAGE_DATAFAB
 	tristate "Datafab Compact Flash Reader support"
 	depends on USB_STORAGE

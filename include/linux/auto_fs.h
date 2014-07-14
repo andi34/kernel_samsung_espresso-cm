@@ -1,5 +1,5 @@
 /* -*- linux-c -*- ------------------------------------------------------- *
- *   
+ *
  * linux/include/linux/auto_fs.h
  *
  *   Copyright 1997 Transmeta Corporation - All Rights Reserved
@@ -9,7 +9,6 @@
  * option, any later version, incorporated herein by reference.
  *
  * ----------------------------------------------------------------------- */
-
 
 #ifndef _LINUX_AUTO_FS_H
 #define _LINUX_AUTO_FS_H
@@ -57,7 +56,7 @@ struct autofs_packet_missing {
         autofs_wqt_t wait_queue_token;
 	int len;
 	char name[NAME_MAX+1];
-};	
+};
 
 /* v3 expire (via ioctl) */
 struct autofs_packet_expire {

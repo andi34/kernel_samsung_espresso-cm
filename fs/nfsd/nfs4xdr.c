@@ -51,7 +51,6 @@
 #include "xdr4.h"
 #include "vfs.h"
 
-
 #define NFSDDBG_FACILITY		NFSDDBG_XDR
 
 /*
@@ -150,7 +149,7 @@ static __be32 *read_buf(struct nfsd4_compoundargs *argp, u32 nbytes)
 		p = argp->tmpp = kmalloc(nbytes, GFP_KERNEL);
 		if (!p)
 			return NULL;
-		
+
 	}
 	/*
 	 * The following memcpy is safe because read_buf is always
@@ -440,7 +439,6 @@ nfsd4_decode_close(struct nfsd4_compoundargs *argp, struct nfsd4_close *close)
 	DECODE_TAIL;
 }
 
-
 static __be32
 nfsd4_decode_commit(struct nfsd4_compoundargs *argp, struct nfsd4_commit *commit)
 {
@@ -567,7 +565,7 @@ static __be32
 nfsd4_decode_lockt(struct nfsd4_compoundargs *argp, struct nfsd4_lockt *lockt)
 {
 	DECODE_HEAD;
-		        
+
 	READ_BUF(32);
 	READ32(lockt->lt_type);
 	if((lockt->lt_type < NFS4_READ_LT) || (lockt->lt_type > NFS4_WRITEW_LT))
@@ -714,14 +712,14 @@ static __be32
 nfsd4_decode_open_confirm(struct nfsd4_compoundargs *argp, struct nfsd4_open_confirm *open_conf)
 {
 	DECODE_HEAD;
-		    
+
 	open_conf->oc_stateowner = NULL;
 	status = nfsd4_decode_stateid(argp, &open_conf->oc_req_stateid);
 	if (status)
 		return status;
 	READ_BUF(4);
 	READ32(open_conf->oc_seqid);
-						        
+
 	DECODE_TAIL;
 }
 
@@ -729,7 +727,7 @@ static __be32
 nfsd4_decode_open_downgrade(struct nfsd4_compoundargs *argp, struct nfsd4_open_downgrade *open_down)
 {
 	DECODE_HEAD;
-		    
+
 	open_down->od_stateowner = NULL;
 	status = nfsd4_decode_stateid(argp, &open_down->od_stateid);
 	if (status)
@@ -738,7 +736,7 @@ nfsd4_decode_open_downgrade(struct nfsd4_compoundargs *argp, struct nfsd4_open_d
 	READ32(open_down->od_seqid);
 	READ32(open_down->od_share_access);
 	READ32(open_down->od_share_deny);
-						        
+
 	DECODE_TAIL;
 }
 
@@ -2420,7 +2418,6 @@ nfsd4_encode_close(struct nfsd4_compoundres *resp, __be32 nfserr, struct nfsd4_c
 	return nfserr;
 }
 
-
 static __be32
 nfsd4_encode_commit(struct nfsd4_compoundres *resp, __be32 nfserr, struct nfsd4_commit *commit)
 {
@@ -2544,7 +2541,6 @@ nfsd4_encode_locku(struct nfsd4_compoundres *resp, __be32 nfserr, struct nfsd4_l
 	return nfserr;
 }
 
-
 static __be32
 nfsd4_encode_link(struct nfsd4_compoundres *resp, __be32 nfserr, struct nfsd4_link *link)
 {
@@ -2557,7 +2553,6 @@ nfsd4_encode_link(struct nfsd4_compoundres *resp, __be32 nfserr, struct nfsd4_li
 	}
 	return nfserr;
 }
-
 
 static __be32
 nfsd4_encode_open(struct nfsd4_compoundres *resp, __be32 nfserr, struct nfsd4_open *open)
@@ -2655,7 +2650,7 @@ nfsd4_encode_read(struct nfsd4_compoundres *resp, __be32 nfserr,
 {
 	u32 eof;
 	int v, pn;
-	unsigned long maxcount; 
+	unsigned long maxcount;
 	long len;
 	__be32 *p;
 
@@ -2821,7 +2816,7 @@ nfsd4_encode_readdir(struct nfsd4_compoundres *resp, __be32 nfserr, struct nfsd4
 			      &readdir->common, nfsd4_encode_dirent);
 	if (nfserr == nfs_ok &&
 	    readdir->common.err == nfserr_toosmall &&
-	    readdir->buffer == page) 
+	    readdir->buffer == page)
 		nfserr = nfserr_toosmall;
 	if (nfserr == nfserr_symlink)
 		nfserr = nfserr_notdir;
@@ -3299,9 +3294,9 @@ status:
 	*statp = op->status;
 }
 
-/* 
- * Encode the reply stored in the stateowner reply cache 
- * 
+/*
+ * Encode the reply stored in the stateowner reply cache
+ *
  * XDR note: do not encode rp->rp_buflen: the buffer contains the
  * previously sent already encoded operation.
  *
@@ -3382,7 +3377,7 @@ nfs4svc_encode_compoundres(struct svc_rqst *rqstp, __be32 *p, struct nfsd4_compo
 	p += XDR_QUADLEN(resp->taglen);
 	*p++ = htonl(resp->opcnt);
 
-	if (rqstp->rq_res.page_len) 
+	if (rqstp->rq_res.page_len)
 		iov = &rqstp->rq_res.tail[0];
 	else
 		iov = &rqstp->rq_res.head[0];

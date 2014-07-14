@@ -4,7 +4,7 @@
  * Copyright (C) 2008-2010 Nokia Corporation
  *
  * Written by Hiroshi DOYU <Hiroshi.DOYU@nokia.com>,
- *		Paul Mundt and Toshihiro Kobayashi
+ *	      Paul Mundt and Toshihiro Kobayashi
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2 as

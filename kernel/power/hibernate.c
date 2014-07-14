@@ -28,7 +28,6 @@
 
 #include "power.h"
 
-
 static int nocompress = 0;
 static int noresume = 0;
 static char resume_file[256] = CONFIG_PM_STD_PARTITION;
@@ -344,7 +343,6 @@ int hibernation_snapshot(int platform_mode)
 		goto Complete_devices;
 
 	suspend_console();
-	ftrace_stop();
 	pm_restrict_gfp_mask();
 	error = dpm_suspend(PMSG_FREEZE);
 	if (error)
@@ -370,7 +368,6 @@ int hibernation_snapshot(int platform_mode)
 	if (error || !in_suspend)
 		pm_restore_gfp_mask();
 
-	ftrace_start();
 	resume_console();
 
  Complete_devices:
@@ -473,7 +470,6 @@ int hibernation_restore(int platform_mode)
 
 	pm_prepare_console();
 	suspend_console();
-	ftrace_stop();
 	pm_restrict_gfp_mask();
 	error = dpm_suspend_start(PMSG_QUIESCE);
 	if (!error) {
@@ -481,7 +477,6 @@ int hibernation_restore(int platform_mode)
 		dpm_resume_end(PMSG_RECOVER);
 	}
 	pm_restore_gfp_mask();
-	ftrace_start();
 	resume_console();
 	pm_restore_console();
 	return error;
@@ -508,7 +503,6 @@ int hibernation_platform_enter(void)
 
 	entering_platform_hibernation = true;
 	suspend_console();
-	ftrace_stop();
 	error = dpm_suspend_start(PMSG_HIBERNATE);
 	if (error) {
 		if (hibernation_ops->recover)
@@ -552,7 +546,6 @@ int hibernation_platform_enter(void)
  Resume_devices:
 	entering_platform_hibernation = false;
 	dpm_resume_end(PMSG_RESTORE);
-	ftrace_start();
 	resume_console();
 
  Close:
@@ -681,7 +674,6 @@ int hibernate(void)
 	mutex_unlock(&pm_mutex);
 	return error;
 }
-
 
 /**
  * software_resume - Resume from a saved hibernation image.
@@ -817,7 +809,6 @@ close_finish:
 }
 
 late_initcall(software_resume);
-
 
 static const char * const hibernation_modes[] = {
 	[HIBERNATION_PLATFORM]	= "platform",
@@ -1016,11 +1007,9 @@ static struct attribute * g[] = {
 	NULL,
 };
 
-
 static struct attribute_group attr_group = {
 	.attrs = g,
 };
-
 
 static int __init pm_disk_init(void)
 {
@@ -1028,7 +1017,6 @@ static int __init pm_disk_init(void)
 }
 
 core_initcall(pm_disk_init);
-
 
 static int __init resume_setup(char *str)
 {

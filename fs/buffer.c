@@ -991,7 +991,7 @@ init_page_buffers(struct page *page, struct block_device *bdev,
 /*
  * Create the page-cache page that contains the requested block.
  *
- * This is user purely for blockdev mappings.
+ * This is used purely for blockdev mappings.
  */
 static int
 grow_dev_page(struct block_device *bdev, sector_t block,

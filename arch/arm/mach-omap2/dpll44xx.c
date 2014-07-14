@@ -230,6 +230,7 @@ int omap4_prcm_freq_update(void)
 /* Use a very high retry count - we should not hit this condition */
 #define MAX_DPLL_WAIT_TRIES	1000000
 
+#define OMAP_1_9GHz	1900000000
 #define OMAP_1_5GHz	1500000000
 #define OMAP_1_2GHz	1200000000
 #define OMAP_1GHz	1000000000
@@ -722,6 +723,4 @@ void omap4_dpll_abe_reconfigure(void)
 
 	if (i >= MAX_DPLL_WAIT_TRIES)
 		pr_err("Warm Reset WA: failed to lock the ABE DPLL\n");
-	else
-		pr_info("Warm Reset WA: succeeded to reconfigure the ABE DPLL\n");
 }

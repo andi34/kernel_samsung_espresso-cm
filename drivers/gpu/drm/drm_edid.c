@@ -143,7 +143,6 @@ int drm_edid_header_is_valid(const u8 *raw_edid)
 }
 EXPORT_SYMBOL(drm_edid_header_is_valid);
 
-
 /*
  * Sanity check the EDID block (base or extension).  Return 0 if the block
  * doesn't check out, or 1 if it's valid.
@@ -1254,7 +1253,7 @@ do_cvt_mode(struct detailed_timing *timing, void *c)
 
 static int
 add_cvt_modes(struct drm_connector *connector, struct edid *edid)
-{	
+{
 	struct detailed_mode_closure closure = {
 		connector, edid, 0, 0, 0
 	};

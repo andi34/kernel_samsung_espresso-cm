@@ -47,7 +47,6 @@ static struct fsnotify_event *fanotify_merge(struct list_head *list,
 
 	pr_debug("%s: list=%p event=%p\n", __func__, list, event);
 
-
 	list_for_each_entry_reverse(test_holder, list, event_list) {
 		if (should_merge(test_holder->event, event)) {
 			test_event = test_holder->event;
@@ -120,7 +119,7 @@ static int fanotify_get_response_from_access(struct fsnotify_group *group,
 
 	pr_debug("%s: group=%p event=%p about to return ret=%d\n", __func__,
 		 group, event, ret);
-	
+
 	return ret;
 }
 #endif

@@ -333,7 +333,6 @@ int xhci_init(struct usb_hcd *hcd)
 
 /*-------------------------------------------------------------------------*/
 
-
 #ifdef CONFIG_USB_XHCI_HCD_DEBUGGING
 static void xhci_event_ring_work(unsigned long arg)
 {
@@ -2785,7 +2784,6 @@ static int xhci_reserve_host_control_ep_resources(struct xhci_hcd *xhci)
 			xhci->num_active_eps);
 	return 0;
 }
-
 
 /*
  * Returns 0 if the xHC ran out of device slots, the Enable Slot command

@@ -58,7 +58,7 @@ struct ion_buffer;
 /**
  * struct ion_platform_heap - defines a heap in the given platform
  * @type:	type of the heap from ion_heap_type enum
- * @id:		unique identifier for heap.  When allocating (lower numbers 
+ * @id:		unique identifier for heap.  When allocating (lower numbers
  * 		will be allocated from first)
  * @name:	used for debug purposes
  * @base:	base address of heap in physical memory if applicable
@@ -147,7 +147,6 @@ void ion_free(struct ion_client *client, struct ion_handle *handle);
 int ion_phys(struct ion_client *client, struct ion_handle *handle,
 	     ion_phys_addr_t *addr, size_t *len);
 
-
 /**
  * ion_phys_frm_dev - returns the physical address and len of a handle
  * @dev:	ion_dev
@@ -166,7 +165,6 @@ int ion_phys(struct ion_client *client, struct ion_handle *handle,
  */
 int ion_phys_frm_dev(struct ion_device *dev, struct ion_handle *handle,
 			ion_phys_addr_t *addr, size_t *len);
-
 
 /**
  * ion_map_kernel - create mapping for the given handle

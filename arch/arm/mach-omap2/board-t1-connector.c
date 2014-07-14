@@ -86,7 +86,6 @@
 #define MASK_SWITCH_USB_AP		0x01
 #define MASK_SWITCH_UART_AP		0x02
 
-
 #define T1_MHL_SWING_LEVEL		0xFA
 
 #define SWCAP_TRIM_OFFSET		(0x30)
@@ -1329,7 +1328,6 @@ static int __init t1_save_init_switch_param(char *str)
 	return ret;
 }
 __setup("switch_sel=", t1_save_init_switch_param);
-
 
 void __init omap4_t1_connector_init(void)
 {

@@ -426,7 +426,6 @@ sdev_show_##field (struct device *dev, struct device_attribute *attr,	\
 	sdev_show_function(field, format_string)			\
 static DEVICE_ATTR(field, S_IRUGO, sdev_show_##field, NULL);
 
-
 /*
  * sdev_rw_attr: create a function and attribute variable for a
  * read/write field.
@@ -482,7 +481,7 @@ static int scsi_sdev_check_buf_bit(const char *buf)
 			return 1;
 		else if (buf[0] == '0')
 			return 0;
-		else 
+		else
 			return -EINVAL;
 	} else
 		return -EINVAL;

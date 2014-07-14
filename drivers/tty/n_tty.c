@@ -1331,7 +1331,6 @@ handle_newline:
 	put_tty_queue(c, tty);
 }
 
-
 /**
  *	n_tty_write_wakeup	-	asynchronous I/O notifier
  *	@tty: tty device
@@ -1704,7 +1703,6 @@ static int job_control(struct tty_struct *tty, struct file *file)
 	}
 	return 0;
 }
-
 
 /**
  *	n_tty_read		-	read function for tty

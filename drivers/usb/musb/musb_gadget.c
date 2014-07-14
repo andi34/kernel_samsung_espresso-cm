@@ -47,7 +47,6 @@
 
 #include "musb_core.h"
 
-
 /* MUSB PERIPHERAL status 3-mar-2006:
  *
  * - EP0 seems solid.  It passes both USBCV and usbtest control cases.
@@ -278,7 +277,6 @@ static inline int max_ep_writesize(struct musb *musb, struct musb_ep *ep)
 	else
 		return ep->packet_sz;
 }
-
 
 #ifdef CONFIG_USB_INVENTRA_DMA
 
@@ -1804,7 +1802,6 @@ static void musb_gadget_release(struct device *dev)
 	dev_dbg(dev, "%s\n", __func__);
 }
 
-
 static void __init
 init_peripheral_ep(struct musb *musb, struct musb_ep *ep, u8 epnum, int is_in)
 {
@@ -2170,7 +2167,6 @@ int usb_gadget_unregister_driver(struct usb_gadget_driver *driver)
 }
 EXPORT_SYMBOL(usb_gadget_unregister_driver);
 
-
 /* ----------------------------------------------------------------------- */
 
 /* lifecycle operations called through plat_uds.c */
@@ -2303,7 +2299,6 @@ __acquires(musb->lock)
 	/* clear HR */
 	else if (devctl & MUSB_DEVCTL_HR)
 		musb_writeb(mbase, MUSB_DEVCTL, MUSB_DEVCTL_SESSION);
-
 
 	/* what speed did we negotiate? */
 	power = musb_readb(mbase, MUSB_POWER);

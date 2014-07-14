@@ -168,12 +168,9 @@ static struct sas_domain_function_template isci_transport_ops  = {
 	.lldd_control_phy	= isci_phy_control,
 };
 
-
 /******************************************************************************
 * P R O T E C T E D  M E T H O D S
 ******************************************************************************/
-
-
 
 /**
  * isci_register_sas_ha() - This method initializes various lldd

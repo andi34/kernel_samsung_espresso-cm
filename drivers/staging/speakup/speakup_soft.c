@@ -316,7 +316,6 @@ static const struct file_operations softsynth_fops = {
 	.release = softsynth_close,
 };
 
-
 static int softsynth_probe(struct spk_synth *synth)
 {
 
@@ -354,7 +353,6 @@ module_param_named(start, synth_soft.startup, short, S_IRUGO);
 
 MODULE_PARM_DESC(start, "Start the synthesizer once it is loaded.");
 
-
 static int __init soft_init(void)
 {
 	return synth_add(&synth_soft);
@@ -371,4 +369,3 @@ MODULE_AUTHOR("Kirk Reiser <kirk@braille.uwo.ca>");
 MODULE_DESCRIPTION("Speakup userspace software synthesizer support");
 MODULE_LICENSE("GPL");
 MODULE_VERSION(DRV_VERSION);
-

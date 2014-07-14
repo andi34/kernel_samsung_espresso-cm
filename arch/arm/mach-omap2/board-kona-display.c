@@ -839,7 +839,6 @@ void __init omap4_kona_memory_display_init(void)
 				   get_omap_ion_platform_data());
 }
 
-
 void __init omap4_kona_display_init(void)
 {
 	/* Removed ENABLE_ON_INIT flag for dss_sys_clk(functional clock)

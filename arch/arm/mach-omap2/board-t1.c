@@ -192,7 +192,6 @@ static void __init omap4_t1_reboot_init(void)
 		register_reboot_notifier(&t1_reboot_notifier);
 }
 
-
 static void __init t1_init(void)
 {
 	sec_common_init_early();

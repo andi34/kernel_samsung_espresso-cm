@@ -80,7 +80,6 @@ find_syscall_meta(unsigned long syscall)
 	struct syscall_metadata **stop;
 	char str[KSYM_SYMBOL_LEN];
 
-
 	start = __start_syscalls_metadata;
 	stop = __stop_syscalls_metadata;
 	kallsyms_lookup(syscall, NULL, NULL, NULL, str);
@@ -333,8 +332,7 @@ void ftrace_syscall_enter(void *ignore, struct pt_regs *regs, long id)
 
 	if (!filter_current_check_discard(buffer, sys_data->enter_event,
 					  entry, event))
-		trace_current_buffer_unlock_commit(buffer, event,
-						   irq_flags, pc);
+		trace_current_buffer_unlock_commit(buffer, event, irq_flags, pc);
 }
 
 void ftrace_syscall_exit(void *ignore, struct pt_regs *regs, long ret)
@@ -372,8 +370,7 @@ void ftrace_syscall_exit(void *ignore, struct pt_regs *regs, long ret)
 
 	if (!filter_current_check_discard(buffer, sys_data->exit_event,
 					  entry, event))
-		trace_current_buffer_unlock_commit(buffer, event,
-						   irq_flags, pc);
+		trace_current_buffer_unlock_commit(buffer, event, irq_flags, pc);
 }
 
 int reg_event_syscall_enter(struct ftrace_event_call *call)

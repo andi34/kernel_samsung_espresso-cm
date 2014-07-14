@@ -1,4 +1,3 @@
-
 /*
  *  Copyright 2003-2004 Red Hat, Inc.  All rights reserved.
  *  Copyright 2003-2004 Jeff Garzik
@@ -598,7 +597,6 @@ static inline bool ata_id_has_dipm(const u16 *id)
 
 	return val & (1 << 3);
 }
-
 
 static inline bool ata_id_has_fua(const u16 *id)
 {

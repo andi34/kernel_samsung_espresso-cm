@@ -159,7 +159,6 @@ int omap4_core_dpll_m2_set_rate(struct clk *clk, unsigned long rate)
 	return 0;
 }
 
-
 /**
  * omap4_prcm_freq_update - set freq_update bit
  *

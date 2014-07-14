@@ -859,7 +859,6 @@ void hdmi_core_vsi_config(struct hdmi_ip_data *ip_data,
 }
 EXPORT_SYMBOL(hdmi_core_vsi_config);
 
-
 static void hdmi_wp_init(struct omap_video_timings *timings,
 			struct hdmi_video_format *video_fmt,
 			struct hdmi_video_interface *video_int)
@@ -919,7 +918,6 @@ int hdmi_ti_4xxx_set_wait_soft_reset(struct hdmi_ip_data *ip_data)
 
 	return 0;
 }
-
 
 static void hdmi_wp_video_init_format(struct hdmi_video_format *video_fmt,
 	struct omap_video_timings *timings, struct hdmi_config *param)
@@ -1309,7 +1307,6 @@ int hdmi_ti_4xxx_config_audio_acr(struct hdmi_ip_data *ip_data,
 	 */
 	r = REG_GET(hdmi_wp_base(ip_data), HDMI_WP_VIDEO_CFG, 1, 0);
 
-
 	switch (r) {
 	case 1: /* No deep color selected */
 		deep_color = 100;
@@ -1371,7 +1368,6 @@ int hdmi_ti_4xxx_config_audio_acr(struct hdmi_ip_data *ip_data,
 }
 EXPORT_SYMBOL(hdmi_ti_4xxx_config_audio_acr);
 
-
 void hdmi_ti_4xxx_wp_audio_config_format(struct hdmi_ip_data *ip_data,
 					struct hdmi_audio_format *aud_fmt)
 {
@@ -1420,7 +1416,6 @@ void hdmi_ti_4xxx_wp_audio_config_dma(struct hdmi_ip_data *ip_data,
 	hdmi_write_reg(hdmi_wp_base(ip_data), HDMI_WP_AUDIO_CTRL, r);
 }
 EXPORT_SYMBOL(hdmi_ti_4xxx_wp_audio_config_dma);
-
 
 void hdmi_ti_4xxx_core_audio_config(struct hdmi_ip_data *ip_data,
 					struct hdmi_core_audio_config *cfg)
@@ -1586,7 +1581,6 @@ void hdmi_ti_4xxx_audio_transfer_en(struct hdmi_ip_data *ip_data,
 }
 EXPORT_SYMBOL(hdmi_ti_4xxx_audio_transfer_en);
 
-
 void hdmi_ti_4xxx_wp_audio_enable(struct hdmi_ip_data *ip_data, bool enable)
 {
 	/* Checking clock for HDMI Hardware Block.
@@ -1731,7 +1725,6 @@ int hdmi_ti_4xx_cec_transmit_cmd(struct hdmi_ip_data *ip_data,
 	7. Transmit
 	8. Check for NACK / ACK - report the same. */
 
-
 	/* Clear TX FIFO */
 	REG_FLD_MOD(hdmi_core_cec_base(ip_data), HDMI_CEC_DBG_3, 1, 7, 7);
 
@@ -1771,7 +1764,6 @@ int hdmi_ti_4xx_cec_transmit_cmd(struct hdmi_ip_data *ip_data,
 	hdmi_write_reg(hdmi_core_cec_base(ip_data), HDMI_CEC_TX_DEST,
 		temp);
 
-
 	/* Set the retry count */
 	REG_FLD_MOD(hdmi_core_cec_base(ip_data), HDMI_CEC_DBG_3,
 		data->retry_count, 6, 4);
@@ -1779,11 +1771,9 @@ int hdmi_ti_4xx_cec_transmit_cmd(struct hdmi_ip_data *ip_data,
 	if (data->send_ping)
 		goto send_ping;
 
-
 	/* Setup command and arguments for the command */
 	REG_FLD_MOD(hdmi_core_cec_base(ip_data), HDMI_CEC_TX_COMMAND,
 		data->tx_cmd, 7, 0);
-
 
 	for (i = 0; i < data->tx_count; i++) {
 		temp = RD_REG_32(hdmi_core_cec_base(ip_data),
@@ -1928,7 +1918,6 @@ int hdmi_ti_4xxx_power_on_cec(struct hdmi_ip_data *ip_data)
 	REG_FLD_MOD(hdmi_wp_base(ip_data), HDMI_WP_IRQENABLE_SET, 0x1,
 		0, 0);
 
-
 	REG_FLD_MOD(hdmi_core_sys_base(ip_data), HDMI_CORE_SYS_UMASK4, 0x1, 3,
 		3);
 
@@ -1940,7 +1929,6 @@ int hdmi_ti_4xxx_power_on_cec(struct hdmi_ip_data *ip_data)
 	/*RX fifo not empty event*/
 	REG_FLD_MOD(hdmi_core_cec_base(ip_data), HDMI_CEC_INT_ENABLE_0, 0x1, 1,
 		1);
-
 
 	/*Initialize CEC clock divider*/
 	/*CEC needs 2MHz clock hence set the devider to 24 to get

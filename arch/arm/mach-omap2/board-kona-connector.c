@@ -81,7 +81,6 @@
 #define USB_INDEX	1
 #define CHARGER_INDEX	2
 
-
 #define SWCAP_TRIM_OFFSET			(-0x3)
 #define SWCAP_TRIM_OFFSET_HOST			(-0x42)
 #define BGTRIM_TRIM_OFFSET_HOST			(-0x3FA0)
@@ -1077,7 +1076,6 @@ static ssize_t kona_adc_show(struct device *dev,
 	return sprintf(buf, "%x\n", key_string_on);
 }
 
-
 static DEVICE_ATTR(usb_sel, S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP,
 			kona_usb_sel_show, kona_usb_sel_store);
 static DEVICE_ATTR(uart_sel, S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP,
@@ -1345,7 +1343,6 @@ void __init omap4_kona_connector_init(void)
 		pr_err("fail to  create switch_sel sysfs group (%d)\n", ret);
 
 switch_dev_fail:
-
 
 	kona_switch_initial_setup();
 

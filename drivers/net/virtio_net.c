@@ -1036,7 +1036,6 @@ static void __devexit virtnet_remove(struct virtio_device *vdev)
 	/* Stop all the virtqueues. */
 	vdev->config->reset(vdev);
 
-
 	unregister_netdev(vi->dev);
 	cancel_delayed_work_sync(&vi->refill);
 

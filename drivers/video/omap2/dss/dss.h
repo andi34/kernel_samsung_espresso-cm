@@ -61,7 +61,6 @@ extern unsigned int dss_debug;
 #define DSSDBGF(format, ...)
 #endif
 
-
 #ifdef DSS_SUBSYS_NAME
 #define DSSERR(format, ...) \
 	printk(KERN_ERR "omapdss " DSS_SUBSYS_NAME " error: " format, \
@@ -635,7 +634,6 @@ static inline void rfbi_uninit_platform_driver(void)
 {
 }
 #endif
-
 
 #ifdef CONFIG_OMAP2_DSS_COLLECT_IRQ_STATS
 static inline void dss_collect_irq_stats(u32 irqstatus, unsigned *irq_arr)

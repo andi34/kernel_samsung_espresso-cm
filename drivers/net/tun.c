@@ -17,19 +17,15 @@
 
 /*
  *  Changes:
- *
  *  Mike Kershaw <dragorn@kismetwireless.net> 2005/08/14
  *    Add TUNSETLINK ioctl to set the link encapsulation
- *
  *  Mark Smith <markzzzsmith@yahoo.com.au>
  *    Use random_ether_addr() for tap MAC address.
- *
  *  Harald Roelle <harald.roelle@ifi.lmu.de>  2004/04/20
  *    Fixes in packet dropping, queue length setting and queue wakeup.
  *    Increased default tx queue length.
  *    Added ethtool API.
  *    Minor cleanups
- *
  *  Daniel Podlejski <underley@underley.eu.org>
  *    Modifications for 2.3.99-pre5 kernel.
  */
@@ -1637,13 +1633,11 @@ static const struct ethtool_ops tun_ethtool_ops = {
 	.get_link	= ethtool_op_get_link,
 };
 
-
 static int __init tun_init(void)
 {
 	int ret = 0;
 
 	pr_info("%s, %s\n", DRV_DESCRIPTION, DRV_VERSION);
-	pr_info("%s\n", DRV_COPYRIGHT);
 
 	ret = rtnl_link_register(&tun_link_ops);
 	if (ret) {

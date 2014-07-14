@@ -87,7 +87,6 @@ static struct asus_wmi_driver asus_nb_wmi_driver = {
 	.input_phys = ASUS_NB_WMI_FILE "/input0",
 };
 
-
 static int __init asus_nb_wmi_init(void)
 {
 	return asus_wmi_register_driver(&asus_nb_wmi_driver);

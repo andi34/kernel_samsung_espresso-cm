@@ -2064,7 +2064,6 @@ static struct notifier_block rtnetlink_dev_notifier = {
 	.notifier_call	= rtnetlink_event,
 };
 
-
 static int __net_init rtnetlink_net_init(struct net *net)
 {
 	struct sock *sk;
@@ -2114,4 +2113,3 @@ void __init rtnetlink_init(void)
 	rtnl_register(PF_UNSPEC, RTM_GETADDR, NULL, rtnl_dump_all, NULL);
 	rtnl_register(PF_UNSPEC, RTM_GETROUTE, NULL, rtnl_dump_all, NULL);
 }
-

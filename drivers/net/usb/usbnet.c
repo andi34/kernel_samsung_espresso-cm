@@ -49,7 +49,6 @@
 
 #define DRIVER_VERSION		"22-Aug-2005"
 
-
 /*-------------------------------------------------------------------------*/
 
 /*
@@ -401,7 +400,6 @@ static int rx_submit (struct usbnet *dev, struct urb *urb, gfp_t flags)
 	}
 	return retval;
 }
-
 
 /*-------------------------------------------------------------------------*/
 
@@ -1265,7 +1263,6 @@ static void usbnet_bh (unsigned long param)
 	}
 }
 
-
 /*-------------------------------------------------------------------------
  *
  * USB Device Driver support
@@ -1576,7 +1573,6 @@ int usbnet_resume (struct usb_interface *intf)
 	return 0;
 }
 EXPORT_SYMBOL_GPL(usbnet_resume);
-
 
 /*-------------------------------------------------------------------------*/
 

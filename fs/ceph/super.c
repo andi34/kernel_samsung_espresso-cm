@@ -1,4 +1,3 @@
-
 #include <linux/ceph/ceph_debug.h>
 
 #include <linux/backing-dev.h>
@@ -94,7 +93,6 @@ static int ceph_statfs(struct dentry *dentry, struct kstatfs *buf)
 
 	return 0;
 }
-
 
 static int ceph_sync_fs(struct super_block *sb, int wait)
 {
@@ -306,7 +304,7 @@ static int parse_mount_options(struct ceph_mount_options **pfsopt,
         fsopt->max_readdir = CEPH_MAX_READDIR_DEFAULT;
         fsopt->max_readdir_bytes = CEPH_MAX_READDIR_BYTES_DEFAULT;
         fsopt->congestion_kb = default_congestion_kb();
-	
+
         /* ip1[:port1][,ip2[:port2]...]:/subdir/in/fs */
         err = -EINVAL;
         if (!dev_name)
@@ -577,7 +575,6 @@ static void destroy_caches(void)
 	kmem_cache_destroy(ceph_file_cachep);
 }
 
-
 /*
  * ceph_umount_begin - initiate forced umount.  Tear down down the
  * mount, skipping steps that may hang while waiting for server(s).
@@ -645,9 +642,6 @@ static struct dentry *open_root_dentry(struct ceph_fs_client *fsc,
 	ceph_mdsc_put_request(req);
 	return root;
 }
-
-
-
 
 /*
  * mount: join the ceph cluster, and open root directory.

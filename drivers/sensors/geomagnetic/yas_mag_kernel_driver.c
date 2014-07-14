@@ -44,7 +44,6 @@
 #include "yas_pcb_test.c"
 #endif
 
-
 #define GEOMAGNETIC_I2C_DEVICE_NAME         "geomagnetic"
 #define GEOMAGNETIC_INPUT_NAME              "geomagnetic"
 #define GEOMAGNETIC_INPUT_RAW_NAME          "geomagnetic_raw"
@@ -1401,7 +1400,6 @@ static struct yas_pcb_test pcbtest = {
 	},
 };
 
-
 static ssize_t
 geomagnetic_raw_self_test_show(struct device *dev,
 		struct device_attribute *attr, char *buf)
@@ -1490,7 +1488,6 @@ static DEVICE_ATTR(self_test_noise, S_IRUSR,
 
 #endif
 
-
 static DEVICE_ATTR(threshold, S_IRUGO | S_IWUSR,
 		   geomagnetic_raw_threshold_show,
 		   geomagnetic_raw_threshold_store);
@@ -1575,7 +1572,6 @@ static struct device_attribute *magnetic_sensor_attrs[] = {
 	&dev_attr_magnetic_sensor_name,
 	NULL,
 };
-
 
 /* Interface Functions for Lower Layer */
 #ifdef YAS_MAG_MANUAL_OFFSET

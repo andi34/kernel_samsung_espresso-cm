@@ -240,7 +240,6 @@ struct gsm_mux {
 	unsigned long unsupported;
 };
 
-
 /*
  *	Mux objects - needed so that we can translate a tty index into the
  *	relevant mux and DLCI.
@@ -493,7 +492,6 @@ static void gsm_print_packet(const char *hdr, int addr, int cr,
 	}
 	pr_cont("\n");
 }
-
 
 /*
  *	Link level transmission side
@@ -953,7 +951,6 @@ static void gsm_dlci_data_kick(struct gsm_dlci *dlci)
  *	Control message processing
  */
 
-
 /**
  *	gsm_control_reply	-	send a response frame to a control
  *	@gsm: gsm channel
@@ -1355,7 +1352,6 @@ static int gsm_control_wait(struct gsm_mux *gsm, struct gsm_control *control)
 	kfree(control);
 	return err;
 }
-
 
 /*
  *	DLCI level handling: Needs krefs
@@ -1759,7 +1755,6 @@ invalid:
 	return;
 }
 
-
 /**
  *	gsm0_receive	-	perform processing for non-transparency
  *	@gsm: gsm data for this ldisc instance
@@ -2128,7 +2123,6 @@ static int gsmld_attach_gsm(struct tty_struct *tty, struct gsm_mux *gsm)
 	return ret;
 }
 
-
 /**
  *	gsmld_detach_gsm	-	stop doing 0710 mux
  *	@tty: tty attached to the mux
@@ -2479,7 +2473,6 @@ static int gsmld_ioctl(struct tty_struct *tty, struct file *file,
 	}
 }
 
-
 /* Line discipline for real tty */
 struct tty_ldisc_ops tty_ldisc_packet = {
 	.owner		 = THIS_MODULE,
@@ -2552,7 +2545,6 @@ static const struct tty_port_operations gsm_port_ops = {
 	.carrier_raised = gsm_carrier_raised,
 	.dtr_rts = gsm_dtr_rts,
 };
-
 
 static int gsmtty_open(struct tty_struct *tty, struct file *filp)
 {
@@ -2676,7 +2668,6 @@ static int gsmtty_tiocmset(struct tty_struct *tty,
 	return 0;
 }
 
-
 static int gsmtty_ioctl(struct tty_struct *tty,
 			unsigned int cmd, unsigned long arg)
 {
@@ -2750,8 +2741,6 @@ static const struct tty_operations gsmtty_ops = {
 	.break_ctl		= gsmtty_break_ctl,
 };
 
-
-
 static int __init gsm_init(void)
 {
 	/* Fill in our line protocol discipline, and register it */
@@ -2807,7 +2796,6 @@ static void __exit gsm_exit(void)
 
 module_init(gsm_init);
 module_exit(gsm_exit);
-
 
 MODULE_LICENSE("GPL");
 MODULE_ALIAS_LDISC(N_GSM0710);

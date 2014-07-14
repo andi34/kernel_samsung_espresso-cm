@@ -1638,7 +1638,6 @@ static void rt2800_config_channel_rf3xxx(struct rt2x00_dev *rt2x00dev,
 	rt2800_rfcsr_write(rt2x00dev, 7, rfcsr);
 }
 
-
 #define RT5390_POWER_BOUND     0x27
 #define RT5390_FREQ_OFFSET_BOUND       0x5f
 

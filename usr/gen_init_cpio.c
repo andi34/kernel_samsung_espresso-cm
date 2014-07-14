@@ -372,7 +372,7 @@ static int cpio_mkfile(const char *name, const char *location,
 	}
 	ino++;
 	rc = 0;
-	
+
 error:
 	if (filebuf) free(filebuf);
 	if (file >= 0) close(file);
@@ -392,10 +392,8 @@ static char *cpio_replace_env(char *new_location)
 			*env_var = *expanded = '\0';
 			strncat(env_var, start + 2, end - start - 2);
 			strncat(expanded, new_location, start - new_location);
-			strncat(expanded, getenv(env_var),
-				PATH_MAX - strlen(expanded));
-			strncat(expanded, end + 1,
-				PATH_MAX - strlen(expanded));
+			strncat(expanded, getenv(env_var), PATH_MAX - strlen(expanded));
+			strncat(expanded, end + 1, PATH_MAX - strlen(expanded));
 			strncpy(new_location, expanded, PATH_MAX);
 			new_location[PATH_MAX] = 0;
 		} else
@@ -404,7 +402,6 @@ static char *cpio_replace_env(char *new_location)
 
 	return new_location;
 }
-
 
 static int cpio_mkfile_line(const char *line)
 {

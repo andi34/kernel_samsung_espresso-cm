@@ -97,7 +97,6 @@ static inline int hrtimer_clockid_to_base(clockid_t clock_id)
 	return hrtimer_clock_to_base_table[clock_id];
 }
 
-
 /*
  * Get the coarse grained time at the softirq based on xtime and
  * wall_to_monotonic.
@@ -153,7 +152,6 @@ struct hrtimer_clock_base *lock_hrtimer_base(const struct hrtimer *timer,
 		cpu_relax();
 	}
 }
-
 
 /*
  * Get the preferred target CPU for NOHZ
@@ -1049,7 +1047,6 @@ hrtimer_start(struct hrtimer *timer, ktime_t tim, const enum hrtimer_mode mode)
 }
 EXPORT_SYMBOL_GPL(hrtimer_start);
 
-
 /**
  * hrtimer_try_to_cancel - try to deactivate a timer
  * @timer:	hrtimer to stop
@@ -1248,7 +1245,7 @@ static void __run_hrtimer(struct hrtimer *timer, ktime_t *now)
 	 * hrtimer_start_range_ns() or in hrtimer_interrupt()
 	 */
 	if (restart != HRTIMER_NORESTART) {
-		BUG_ON(timer->state != HRTIMER_STATE_CALLBACK);
+		BUG_ON(!(timer->state & HRTIMER_STATE_CALLBACK));
 		enqueue_hrtimer(timer, base);
 	}
 

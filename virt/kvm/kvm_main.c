@@ -527,7 +527,6 @@ static void kvm_free_physmem_slot(struct kvm_memory_slot *free,
 	if (!dont || free->dirty_bitmap != dont->dirty_bitmap)
 		kvm_destroy_dirty_bitmap(free);
 
-
 	for (i = 0; i < KVM_NR_PAGE_SIZES - 1; ++i) {
 		if (!dont || free->lpage_info[i] != dont->lpage_info[i]) {
 			vfree(free->lpage_info[i]);
@@ -588,7 +587,6 @@ void kvm_put_kvm(struct kvm *kvm)
 		kvm_destroy_vm(kvm);
 }
 EXPORT_SYMBOL_GPL(kvm_put_kvm);
-
 
 static int kvm_vm_release(struct inode *inode, struct file *filp)
 {
@@ -1398,8 +1396,7 @@ int kvm_gfn_to_hva_cache_init(struct kvm *kvm, struct gfn_to_hva_cache *ghc,
 		 */
 		while (start_gfn <= end_gfn) {
 			ghc->memslot = gfn_to_memslot(kvm, start_gfn);
-			ghc->hva = gfn_to_hva_many(ghc->memslot, start_gfn,
-						   &nr_pages_avail);
+			ghc->hva = gfn_to_hva_many(ghc->memslot, start_gfn, &nr_pages_avail);
 			if (kvm_is_error_hva(ghc->hva))
 				return -EFAULT;
 			start_gfn += nr_pages_avail;
@@ -1716,7 +1713,6 @@ static long kvm_vcpu_ioctl(struct file *filp,
 	if (ioctl == KVM_S390_INTERRUPT || ioctl == KVM_INTERRUPT)
 		return kvm_arch_vcpu_ioctl(filp, ioctl, arg);
 #endif
-
 
 	vcpu_load(vcpu);
 	switch (ioctl) {
@@ -2296,7 +2292,6 @@ static int kvm_cpu_hotplug(struct notifier_block *notifier, unsigned long val,
 	}
 	return NOTIFY_OK;
 }
-
 
 asmlinkage void kvm_spurious_fault(void)
 {

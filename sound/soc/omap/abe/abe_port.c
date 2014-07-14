@@ -1826,4 +1826,3 @@ void abe_write_pdmdl_offset(u32 path, u32 offset_left, u32 offset_right)
 	}
 }
 EXPORT_SYMBOL(abe_write_pdmdl_offset);
-

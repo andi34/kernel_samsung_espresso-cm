@@ -762,7 +762,6 @@ static void transport_lun_remove_cmd(struct se_cmd *cmd)
 	transport_all_task_dev_remove_state(cmd);
 	spin_unlock_irqrestore(&T_TASK(cmd)->t_state_lock, flags);
 
-
 check_lun:
 	spin_lock_irqsave(&lun->lun_cmd_lock, flags);
 	if (atomic_read(&T_TASK(cmd)->transport_lun_active)) {
@@ -4237,7 +4236,6 @@ int transport_generic_map_mem_to_cmd(
 	return 0;
 }
 EXPORT_SYMBOL(transport_generic_map_mem_to_cmd);
-
 
 static inline long long transport_dev_end_lba(struct se_device *dev)
 {

@@ -37,7 +37,6 @@
 #define CMD_DEBUG_CTRL_OFFSET   4
 #define CMD_DIAGNOSTIC_OFFSET   5
 
-
 #define DETECT_MSG_MASK			0x80
 #define PRESS_MSG_MASK			0x40
 #define RELEASE_MSG_MASK		0x20
@@ -250,7 +249,6 @@ static int write_config(struct mxt224_data *data, u8 type, const u8 *cfg)
 	else
 		return write_mem(data, address, size, cfg);
 }
-
 
 static u32 crc24(u32 crc, u8 byte1, u8 byte2)
 {
@@ -491,7 +489,6 @@ void check_chip_calibration(void)
 			copy_data->cmd_proc + CMD_DIAGNOSTIC_OFFSET,
 			1, &data_byte);
 
-
 	/*
 	 * get the address of the diagnostic object so
 	 * we can get the data we need
@@ -524,7 +521,6 @@ void check_chip_calibration(void)
 		try_ctr++; /* timeout counter */
 		read_mem(copy_data, object_address, 2, data_buffer);
 	}
-
 
 	/* data is ready - read the detection flags */
 	read_mem(copy_data, object_address, 82, data_buffer);
@@ -1970,7 +1966,6 @@ static DEVICE_ATTR(object_write, S_IWUSR | S_IWGRP, NULL,
 		mxt224_object_setting);
 static DEVICE_ATTR(dbg_switch, S_IWUSR | S_IWGRP, NULL,
 		mxt224_debug_setting);
-
 
 static struct attribute *mxt224_attrs[] = {
 	&dev_attr_object_show.attr,

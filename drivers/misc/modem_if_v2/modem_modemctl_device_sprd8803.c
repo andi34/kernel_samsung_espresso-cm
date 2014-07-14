@@ -182,7 +182,6 @@ int sprd8803_init_modemctl_device(struct modem_ctl *mc,
 	mc->gpio_cp_ctrl2 = pdata->gpio_cp_ctrl2;
 #endif
 
-
 	pdev = to_platform_device(mc->dev);
 	mc->irq_phone_active = gpio_to_irq(mc->gpio_phone_active);
 	irq_cp_dump_int = gpio_to_irq(mc->gpio_cp_dump_int);

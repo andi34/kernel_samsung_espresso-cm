@@ -23,7 +23,6 @@
 #include <sound/soc.h>
 #include <asm/dmabrg.h>
 
-
 /* registers and bits */
 #define BRGATXSAR	0x00
 #define BRGARXDAR	0x04
@@ -47,7 +46,6 @@
 #define ACR_TAM_NONE	(0 << 8)
 #define ACR_TAM_4BYTE	(1 << 8)
 #define ACR_TAM_2WORD	(2 << 8)
-
 
 struct camelot_pcm {
 	unsigned long mmio;  /* DMABRG audio channel control reg MMIO */
@@ -223,7 +221,7 @@ static int camelot_prepare(struct snd_pcm_substream *substream)
 
 	pr_debug("PCM data: addr 0x%08ulx len %d\n",
 		 (u32)runtime->dma_addr, runtime->dma_bytes);
- 
+
 	if (substream->stream == SNDRV_PCM_STREAM_PLAYBACK) {
 		BRGREG(BRGATXSAR) = (unsigned long)runtime->dma_area;
 		BRGREG(BRGATXTCR) = runtime->dma_bytes;

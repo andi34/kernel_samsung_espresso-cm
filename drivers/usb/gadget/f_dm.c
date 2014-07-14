@@ -207,7 +207,6 @@ dm_bind(struct usb_configuration *c, struct usb_function *f)
 	dm->fs.out = usb_find_endpoint(dm_fs_function,
 			f->descriptors, &dm_fs_out_desc);
 
-
 	/* support all relevant hardware speeds... we expect that when
 	 * hardware is dual speed, all bulk-capable endpoints work at
 	 * both speeds

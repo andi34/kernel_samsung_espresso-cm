@@ -22,7 +22,6 @@
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2 as
  * published by the Free Software Foundation.
- *
  */
 
 #include <linux/module.h>
@@ -129,8 +128,7 @@ static inline void disable_lnk(int lch);
 static void omap_disable_channel_irq(int lch);
 static inline void omap_enable_channel_irq(int lch);
 
-#define REVISIT_24XX()		printk(KERN_ERR "FIXME: no %s on 24xx\n", \
-						__func__);
+#define REVISIT_24XX()	printk(KERN_ERR "FIXME: no %s on 24xx\n", __func__);
 
 #ifdef CONFIG_ARCH_OMAP15XX
 /* Returns 1 if the DMA module is in OMAP1510-compatible mode, 0 otherwise */
@@ -139,7 +137,7 @@ static int omap_dma_in_1510_mode(void)
 	return enable_1510_mode;
 }
 #else
-#define omap_dma_in_1510_mode()		0
+#define omap_dma_in_1510_mode()	0
 #endif
 
 #ifdef CONFIG_ARCH_OMAP1
@@ -753,8 +751,7 @@ void omap_free_dma(int lch)
 	unsigned long flags;
 
 	if (dma_chan[lch].dev_id == -1) {
-		pr_err("omap_dma: trying to free unallocated DMA channel %d\n",
-		       lch);
+		pr_err("omap_dma: trying to free unallocated DMA channel %d\n", lch);
 		return;
 	}
 
@@ -955,8 +952,7 @@ void omap_stop_dma(int lch)
 			l = p->dma_read(CCR, lch);
 		}
 		if (i >= 100)
-			printk(KERN_ERR "DMA drain did not complete on "
-					"lch %d\n", lch);
+			printk(KERN_ERR "DMA drain did not complete on lch %d\n", lch);
 		/* Restore OCP_SYSCONFIG */
 		p->dma_write(sys_cf, OCP_SYSCONFIG, lch);
 	} else {

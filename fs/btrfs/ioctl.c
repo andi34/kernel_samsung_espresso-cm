@@ -943,7 +943,6 @@ again:
 				     (num_pages - i_done) << PAGE_CACHE_SHIFT);
 	}
 
-
 	btrfs_set_extent_delalloc(inode, page_start, page_end - 1,
 				  &cached_state);
 

@@ -34,7 +34,6 @@ struct bvrect {
 	unsigned int height;
 };
 
-
 /*
  * BVFLAG_* - These define the type of BLT to be performed and are placed in
  * the bvparams.flags element.
@@ -67,7 +66,6 @@ struct bvrect {
 #define BVFLAG_TILE_SRC2	0x00000400 /* source 2 is tiled */
 #define BVFLAG_TILE_MASK	0x00000800 /* mask is tiled */
 
-
 #define BVFLAG_BATCH_SHIFT	12
 #define BVFLAG_BATCH_MASK	(3 << BVFLAG_BATCH_SHIFT)
 
@@ -76,7 +74,6 @@ struct bvrect {
 #define BVFLAG_BATCH_CONTINUE	(2 << BVFLAG_BATCH_SHIFT) /* continue batch */
 #define BVFLAG_BATCH_END	(3 << BVFLAG_BATCH_SHIFT) /* end batch */
 
-
 #define BVFLAG_HORZ_FLIP_SRC1	0x00004000 /* flip src1 horizontally */
 #define BVFLAG_VERT_FLIP_SRC1	0x00008000 /* flip src1 vertically */
 #define BVFLAG_HORZ_FLIP_SRC2	0x00010000 /* flip src2 horizontally */
@@ -84,10 +81,8 @@ struct bvrect {
 #define BVFLAG_HORZ_FLIP_MASK	0x00040000 /* flip mask horizontally */
 #define BVFLAG_VERT_FLIP_MASK	0x00080000 /* flip mask vertically */
 
-
 #define BVFLAG_SCALE_RETURN	0x00100000 /* return scale type used */
 #define BVFLAG_DITHER_RETURN	0x00200000 /* return dither type used */
-
 
 #define BVFLAG_SRC2_AUXDSTRECT	0x00400000 /* src2auxdstrect used */
 #define BVFLAG_MASK_AUXDSTRECT	0x00800000 /* maskauxdstrect used */
@@ -103,7 +98,6 @@ struct bvrect {
 #define BVIMPL_ANY		0
 #define BVIMPL_FIRST_HW		(1 << 31) /* Continues to the right */
 #define BVIMPL_FIRST_CPU	(1 << 0)  /* Continues to the left */
-
 
 /*
  * bvscalemode - This specifies the type of scaling to perform.
@@ -289,7 +283,6 @@ enum bvscalemode {
 #endif
 };
 
-
 /*
  * bvdithermode - This defines the type of dithering to use.
  */
@@ -418,7 +411,6 @@ enum bvdithermode {
 #endif
 };
 
-
 /*
  * BVTILE_* flags - These specify parameters used when tiling.
  */
@@ -522,7 +514,6 @@ union bvop {
 	enum bvblend blend;		/* when BVFLAG_BLEND set */
 	struct bvfilter *filter;	/* when BVFLAG_FILTER set */
 };
-
 
 /*
  * bvbltparams - This structure is passed into bv_blt() to specify the

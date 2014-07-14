@@ -393,7 +393,6 @@ CFQ_CFQQ_FNS(wait_busy);
 			j++, st = i < IDLE_WORKLOAD ? \
 			&cfqg->service_trees[i][j]: NULL) \
 
-
 static inline bool iops_mode(struct cfq_data *cfqd)
 {
 	/*
@@ -417,7 +416,6 @@ static inline enum wl_prio_t cfqq_prio(struct cfq_queue *cfqq)
 		return RT_WORKLOAD;
 	return BE_WORKLOAD;
 }
-
 
 static enum wl_type_t cfqq_type(struct cfq_queue *cfqq)
 {

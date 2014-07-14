@@ -364,7 +364,6 @@ static int yas530_read_cal(uint8_t *pu08Buf)
 	return YAS_PCB_ERROR_CALREG;
 }
 
-
 static int yas532_read_cal(uint8_t *pu08Buf)
 {
 	int i;

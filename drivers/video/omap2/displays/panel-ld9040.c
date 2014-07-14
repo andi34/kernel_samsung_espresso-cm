@@ -440,7 +440,6 @@ static int update_brightness(struct ld9040 *lcd)
 	return 0;
 }
 
-
 static int ld9040_power_on(struct ld9040 *lcd)
 {
 	int ret = 0;
@@ -746,7 +745,6 @@ static ssize_t ld9040_sysfs_show_gamma_table(struct device *dev,
 static DEVICE_ATTR(gamma_table, S_IRUGO,
 		ld9040_sysfs_show_gamma_table, NULL);
 
-
 static ssize_t ld9040_sysfs_store_lcd_power(struct device *dev,
 				       struct device_attribute *attr,
 				       const char *buf, size_t len)
@@ -874,7 +872,6 @@ static int ld9040_panel_enable(struct omap_dss_device *dssdev)
 	if (!panel_ld9040_enabled)
 		panel_ld9040_enabled = true;
 
-
 	return r;
 }
 
@@ -884,7 +881,6 @@ static void ld9040_panel_disable(struct omap_dss_device *dssdev)
 
 	if (dssdev->state != OMAP_DSS_DISPLAY_ACTIVE)
 		return;
-
 
 	spi_setup(lcd->spi);
 
@@ -902,7 +898,6 @@ static void ld9040_panel_disable(struct omap_dss_device *dssdev)
 
 static int ld9040_panel_suspend(struct omap_dss_device *dssdev)
 {
-
 
 	ld9040_panel_disable(dssdev);
 
@@ -952,8 +947,6 @@ static int  ld9040_panel_check_timings(struct omap_dss_device *dssdev,
 {
 	return dpi_check_timings(dssdev, timings);
 }
-
-
 
 static struct omap_dss_driver ld9040_omap_dss_driver = {
 	.probe          = ld9040_panel_probe,
@@ -1102,7 +1095,6 @@ static int ld9040_probe(struct spi_device *spi)
 		lcd->lcd_pd->lcd_enabled = 1;
 		lcd->ldi_enable = 1;
 	}
-
 
 	dev_set_drvdata(&spi->dev, lcd);
 

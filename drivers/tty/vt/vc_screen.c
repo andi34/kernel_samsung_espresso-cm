@@ -205,7 +205,6 @@ static loff_t vcs_lseek(struct file *file, loff_t offset, int orig)
 	return file->f_pos;
 }
 
-
 static ssize_t
 vcs_read(struct file *file, char __user *buf, size_t count, loff_t *ppos)
 {
@@ -608,7 +607,7 @@ vcs_open(struct inode *inode, struct file *filp)
 {
 	unsigned int currcons = iminor(inode) & 127;
 	int ret = 0;
-	
+
 	tty_lock();
 	if(currcons && !vc_cons_allocated(currcons-1))
 		ret = -ENXIO;

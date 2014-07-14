@@ -80,7 +80,6 @@ static char *supply_list[] = {
 	"battery",
 };
 
-
 static enum power_supply_property batman_battery_properties[] = {
 	POWER_SUPPLY_PROP_STATUS,
 	POWER_SUPPLY_PROP_HEALTH,
@@ -364,7 +363,6 @@ static void charger_detect_work(struct work_struct *work)
 	if ((di->cable_status == CABLE_TYPE_AC) && (di->pdata->bootmode != 5))
 		di->pdata->set_control_limit();
 
-
 	di->pdata->set_charger_state(di->cable_status);
 	di->pdata->set_charger_en(di->is_cable_attached);
 	di->pdata->get_charger_register();
@@ -557,7 +555,6 @@ static struct device_attribute battery_manager_attrs[] = {
 	SEC_BATTERY_ATTR(batt_dmb_check),
 	SEC_BATTERY_ATTR(batt_read_raw_soc),
 };
-
 
 static ssize_t battery_manager_show_attrs(struct device *dev,
 		struct device_attribute *attr, char *buf)

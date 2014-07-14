@@ -447,7 +447,6 @@ static int get_futex_value_locked(u32 *dest, u32 __user *from)
 	return ret ? -EFAULT : 0;
 }
 
-
 /*
  * PI code:
  */
@@ -777,8 +776,7 @@ retry:
 	 */
 	if (unlikely(force_take)) {
 		/*
-		 * Keep the OWNER_DIED and the WAITERS bit and set the
-		 * new TID value.
+		 * Keep the OWNER_DIED and the WAITERS bit and set the new TID value.
 		 */
 		newval = (curval & ~FUTEX_TID_MASK) | vpid;
 		force_take = 0;
@@ -809,19 +807,16 @@ retry:
 			 * We failed to find an owner for this
 			 * futex. So we have no pi_state to block
 			 * on. This can happen in two cases:
-			 *
 			 * 1) The owner died
 			 * 2) A stale FUTEX_WAITERS bit
-			 *
 			 * Re-read the futex value.
 			 */
 			if (get_futex_value_locked(&curval, uaddr))
 				return -EFAULT;
 
 			/*
-			 * If the owner died or we have a stale
-			 * WAITERS bit the owner TID in the user space
-			 * futex is 0.
+			 * If the owner died or we have a stale WAITERS bit
+			 * the owner TID in the user space futex is 0.
 			 */
 			if (!(curval & FUTEX_TID_MASK)) {
 				force_take = 1;
@@ -2004,7 +1999,6 @@ out:
 	return ret;
 }
 
-
 static long futex_wait_restart(struct restart_block *restart)
 {
 	u32 __user *uaddr = restart->futex.uaddr;
@@ -2019,7 +2013,6 @@ static long futex_wait_restart(struct restart_block *restart)
 	return (long)futex_wait(uaddr, restart->futex.flags,
 				restart->futex.val, tp, restart->futex.bitset);
 }
-
 
 /*
  * Userspace tried a 0 -> TID atomic transition of the futex value
@@ -2757,7 +2750,6 @@ long do_futex(u32 __user *uaddr, int op, u32 val, ktime_t *timeout,
 	}
 	return ret;
 }
-
 
 SYSCALL_DEFINE6(futex, u32 __user *, uaddr, int, op, u32, val,
 		struct timespec __user *, utime, u32 __user *, uaddr2,

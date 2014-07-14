@@ -584,7 +584,6 @@ static int apply_negative_tune_value(struct cmc624_info *info, int negative)
 		}
 	}
 
-
 	return 0;
 }
 
@@ -1080,7 +1079,6 @@ static ssize_t reg_show(struct device *dev,
 
 static DEVICE_ATTR(reg, S_IRUGO, reg_show, NULL);
 
-
 static struct attribute *manual_cmc624_attributes[] = {
 	&dev_attr_scenario.attr,
 	&dev_attr_outdoor.attr,
@@ -1366,7 +1364,6 @@ static int __devinit cmc624_probe(struct omap_dss_device *dssdev)
 		goto cmc624_init_tune_list;
 	}
 
-
 	/* add i2c driver */
 	ret = i2c_add_driver(&sec_cmc624_i2c_driver);
 	if (ret < 0)
@@ -1496,7 +1493,6 @@ static int cmc624_enable(struct omap_dss_device *dssdev)
 		gpio_set_value(info->pdata->gpio_ima_sleep, 1);
 		udelay(200);
 	}
-
 
 	/* V_IMA_1.1V EN*/
 	r = info->pdata->power_vima_1_1V(1);

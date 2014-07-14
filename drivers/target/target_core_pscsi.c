@@ -708,7 +708,6 @@ static inline struct pscsi_plugin_task *PSCSI_TASK(struct se_task *task)
 	return container_of(task, struct pscsi_plugin_task, pscsi_task);
 }
 
-
 /*	pscsi_transport_complete():
  *
  *

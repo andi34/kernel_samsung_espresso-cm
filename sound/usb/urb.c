@@ -93,7 +93,6 @@ static int deactivate_urbs(struct snd_usb_substream *subs, int force, int can_sl
 	return 0;
 }
 
-
 /*
  * release a urb data
  */
@@ -184,7 +183,6 @@ static void snd_complete_urb(struct urb *urb)
 	}
 }
 
-
 /*
  * complete callback from sync urb
  */
@@ -206,7 +204,6 @@ static void snd_complete_sync_urb(struct urb *urb)
 		}
 	}
 }
-
 
 /*
  * initialize a substream for plaback/capture
@@ -513,7 +510,6 @@ static int retire_paused_capture_urb(struct snd_usb_substream *subs,
 {
 	return 0;
 }
-
 
 /*
  * prepare urb for playback sync pipe
@@ -837,7 +833,6 @@ static int start_urbs(struct snd_usb_substream *subs, struct snd_pcm_runtime *ru
 	return -EPIPE;
 }
 
-
 /*
  */
 static struct snd_urb_ops audio_urb_ops[2] = {
@@ -941,4 +936,3 @@ int snd_usb_substream_prepare(struct snd_usb_substream *subs,
 
 	return 0;
 }
-

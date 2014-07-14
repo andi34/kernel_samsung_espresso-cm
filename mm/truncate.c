@@ -22,7 +22,6 @@
 #include <linux/cleancache.h>
 #include "internal.h"
 
-
 /**
  * do_invalidatepage - invalidate part or all of a page
  * @page: the page which is affected

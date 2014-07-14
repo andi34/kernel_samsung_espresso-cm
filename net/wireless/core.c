@@ -204,7 +204,6 @@ int cfg80211_dev_rename(struct cfg80211_registered_device *rdev,
 			return -EINVAL;
 	}
 
-
 	/* Ignore nop renames */
 	if (strcmp(newname, dev_name(&rdev->wiphy.dev)) == 0)
 		return 0;
@@ -959,8 +958,7 @@ static int cfg80211_netdev_notifier_call(struct notifier_block * nb,
 		synchronize_rcu();
 		INIT_LIST_HEAD(&wdev->list);
 		/*
-		 * Ensure that all events have been processed and
-		 * freed.
+		 * Ensure that all events have been processed and freed.
 		 */
 		cfg80211_process_wdev_events(wdev);
 		break;

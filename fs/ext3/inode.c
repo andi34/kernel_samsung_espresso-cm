@@ -841,7 +841,6 @@ int ext3_get_blocks_handle(handle_t *handle, struct inode *inode,
 	int count = 0;
 	ext3_fsblk_t first_block = 0;
 
-
 	J_ASSERT(handle != NULL || create == 0);
 	depth = ext3_block_to_path(inode,iblock,offsets,&blocks_to_boundary);
 
@@ -1266,7 +1265,6 @@ write_begin_failed:
 out:
 	return ret;
 }
-
 
 int ext3_journal_dirty_data(handle_t *handle, struct buffer_head *bh)
 {
@@ -3282,7 +3280,6 @@ err_out:
 		error = rc;
 	return error;
 }
-
 
 /*
  * How many blocks doth make a writepage()?

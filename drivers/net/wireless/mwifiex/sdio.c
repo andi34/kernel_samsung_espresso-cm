@@ -28,7 +28,6 @@
 #include "11n.h"
 #include "sdio.h"
 
-
 #define SDIO_VERSION	"1.0"
 
 static struct mwifiex_if_ops sdio_ops;

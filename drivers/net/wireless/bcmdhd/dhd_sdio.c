@@ -2,13 +2,13 @@
  * DHD Bus Module for SDIO
  *
  * Copyright (C) 1999-2012, Broadcom Corporation
- * 
+ *
  *      Unless you and Broadcom execute a separate written software license
  * agreement governing use of this software, this software is licensed to you
  * under the terms of the GNU General Public License version 2 (the "GPL"),
  * available at http://www.broadcom.com/licenses/GPLv2.php, with the
  * following added to such license:
- * 
+ *
  *      As a special exception, the copyright holders of this software give you
  * permission to link this software with independent modules, and to copy and
  * distribute the resulting executable under terms of your choice, provided that
@@ -16,7 +16,7 @@
  * the license of that module.  An independent module is a module which is not
  * derived from this software.  The special exception does not apply to any
  * modifications of the software.
- * 
+ *
  *      Notwithstanding the above, under no circumstances may you combine this
  * software in any way with any other Broadcom software provided under a license
  * other than the GPL, without Broadcom's express prior written consent.
@@ -459,7 +459,6 @@ static const uint max_roundup = 512;
 /* Try doing readahead */
 static bool dhd_readahead;
 
-
 /* To check if there's window offered */
 #define DATAOK(bus) \
 	(((uint8)(bus->tx_max - bus->tx_seq) > 1) && \
@@ -760,7 +759,6 @@ dhdsdio_srwar_init(dhd_bus_t *bus)
 	dhdsdio_oobwakeup_init(bus);
 #endif
 
-
 	return 0;
 }
 
@@ -860,7 +858,6 @@ dhdsdio_clk_kso_enab(dhd_bus_t *bus, bool on)
 		bcmsdh_cfg_write(bus->sdh, SDIO_FUNC_1, SBSDIO_FUNC1_SLEEPCSR, wr_val, &err);
 
 	} while (try_cnt++ < MAX_KSO_ATTEMPTS);
-
 
 	if (try_cnt > 1) {
 		KSO_DBG(("%s> op:%s, try_cnt:%d, rd_val:%x, ERR:%x \n",
@@ -1102,7 +1099,6 @@ dhdsdio_htclk(dhd_bus_t *bus, bool on, bool pendok)
 	clkctl = 0;
 	sdh = bus->sdh;
 
-
 	if (!KSO_ENAB(bus))
 		return BCME_OK;
 
@@ -1118,7 +1114,6 @@ dhdsdio_htclk(dhd_bus_t *bus, bool on, bool pendok)
 #ifdef BCMSPI
 		dhdsdio_wkwlan(bus, TRUE);
 #endif /* BCMSPI */
-
 
 		bcmsdh_cfg_write(sdh, SDIO_FUNC_1, SBSDIO_FUNC1_CHIPCLKCSR, clkreq, &err);
 		if (err) {
@@ -1425,7 +1420,6 @@ dhdsdio_bussleep(dhd_bus_t *bus, bool sleep)
 #endif /* CUSTOMER_HW4 */
 			return BCME_BUSY;
 
-
 		if (!SLPAUTO_ENAB(bus)) {
 			/* Disable SDIO interrupts (no longer interested) */
 			bcmsdh_intr_disable(bus->sdh);
@@ -1468,7 +1462,6 @@ dhdsdio_bussleep(dhd_bus_t *bus, bool sleep)
 
 			/* Force pad isolation off if possible (in case power never toggled) */
 			bcmsdh_cfg_write(sdh, SDIO_FUNC_1, SBSDIO_DEVICE_CTL, 0, NULL);
-
 
 			/* Make sure the controller has the bus up */
 			dhdsdio_clkctl(bus, CLK_AVAIL, FALSE);
@@ -1593,7 +1586,6 @@ dhdsdio_txpkt(dhd_bus_t *bus, void *pkt, uint chan, bool free_pkt, bool queue_on
 	char *p;
 	htsfts_t *htsf_ts;
 #endif
-
 
 	DHD_TRACE(("%s: Enter\n", __FUNCTION__));
 
@@ -2219,7 +2211,6 @@ dhd_bus_txctl(struct dhd_bus *bus, uchar *msg, uint msglen)
 		len = ROUNDUP(len, ALIGNMENT);
 
 	ASSERT(ISALIGNED((uintptr)frame, 2));
-
 
 	/* Need to lock here to protect txseq and SDIO tx calls */
 	dhd_os_sdlock(bus->dhd);
@@ -3068,7 +3059,6 @@ dhdsdio_checkdied(dhd_bus_t *bus, char *data, uint size)
 					line[n] = ch;
 				}
 
-
 				if (n > 0) {
 					if (line[n - 1] == '\r')
 						n--;
@@ -3090,7 +3080,6 @@ printbuf:
 		DHD_ERROR(("%s: %s\n", __FUNCTION__, strbuf.origbuf));
 	}
 
-
 done:
 	if (mbuffer)
 		MFREE(bus->dhd->osh, mbuffer, msize);
@@ -3102,7 +3091,6 @@ done:
 	return bcmerror;
 }
 #endif /* #ifdef DHD_DEBUG */
-
 
 int
 dhdsdio_downloadvars(dhd_bus_t *bus, void *arg, int len)
@@ -3208,7 +3196,7 @@ dhd_serialconsole(dhd_bus_t *bus, bool set, bool enable, int *bcmerror)
 
 	return (int_val & uart_enab);
 }
-#endif 
+#endif
 
 static int
 dhdsdio_doiovar(dhd_bus_t *bus, const bcm_iovar_t *vi, uint32 actionid, const char *name,
@@ -3228,7 +3216,6 @@ dhdsdio_doiovar(dhd_bus_t *bus, const bcm_iovar_t *vi, uint32 actionid, const ch
 		bcopy(params, &int_val, sizeof(int_val));
 
 	bool_val = (int_val != 0) ? TRUE : FALSE;
-
 
 	/* Some ioctls use the bus */
 	dhd_os_sdlock(bus->dhd);
@@ -3338,7 +3325,6 @@ dhdsdio_doiovar(dhd_bus_t *bus, const bcm_iovar_t *vi, uint32 actionid, const ch
 	case IOV_SVAL(IOV_SD1IDLE):
 		sd1idle = bool_val;
 		break;
-
 
 	case IOV_SVAL(IOV_MEMBYTES):
 	case IOV_GVAL(IOV_MEMBYTES):
@@ -3617,10 +3603,7 @@ dhdsdio_doiovar(dhd_bus_t *bus, const bcm_iovar_t *vi, uint32 actionid, const ch
 		dhd_serialconsole(bus, TRUE, bool_val, &bcmerror);
 		break;
 
-
-
 #endif /* DHD_DEBUG */
-
 
 #ifdef SDTEST
 	case IOV_GVAL(IOV_EXTLOOP):
@@ -3668,7 +3651,6 @@ dhdsdio_doiovar(dhd_bus_t *bus, const bcm_iovar_t *vi, uint32 actionid, const ch
 			((uint8)mesbusyctrl | 0x80), NULL);
 		break;
 #endif /* SDIO_CRC_ERROR_FIX */
-
 
 	case IOV_GVAL(IOV_DONGLEISOLATION):
 		int_val = bus->dhd->dongle_isolation;
@@ -3992,7 +3974,6 @@ dhdsdio_download_state(dhd_bus_t *bus, bool enter)
 			goto fail;
 		}
 		W_SDREG(0xFFFFFFFF, &bus->regs->intstatus, retries);
-
 
 		if (!(si_setcore(bus->sih, ARM7S_CORE_ID, 0)) &&
 		    !(si_setcore(bus->sih, ARMCM3_CORE_ID, 0))) {
@@ -4367,7 +4348,6 @@ dhd_bus_init(dhd_pub_t *dhdp, bool enforce_mutex)
 	DHD_ERROR(("%s: enable 0x%02x, ready 0x%02x (waited %uus)\n",
 	          __FUNCTION__, enable, ready, tmo.elapsed));
 
-
 	/* If F2 successfully enabled, set core and enable interrupts */
 	if (ready == enable) {
 		/* Make sure we're talking to the core. */
@@ -4586,7 +4566,6 @@ dhdsdio_read_control(dhd_bus_t *bus, uint8 *hdr, uint len, uint doff)
 		goto done;
 	}
 
-
 	/* Read remainder of frame body into the rxctl buffer */
 	sdret = dhd_bcmsdh_recv_buf(bus, bcmsdh_cur_sbwad(sdh), SDIO_FUNC_2, F2SYNC,
 	                            (bus->rxctl + firstread), rdlen, NULL, NULL, NULL);
@@ -4799,7 +4778,6 @@ dhdsdio_rxglom(dhd_bus_t *bus, uint8 rxseq)
 			      MIN(PKTLEN(osh, pfirst), 48));
 		}
 #endif
-
 
 		/* Validate the superframe header */
 		dptr = (uint8 *)PKTDATA(osh, pfirst);
@@ -5045,7 +5023,6 @@ dhdsdio_rxglom(dhd_bus_t *bus, uint8 rxseq)
 	}
 	return num;
 }
-
 
 /* Return TRUE if there may be more frames to read */
 static uint
@@ -5363,7 +5340,6 @@ dhdsdio_readframes(dhd_bus_t *bus, uint maxframes, bool *finished)
 				GSPI_PR55150_BAILOUT;
 				continue;
 			}
-
 
 			/* Extract software header fields */
 			chan = SDPCM_PACKET_CHANNEL(&bus->rxhdr[SDPCM_FRAMETAG_LEN]);
@@ -5746,7 +5722,6 @@ deliver:
 		}
 		else
 			pkt_count = 1;
-
 
 		/* Unlock during rx call */
 		dhd_os_sdunlock(bus->dhd);
@@ -6250,7 +6225,7 @@ dhdsdio_isr(void *arg)
 	bus->dpc_sched = TRUE;
 	dhd_sched_dpc(bus->dhd);
 
-#endif 
+#endif
 
 }
 
@@ -6445,7 +6420,6 @@ dhdsdio_sdtest_set(dhd_bus_t *bus, uint count)
 	if (dhdsdio_txpkt(bus, pkt, SDPCM_TEST_CHANNEL, TRUE, FALSE))
 		bus->pktgen_fail++;
 }
-
 
 static void
 dhdsdio_testrcv(dhd_bus_t *bus, void *pkt, uint seq)
@@ -7068,8 +7042,6 @@ dhdsdio_probe_attach(struct dhd_bus *bus, osl_t *osh, void *sdh, void *regsva,
 
 	/* Force PLL off until si_attach() programs PLL control regs */
 
-
-
 	bcmsdh_cfg_write(sdh, SDIO_FUNC_1, SBSDIO_FUNC1_CHIPCLKCSR, DHD_INIT_CLKCTL1, &err);
 	if (!err)
 		clkctl = bcmsdh_cfg_read(sdh, SDIO_FUNC_1, SBSDIO_FUNC1_CHIPCLKCSR, &err);
@@ -7157,7 +7129,6 @@ dhdsdio_probe_attach(struct dhd_bus *bus, osl_t *osh, void *sdh, void *regsva,
 
 	si_sdiod_drive_strength_init(bus->sih, osh, dhd_sdiod_drive_strength);
 
-
 	/* Get info on the ARM and SOCRAM cores... */
 	if (!DHD_NOPMU(bus)) {
 		if ((si_setcore(bus->sih, ARM7S_CORE_ID, 0)) ||
@@ -7217,7 +7188,6 @@ dhdsdio_probe_attach(struct dhd_bus *bus, osl_t *osh, void *sdh, void *regsva,
 		W_REG(osh, &bus->regs->corecontrol, val);
 	}
 #endif /* BCMSPI */
-
 
 	pktq_init(&bus->txq, (PRIOMASK + 1), QLEN);
 
@@ -7469,7 +7439,6 @@ dhdsdio_release_malloc(dhd_bus_t *bus, osl_t *osh)
 
 }
 
-
 static void
 dhdsdio_release_dongle(dhd_bus_t *bus, osl_t *osh, bool dongle_isolation, bool reset_flag)
 {
@@ -7530,7 +7499,6 @@ dhdsdio_disconnect(void *ptr)
 
 	DHD_TRACE(("%s: Disconnected\n", __FUNCTION__));
 }
-
 
 /* Register/Unregister functions are called by the main DHD entry
  * point (e.g. module insertion) to link with the bus driver, in
@@ -8010,7 +7978,7 @@ dhd_bus_devreset(dhd_pub_t *dhdp, uint8 flag)
 #if !defined(IGNORE_ETH0_DOWN)
 						/* Restore flow control  */
 						dhd_txflowcontrol(bus->dhd, ALL_INTERFACES, OFF);
-#endif 
+#endif
 						dhd_os_wd_timer(dhdp, dhd_watchdog_ms);
 #ifdef BCMSDIOH_TXGLOM
 						if ((dhdp->busstate == DHD_BUS_DATA) &&

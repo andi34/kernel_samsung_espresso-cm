@@ -182,7 +182,6 @@ static void s6e8aa0a01_write_sequence(struct omap_dss_device *dssdev,
 	}
 }
 
-
 #ifdef CONFIG_AID_DIMMING
 /* CONFIG_AID_DIMMING */
 static const u32 candela_table[GAMMA_MAX] = {
@@ -1056,7 +1055,6 @@ static ssize_t s6e8aa0a01_auto_brightness_store(struct device *dev,
 static DEVICE_ATTR(auto_brightness, S_IRUGO | S_IWUSR,
 		s6e8aa0a01_auto_brightness_show,
 		s6e8aa0a01_auto_brightness_store);
-
 
 static struct class *lcd_class;
 

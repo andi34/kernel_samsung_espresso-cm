@@ -291,7 +291,6 @@ static int max77693_led_init_set(struct i2c_client *i2c,
 
 	ret |= max77693_write_reg(i2c, MAX77693_LED_REG_ITORCH, val);
 
-
 	return ret;
 }
 

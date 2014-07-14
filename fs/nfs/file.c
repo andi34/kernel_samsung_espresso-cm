@@ -313,7 +313,6 @@ nfs_file_fsync(struct file *file, int datasync)
 	int have_error, status;
 	int ret = 0;
 
-
 	dprintk("NFS: fsync file(%s/%s) datasync %d\n",
 			dentry->d_parent->d_name.name, dentry->d_name.name,
 			datasync);

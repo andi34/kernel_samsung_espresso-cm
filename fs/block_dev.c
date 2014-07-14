@@ -92,7 +92,7 @@ static void kill_bdev(struct block_device *bdev)
 		return;
 	invalidate_bh_lrus();
 	truncate_inode_pages(bdev->bd_inode->i_mapping, 0);
-}	
+}
 
 int set_blocksize(struct block_device *bdev, int size)
 {
@@ -380,7 +380,7 @@ static loff_t block_llseek(struct file *file, loff_t offset, int origin)
 	mutex_unlock(&bd_inode->i_mutex);
 	return retval;
 }
-	
+
 int blkdev_fsync(struct file *filp, int datasync)
 {
 	struct inode *bd_inode = filp->f_mapping->host;
@@ -604,7 +604,7 @@ void bdput(struct block_device *bdev)
 }
 
 EXPORT_SYMBOL(bdput);
- 
+
 static struct block_device *bd_acquire(struct inode *inode)
 {
 	struct block_device *bdev;

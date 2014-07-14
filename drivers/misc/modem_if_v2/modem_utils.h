@@ -153,7 +153,6 @@ int pr_buffer(const char *tag, const char *data, size_t data_len,
 /* flow control CMD from CP, it use in serial devices */
 int link_rx_flowctl_cmd(struct link_device *ld, const char *data, size_t len);
 
-
 /* get iod from tree functions */
 
 struct io_device *get_iod_with_format(struct modem_shared *msd,

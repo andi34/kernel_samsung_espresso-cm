@@ -217,7 +217,6 @@ megasas_return_cmd(struct megasas_instance *instance, struct megasas_cmd *cmd)
 	spin_unlock_irqrestore(&instance->cmd_pool_lock, flags);
 }
 
-
 /**
 *	The following functions are defined for xscale
 *	(deviceid : 1064R, PERC5) controllers
@@ -638,7 +637,6 @@ static struct megasas_instance_template megasas_instance_template_skinny = {
 	.build_and_issue_cmd = megasas_build_and_issue_cmd,
 	.issue_dcmd = megasas_issue_dcmd,
 };
-
 
 /**
 *	The following functions are defined for gen2 (deviceid : 0x78 0x79)
@@ -1443,7 +1441,6 @@ out_return_cmd:
 	megasas_return_cmd(instance, cmd);
 	return 1;
 }
-
 
 /**
  * megasas_queue_command -	Queue entry point
@@ -2423,7 +2420,6 @@ megasas_internal_reset_defer_cmds(struct megasas_instance *instance)
 	spin_unlock_irqrestore(&instance->cmd_pool_lock, flags);
 }
 
-
 static void
 process_fw_state_change_wq(struct work_struct *work)
 {
@@ -2544,7 +2540,6 @@ megasas_deplete_reply_queue(struct megasas_instance *instance,
 				*instance->consumer =
 					MEGASAS_ADPRESET_INPROG_SIGN;
 			}
-
 
 			instance->instancet->disable_intr(instance->reg_set);
 			instance->adprecovery	= MEGASAS_ADPRESET_SM_INFAULT;
@@ -5362,7 +5357,6 @@ megasas_aen_polling(struct work_struct *work)
 
 	kfree(ev);
 }
-
 
 static DRIVER_ATTR(poll_mode_io, S_IRUGO|S_IWUSR,
 		megasas_sysfs_show_poll_mode_io,

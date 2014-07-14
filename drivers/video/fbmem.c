@@ -35,7 +35,6 @@
 
 #include <asm/fb.h>
 
-
     /*
      *  Frame buffer device initialization and setup routines
      */
@@ -515,7 +514,6 @@ static int fb_show_logo_line(struct fb_info *info, int rotate,
 	return logo->height;
 }
 
-
 #ifdef CONFIG_FB_LOGO_EXTRA
 
 #define FB_LOGO_EX_NUM_MAX 10
@@ -586,7 +584,6 @@ static inline int fb_show_extra_logos(struct fb_info *info, int y, int rotate)
 
 #endif /* CONFIG_FB_LOGO_EXTRA */
 
-
 int fb_prepare_logo(struct fb_info *info, int rotate)
 {
 	int depth = fb_get_color_depth(&info->var, &info->fix);
@@ -635,7 +632,6 @@ int fb_prepare_logo(struct fb_info *info, int rotate)
 		fb_logo.depth = 4;
 	else
 		fb_logo.depth = 1;
-
 
  	if (fb_logo.depth > 4 && depth > 4) {
  		switch (info->fix.visual) {
@@ -754,7 +750,7 @@ fb_read(struct file *file, char __user *buf, size_t count, loff_t *ppos)
 
 	if (info->fbops->fb_read)
 		return info->fbops->fb_read(info, buf, count, ppos);
-	
+
 	total_size = info->screen_size;
 
 	if (total_size == 0)
@@ -819,7 +815,7 @@ fb_write(struct file *file, const char __user *buf, size_t count, loff_t *ppos)
 
 	if (info->fbops->fb_write)
 		return info->fbops->fb_write(info, buf, count, ppos);
-	
+
 	total_size = info->screen_size;
 
 	if (total_size == 0)
@@ -958,7 +954,6 @@ fb_set_var(struct fb_info *info, struct fb_var_screeninfo *var)
 		if (!ret)
 		    fb_delete_videomode(&mode1, &info->modelist);
 
-
 		ret = (ret) ? -EINVAL : 0;
 		goto done;
 	}
@@ -1031,7 +1026,7 @@ fb_set_var(struct fb_info *info, struct fb_var_screeninfo *var)
 
 int
 fb_blank(struct fb_info *info, int blank)
-{	
+{
  	int ret = -EINVAL;
 
  	if (blank > FB_BLANK_POWERDOWN)
@@ -1428,7 +1423,7 @@ out:
 	return res;
 }
 
-static int 
+static int
 fb_release(struct inode *inode, struct file *file)
 __acquires(&info->lock)
 __releases(&info->lock)
@@ -1599,7 +1594,7 @@ static int do_register_framebuffer(struct fb_info *fb_info)
 			fb_info->pixmap.access_align = 32;
 			fb_info->pixmap.flags = FB_PIXMAP_DEFAULT;
 		}
-	}	
+	}
 	fb_info->pixmap.offset = 0;
 
 	if (!fb_info->pixmap.blit_x)

@@ -182,7 +182,7 @@ static void nfs4_setup_readdir(u64 cookie, __be32 *verifier, struct dentry *dent
 	memset(&readdir->verifier, 0, sizeof(readdir->verifier));
 	if (cookie == 2)
 		return;
-	
+
 	/*
 	 * NFSv4 servers do not return entries for '.' and '..'
 	 * Therefore, we fake these entries here.  We let '.'
@@ -191,7 +191,7 @@ static void nfs4_setup_readdir(u64 cookie, __be32 *verifier, struct dentry *dent
 	 * instead of 1 or 2.
 	 */
 	start = p = kmap_atomic(*readdir->pages, KM_USER0);
-	
+
 	if (cookie == 0) {
 		*p++ = xdr_one;                                  /* next */
 		*p++ = xdr_zero;                   /* cookie, first word */
@@ -204,7 +204,7 @@ static void nfs4_setup_readdir(u64 cookie, __be32 *verifier, struct dentry *dent
 		*p++ = htonl(8);              /* attribute buffer length */
 		p = xdr_encode_hyper(p, NFS_FILEID(dentry->d_inode));
 	}
-	
+
 	*p++ = xdr_one;                                  /* next */
 	*p++ = xdr_zero;                   /* cookie, first word */
 	*p++ = xdr_two;                   /* cookie, second word */
@@ -341,7 +341,6 @@ wait_on_recovery:
 		exception->retry = 1;
 	return ret;
 }
-
 
 static void do_renew_lease(struct nfs_client *clp, unsigned long timestamp)
 {
@@ -788,7 +787,6 @@ struct nfs4_opendata {
 	int cancelled;
 };
 
-
 static void nfs4_init_opendata_res(struct nfs4_opendata *p)
 {
 	p->o_res.f_attr = &p->f_attr;
@@ -1010,7 +1008,6 @@ no_delegation:
 	return ret;
 }
 
-
 static void nfs4_return_incompatible_delegation(struct inode *inode, fmode_t fmode)
 {
 	struct nfs_delegation *delegation;
@@ -1164,7 +1161,7 @@ static int nfs4_open_recover_helper(struct nfs4_opendata *opendata, fmode_t fmod
 	nfs4_init_opendata_res(opendata);
 	ret = _nfs4_recover_proc_open(opendata);
 	if (ret != 0)
-		return ret; 
+		return ret;
 	newstate = nfs4_opendata_to_nfs4_state(opendata);
 	if (IS_ERR(newstate))
 		return PTR_ERR(newstate);
@@ -1792,7 +1789,6 @@ out_err:
 	return status;
 }
 
-
 static struct nfs4_state *nfs4_do_open(struct inode *dir, struct path *path, fmode_t fmode, int flags, struct iattr *sattr, struct rpc_cred *cred)
 {
 	struct nfs4_exception exception = { };
@@ -2030,13 +2026,13 @@ static const struct rpc_call_ops nfs4_close_ops = {
 	.rpc_release = nfs4_free_closedata,
 };
 
-/* 
- * It is possible for data to be read/written from a mem-mapped file 
+/*
+ * It is possible for data to be read/written from a mem-mapped file
  * after the sys_close call (which hits the vfs layer as a flush).
- * This means that we can't safely call nfsv4 close on a file until 
+ * This means that we can't safely call nfsv4 close on a file until
  * the inode is cleared. This in turn means that we are not good
- * NFSv4 citizens - we do not indicate to the server to update the file's 
- * share state even when we are done with one of the three share 
+ * NFSv4 citizens - we do not indicate to the server to update the file's
+ * share state even when we are done with one of the three share
  * stateid's in the inode.
  *
  * NOTE: Caller must be holding the sp->so_owner semaphore!
@@ -2350,7 +2346,7 @@ static int _nfs4_proc_getattr(struct nfs_server *server, struct nfs_fh *fhandle,
 		.rpc_argp = &args,
 		.rpc_resp = &res,
 	};
-	
+
 	nfs_fattr_init(fattr);
 	return nfs4_call_sync(server->client, server, &msg, &args.seq_args, &res.seq_res, 0);
 }
@@ -2367,7 +2363,7 @@ static int nfs4_proc_getattr(struct nfs_server *server, struct nfs_fh *fhandle, 
 	return err;
 }
 
-/* 
+/*
  * The file is not closed if it is opened due to the a request to change
  * the size of the file. The open call will not be needed once the
  * VFS layer lookup-intents are implemented.
@@ -2397,7 +2393,7 @@ nfs4_proc_setattr(struct dentry *dentry, struct nfs_fattr *fattr,
 		pnfs_return_layout(inode);
 
 	nfs_fattr_init(fattr);
-	
+
 	/* Search for an existing open(O_WRITE) file */
 	if (sattr->ia_valid & ATTR_FILE) {
 		struct nfs_open_context *ctx;
@@ -2467,7 +2463,7 @@ static int _nfs4_proc_lookup(struct rpc_clnt *clnt, struct inode *dir,
 		struct nfs_fattr *fattr)
 {
 	int status;
-	
+
 	dprintk("NFS call  lookup %s\n", name->name);
 	status = _nfs4_proc_lookupfh(clnt, NFS_SERVER(dir), NFS_FH(dir), name, fhandle, fattr);
 	if (status == -NFS4ERR_MOVED)
@@ -2792,7 +2788,7 @@ static int _nfs4_proc_rename(struct inode *old_dir, struct qstr *old_name,
 		.rpc_resp = &res,
 	};
 	int status = -ENOMEM;
-	
+
 	res.old_fattr = nfs_alloc_fattr();
 	res.new_fattr = nfs_alloc_fattr();
 	if (res.old_fattr == NULL || res.new_fattr == NULL)
@@ -2944,7 +2940,7 @@ static int _nfs4_proc_symlink(struct inode *dir, struct dentry *dentry,
 	data->msg.rpc_proc = &nfs4_procedures[NFSPROC4_CLNT_SYMLINK];
 	data->arg.u.symlink.pages = &page;
 	data->arg.u.symlink.len = len;
-	
+
 	status = nfs4_do_create(dir, dentry, data);
 
 	nfs4_free_createdata(data);
@@ -3077,7 +3073,7 @@ static int _nfs4_proc_mknod(struct inode *dir, struct dentry *dentry,
 		data->arg.u.device.specdata1 = MAJOR(rdev);
 		data->arg.u.device.specdata2 = MINOR(rdev);
 	}
-	
+
 	status = nfs4_do_create(dir, dentry, data);
 
 	nfs4_free_createdata(data);
@@ -3268,7 +3264,7 @@ EXPORT_SYMBOL_GPL(nfs4_reset_read);
 static int nfs4_write_done_cb(struct rpc_task *task, struct nfs_write_data *data)
 {
 	struct inode *inode = data->inode;
-	
+
 	if (nfs4_async_handle_error(task, NFS_SERVER(inode), data->args.context->state) == -EAGAIN) {
 		nfs_restart_rpc(task, NFS_SERVER(inode)->nfs_client);
 		return -EAGAIN;
@@ -3990,8 +3986,8 @@ int nfs4_proc_delegreturn(struct inode *inode, struct rpc_cred *cred, const nfs4
 #define NFS4_LOCK_MINTIMEOUT (1 * HZ)
 #define NFS4_LOCK_MAXTIMEOUT (30 * HZ)
 
-/* 
- * sleep, with exponential backoff, and retry the LOCK operation. 
+/*
+ * sleep, with exponential backoff, and retry the LOCK operation.
  */
 static unsigned long
 nfs4_set_lock_task_retry(unsigned long timeout)
@@ -5406,7 +5402,6 @@ int nfs4_init_ds_session(struct nfs_client *clp)
 
 }
 EXPORT_SYMBOL_GPL(nfs4_init_ds_session);
-
 
 /*
  * Renew the cl_session lease.

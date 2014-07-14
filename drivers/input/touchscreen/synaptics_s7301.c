@@ -281,7 +281,6 @@ static void syna_set_ta_mode(int *ta_state)
 	return;
 }
 
-
 static void reset_points(struct ts_data *ts)
 {
 	int i;

@@ -35,13 +35,11 @@
 #include "omap_muxtbl.h"
 #include "sec_common.h"
 
-
 #ifdef CONFIG_FB_OMAP_BOOTLOADER_INIT
 #include  <linux/clk.h>
 #endif
 
 #define GOKEY_FB_RAM_SIZE	SZ_4M	/* 800*480*4*2 = 3000kb */
-
 
 static const u8 lms501kf07_cmd_setextc[] = {
 	0xb9,

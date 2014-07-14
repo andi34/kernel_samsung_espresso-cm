@@ -21,7 +21,6 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-
 /*
  * This exposes a device side "USB gadget" API, driven by requests to a
  * Linux-USB host controller driver.  USB traffic is simulated; there's
@@ -54,7 +53,6 @@
 #include <asm/irq.h>
 #include <asm/system.h>
 #include <asm/unaligned.h>
-
 
 #define DRIVER_DESC	"USB Host+Gadget Emulator"
 #define DRIVER_VERSION	"02 May 2005"
@@ -145,7 +143,6 @@ struct urbp {
 	struct urb		*urb;
 	struct list_head	urbp_list;
 };
-
 
 enum dummy_rh_state {
 	DUMMY_RH_RESET,
@@ -859,7 +856,6 @@ int net2280_set_fifo_mode (struct usb_gadget *gadget, int mode)
 }
 EXPORT_SYMBOL (net2280_set_fifo_mode);
 
-
 /* The gadget structure is stored inside the hcd structure and will be
  * released along with it. */
 static void
@@ -1198,7 +1194,6 @@ static struct dummy_ep *find_endpoint (struct dummy *dum, u8 address)
 #define Intf_InRequest	(Intf_Request | USB_DIR_IN)
 #define Ep_Request	(USB_TYPE_STANDARD | USB_RECIP_ENDPOINT)
 #define Ep_InRequest	(Ep_Request | USB_DIR_IN)
-
 
 /**
  * handle_control_request() - handles all control transfers

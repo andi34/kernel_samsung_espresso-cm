@@ -1561,7 +1561,6 @@ struct dx_hash_info
  */
 #define HASH_NB_ALWAYS		1
 
-
 /*
  * Describe an inode's exact location on disk and in memory
  */

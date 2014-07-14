@@ -226,7 +226,6 @@ const __u8 ip_tos2prio[16] = {
 	ECN_OR_COST(INTERACTIVE_BULK)
 };
 
-
 /*
  * Route cache.
  */
@@ -466,7 +465,6 @@ static const struct file_operations rt_cache_seq_fops = {
 	.release = seq_release_net,
 };
 
-
 static void *rt_cpu_seq_start(struct seq_file *seq, loff_t *pos)
 {
 	int cpu;
@@ -542,7 +540,6 @@ static const struct seq_operations rt_cpu_seq_ops = {
 	.stop   = rt_cpu_seq_stop,
 	.show   = rt_cpu_seq_show,
 };
-
 
 static int rt_cpu_seq_open(struct inode *inode, struct file *file)
 {
@@ -1796,7 +1793,6 @@ static void ipv4_dst_destroy(struct dst_entry *dst)
 	}
 }
 
-
 static void ipv4_link_failure(struct sk_buff *skb)
 {
 	struct rtable *rt;
@@ -2052,7 +2048,6 @@ e_err:
 	return err;
 }
 
-
 static void ip_handle_martian_source(struct net_device *dev,
 				     struct in_device *in_dev,
 				     struct sk_buff *skb,
@@ -2105,7 +2100,6 @@ static int __mkroute_input(struct sk_buff *skb,
 			       "_slow(). Please, report\n");
 		return -EINVAL;
 	}
-
 
 	err = fib_validate_source(skb, saddr, daddr, tos, FIB_RES_OIF(*res),
 				  in_dev->dev, &spec_dst, &itag);
@@ -2660,7 +2654,6 @@ static struct rtable *ip_route_output_slow(struct net *net, struct flowi4 *fl4)
 		}
 	}
 
-
 	if (fl4->flowi4_oif) {
 		dev_out = dev_get_by_index_rcu(net, fl4->flowi4_oif);
 		rth = ERR_PTR(-ENODEV);
@@ -2716,7 +2709,6 @@ static struct rtable *ip_route_output_slow(struct net *net, struct flowi4 *fl4)
 			   we send packet, ignoring both routing tables
 			   and ifaddr state. --ANK
 
-
 			   We could make it even if oif is unknown,
 			   likely IPv6, but we do not.
 			 */
@@ -2760,7 +2752,6 @@ static struct rtable *ip_route_output_slow(struct net *net, struct flowi4 *fl4)
 
 	dev_out = FIB_RES_DEV(res);
 	fl4->flowi4_oif = dev_out->ifindex;
-
 
 make_route:
 	rth = __mkroute_output(&res, fl4, orig_daddr, orig_saddr, orig_oif,
@@ -3303,9 +3294,9 @@ static struct ctl_table empty[1];
 
 static struct ctl_table ipv4_skeleton[] =
 {
-	{ .procname = "route", 
+	{ .procname = "route",
 	  .mode = 0555, .child = ipv4_route_table},
-	{ .procname = "neigh", 
+	{ .procname = "neigh",
 	  .mode = 0555, .child = empty},
 	{ }
 };
@@ -3386,7 +3377,6 @@ static __net_init int rt_genid_init(struct net *net)
 static __net_initdata struct pernet_operations rt_genid_ops = {
 	.init = rt_genid_init,
 };
-
 
 #ifdef CONFIG_IP_ROUTE_CLASSID
 struct ip_rt_acct __percpu *ip_rt_acct __read_mostly;

@@ -70,7 +70,7 @@
 #define AR9300_BASE_ADDR_512 0x1ff
 
 #define AR9300_OTP_BASE			(AR_SREV_9340(ah) ? 0x30000 : 0x14000)
-#define AR9300_OTP_STATUS		(AR_SREV_9340(ah) ? 0x30018 : 0x15f18)
+#define AR9300_OTP_STATUS          (AR_SREV_9340(ah) ? 0x30018 : 0x15f18)
 #define AR9300_OTP_STATUS_TYPE		0x7
 #define AR9300_OTP_STATUS_VALID		0x4
 #define AR9300_OTP_STATUS_ACCESS_BUSY	0x2
@@ -147,7 +147,6 @@ enum ar9300_Rates {
 	ALL_TARGET_HT40_23,
 	ar9300RateSize,
 };
-
 
 struct eepFlags {
 	u8 opFlags;

@@ -119,7 +119,6 @@ static struct {
 static void peer_check_expire(unsigned long dummy);
 static DEFINE_TIMER(peer_periodic_timer, peer_check_expire, 0, 0);
 
-
 /* Called from ip_output.c:ip_init  */
 void __init inet_initpeers(void)
 {
@@ -527,7 +526,6 @@ found:		/* The existing node has been found.
 		p->pmtu_orig = 0;
 		memset(&p->redirect_learned, 0, sizeof(p->redirect_learned));
 		INIT_LIST_HEAD(&p->unused);
-
 
 		/* Link the node. */
 		link_to_pool(p, base);

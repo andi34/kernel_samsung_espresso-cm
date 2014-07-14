@@ -86,7 +86,6 @@ int get_expired_time(struct wake_lock *lock, ktime_t *expire_time)
 	return 1;
 }
 
-
 static int print_lock_stat(struct seq_file *m, struct wake_lock *lock)
 {
 	int lock_count = lock->stat.count;
@@ -209,7 +208,6 @@ static void update_sleep_wait_stats_locked(int done)
 }
 #endif
 
-
 static void expire_wake_lock(struct wake_lock *lock)
 {
 #ifdef CONFIG_WAKELOCK_STAT
@@ -317,14 +315,12 @@ endofprint:
 }
 EXPORT_SYMBOL(debug_print_active_locks);
 
-
 static void suspend_backoff(void)
 {
 	pr_info("suspend: too many immediate wakeups, back off\n");
 	wake_lock_timeout(&suspend_backoff_lock,
 			  msecs_to_jiffies(SUSPEND_BACKOFF_INTERVAL));
 }
-
 
 static void suspend_sys_sync(struct work_struct *work)
 {

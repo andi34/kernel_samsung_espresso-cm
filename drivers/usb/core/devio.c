@@ -109,7 +109,6 @@ enum snoop_when {
 
 #define	MAX_USBFS_BUFFER_SIZE	16384
 
-
 static int connected(struct dev_state *ps)
 {
 	return (!list_empty(&ps->list) &&
@@ -652,14 +651,9 @@ static int check_ctrlrecip(struct dev_state *ps, unsigned int requesttype,
 			 * rather than the endpoint address (with the
 			 * correct direction). Win does let this through,
 			 * so we'll not reject it here but leave it to
-			 * the device to not break KVM. But we warn.
+			 * the device to not break KVM.
 			 */
 			ret = findintfep(ps->dev, index ^ 0x80);
-			if (ret >= 0)
-				dev_info(&ps->dev->dev,
-					"%s: process %i (%s) requesting ep %02x but needs %02x\n",
-					__func__, task_pid_nr(current),
-					current->comm, index, index ^ 0x80);
 		}
 		if (ret >= 0)
 			ret = checkintf(ps, ret);
@@ -1632,7 +1626,6 @@ static int proc_reapurbnonblock_compat(struct dev_state *ps, void __user *arg)
 	}
 	return retval;
 }
-
 
 #endif
 

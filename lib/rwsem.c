@@ -2,7 +2,6 @@
  *
  * Written by David Howells (dhowells@redhat.com).
  * Derived from arch/i386/kernel/semaphore.c
- *
  * Steal writing sem. Alex Shi <alex.shi@intel.com>
  */
 #include <linux/rwsem.h>
@@ -70,8 +69,7 @@ __rwsem_do_wake(struct rw_semaphore *sem, int wake_type)
 
 	if (wake_type == RWSEM_WAKE_READ_OWNED)
 		/* Another active reader was observed, so wakeup is not
-		 * likely to succeed. Save the atomic op.
-		 */
+		 * likely to succeed. Save the atomic op. */
 		goto out;
 
 	/* wake up the writing waiter and let the task grap sem */
@@ -137,21 +135,23 @@ __rwsem_do_wake(struct rw_semaphore *sem, int wake_type)
 
  out:
 	return sem;
+
 }
 
 /* try to get write sem,  caller hold sem->wait_lock */
-static int try_get_writer_sem(struct rw_semaphore *sem,
-					struct rwsem_waiter *waiter)
+static int try_get_writer_sem(struct rw_semaphore *sem, struct rwsem_waiter *waiter)
 {
 	struct rwsem_waiter *fwaiter;
 	long oldcount, adjustment;
 
 	/* only steal when first waiter is writing */
 	fwaiter = list_entry(sem->wait_list.next, struct rwsem_waiter, list);
+
 	if (!(fwaiter->flags & RWSEM_WAITING_FOR_WRITE))
 		return 0;
 
 	adjustment = RWSEM_ACTIVE_WRITE_BIAS;
+
 	/* only one waiter in queue */
 	if (fwaiter == waiter && waiter->list.next == &sem->wait_list)
 		adjustment -= RWSEM_WAITING_BIAS;
@@ -160,17 +160,19 @@ try_again_write:
 	oldcount = rwsem_atomic_update(adjustment, sem) - adjustment;
 	if (!(oldcount & RWSEM_ACTIVE_MASK)) {
 		/* no active lock */
-		struct task_struct *tsk = waiter->task;
+	    struct task_struct *tsk = waiter->task;
 
-		list_del(&waiter->list);
-		smp_mb();
-		put_task_struct(tsk);
-		tsk->state = TASK_RUNNING;
-		return 1;
+	    list_del(&waiter->list);
+	    smp_mb();
+	    put_task_struct(tsk);
+	    tsk->state = TASK_RUNNING;
+	    return 1;
 	}
+
 	/* some one grabbed the sem already */
 	if (rwsem_atomic_update(-adjustment, sem) & RWSEM_ACTIVE_MASK)
 		return 0;
+
 	goto try_again_write;
 }
 
@@ -201,7 +203,6 @@ rwsem_down_failed_common(struct rw_semaphore *sem,
 	count = rwsem_atomic_update(adjustment, sem);
 
 	/* If there are no active locks, wake the front queued process(es) up.
-	 *
 	 * Alternatively, if we're called from a failed down_write(), there
 	 * were already threads queued before us and there are no active
 	 * writers, the lock must be read owned; so we try to wake any read
